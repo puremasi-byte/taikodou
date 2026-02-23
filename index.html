@@ -370,8 +370,8 @@ footer a{color:var(--gold2);}
 .blog-content-area{width:100%;min-height:240px;padding:12px;border:1px solid var(--border-light);border-radius:2px;font-family:"Noto Sans JP",sans-serif;font-size:14px;outline:none;resize:vertical;line-height:1.8;color:var(--black);}
 .blog-content-area:focus{border-color:var(--gold-dark);box-shadow:0 0 0 3px rgba(200,169,110,.08);}
 .blog-pub-row{display:flex;align-items:center;gap:12px;margin-top:4px;}
-.blog-pub-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:700;padding:10px 18px;border:1px solid var(--border-light);border-radius:2px;background:white;transition:all .2s;}
-.blog-pub-toggle:has(input:checked){border-color:#2e7d32;background:#f0fff0;color:#2e7d32;}
+.blog-pub-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:700;padding:10px 18px;border:1px solid var(--border-light);border-radius:2px;background:white;transition:all .2s;user-select:none;}
+.blog-pub-toggle.checked{border-color:#2e7d32;background:#f0fff0;color:#2e7d32;}
 .blog-pub-toggle input{display:none;}
 
 /* ===== レスポンシブ ===== */
@@ -523,7 +523,11 @@ footer a{color:var(--gold2);}
             </div>
             <div class="fg full">
               <label>公開設定</label>
-              <label class="blog-pub-toggle"><input type="checkbox" id="bf-published"> ✅ すぐに公開する（チェックなしは下書き保存）</label>
+              <div class="blog-pub-toggle" id="bf-pub-toggle" onclick="toggleBlogPub()">
+                <input type="checkbox" id="bf-published">
+                <span id="bf-pub-icon">☐</span>
+                <span id="bf-pub-label">すぐに公開する（タップで切替 / 現在：下書き）</span>
+              </div>
             </div>
           </div>
           <div class="form-err" id="bf-err"></div>
@@ -796,7 +800,7 @@ function openBlogEdit(id){
   if(!p) return;
   document.getElementById('bf-title').value = p.title||'';
   document.getElementById('bf-content').value = p.content||'';
-  document.getElementById('bf-published').checked = !!p.published;
+  setBlogPub(!!p.published);
   document.getElementById('bf-edit-id').value = id;
   document.getElementById('blog-form-title-label').textContent = '✏️ 記事を編集中';
   document.getElementById('bf-submit-btn').textContent = '💾 変更を保存する';
@@ -815,7 +819,7 @@ function openBlogEdit(id){
 function resetBlogForm(){
   document.getElementById('bf-title').value='';
   document.getElementById('bf-content').value='';
-  document.getElementById('bf-published').checked=false;
+  setBlogPub(false);
   document.getElementById('bf-edit-id').value='';
   document.getElementById('blog-form-title-label').textContent='＋ 新しい記事を書く';
   document.getElementById('bf-submit-btn').textContent='📝 この記事を投稿する';
@@ -826,6 +830,39 @@ function resetBlogForm(){
 
 function bfSetPhoto(dataUrl){ bfPhotoData=dataUrl; document.getElementById('bf-photo-prev').src=dataUrl; document.getElementById('bf-photo-prev').style.display='block'; document.getElementById('bf-photo-hint').style.display='none'; document.getElementById('bf-btn-rmpho').style.display='inline-flex'; }
 function bfRemovePhoto(){ bfPhotoData=null; document.getElementById('bf-photo-prev').src=''; document.getElementById('bf-photo-prev').style.display='none'; document.getElementById('bf-photo-hint').style.display='block'; document.getElementById('bf-btn-rmpho').style.display='none'; try{document.getElementById('bf-photo-cam').value='';document.getElementById('bf-photo-lib').value='';}catch(e){} }
+
+function toggleBlogPub(){
+  var cb  = document.getElementById('bf-published');
+  var tog = document.getElementById('bf-pub-toggle');
+  var ico = document.getElementById('bf-pub-icon');
+  var lbl = document.getElementById('bf-pub-label');
+  cb.checked = !cb.checked;
+  if(cb.checked){
+    tog.classList.add('checked');
+    ico.textContent = '✅';
+    lbl.textContent = 'すぐに公開する（タップで切替 / 現在：公開）';
+  } else {
+    tog.classList.remove('checked');
+    ico.textContent = '☐';
+    lbl.textContent = 'すぐに公開する（タップで切替 / 現在：下書き）';
+  }
+}
+function setBlogPub(val){
+  var cb  = document.getElementById('bf-published');
+  var tog = document.getElementById('bf-pub-toggle');
+  var ico = document.getElementById('bf-pub-icon');
+  var lbl = document.getElementById('bf-pub-label');
+  cb.checked = val;
+  if(val){
+    tog.classList.add('checked');
+    ico.textContent = '✅';
+    lbl.textContent = 'すぐに公開する（タップで切替 / 現在：公開）';
+  } else {
+    tog.classList.remove('checked');
+    ico.textContent = '☐';
+    lbl.textContent = 'すぐに公開する（タップで切替 / 現在：下書き）';
+  }
+}
 
 function submitBlog(){
   var title = document.getElementById('bf-title').value.trim();
