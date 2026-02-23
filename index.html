@@ -714,8 +714,7 @@ function renderBlog(){
   grid.innerHTML = published.map(function(p){
     var d = new Date(p.created_at);
     var dateStr = d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日';
-    var excerpt = (p.content||'').replace(/
-/g,' ').substring(0,80);
+    var excerpt = (p.content||'').replace(/\n/g,' ').substring(0,80);
     var thumb = p.thumbnail
       ? '<div class="blog-card-thumb"><img src="'+esc(p.thumbnail)+'" alt="'+esc(p.title)+'"></div>'
       : '<div class="blog-card-thumb"><div class="blog-card-thumb-icon">📝</div></div>';
@@ -745,8 +744,7 @@ function openBlogDetail(id){
   thumbWrap.innerHTML = p.thumbnail
     ? '<div class="blog-box-thumb"><img src="'+esc(p.thumbnail)+'" alt="'+esc(p.title)+'"></div>'
     : '';
-  document.getElementById('blog-box-content').innerHTML = esc(p.content||'').replace(/
-/g,'<br>');
+  document.getElementById('blog-box-content').innerHTML = esc(p.content||'').replace(/\n/g,'<br>');
   document.getElementById('blog-overlay').classList.add('show');
 }
 function closeBlogDetail(){ document.getElementById('blog-overlay').classList.remove('show'); }
