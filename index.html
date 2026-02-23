@@ -1,0 +1,580 @@
+!DOCTYPE html
+html lang=ja
+head
+meta charset=UTF-8
+meta name=viewport content=width=device-width, initial-scale=1.0
+title太古堂  印鑑・こにゅうどうくんグッズtitle
+link href=httpsfonts.googleapis.comcss2family=Noto+Serif+JPwght@400;700;900&family=Noto+Sans+JPwght@300;400;500;700&display=swap rel=stylesheet
+style
+root {
+  --red #8B0000; --red2 #C0392B;
+  --gold #C9A84C; --gold2 #F0D080;
+  --ink #1a1008; --cream #FAF3E0; --paper #F5ECD7;
+  --muted #8a7a6a; --teal #2E7D7D;
+}
+ { margin0; padding0; box-sizingborder-box; }
+body { font-family'Noto Sans JP',sans-serif; backgroundvar(--cream); colorvar(--ink); min-height100vh; }
+
+ BANNER 
+.banner-wrap { width100%; background#1a0a06; line-height0; }
+.banner-wrap img { width100%; heightauto; displayblock; object-fitcover; max-height220px; object-positioncenter; }
+.info-bar { backgroundvar(--red); displayflex; align-itemscenter; justify-contentspace-between; padding10px 32px; flex-wrapwrap; gap8px; }
+.info-bar .tagline { font-size12px; colorrgba(255,255,255,.75); letter-spacing.2em; }
+.info-bar .contact { text-alignright; colorrgba(255,255,255,.8); font-size12px; line-height1.8; }
+.info-bar .contact a { colorvar(--gold2); text-decorationnone; font-weight700; font-size17px; }
+
+ HERO 
+.hero { backgroundlinear-gradient(135deg,var(--paper) 0%,#e8d5b0 100%); padding28px 40px; text-aligncenter; border-bottom3px solid var(--gold); }
+.hero h2 { font-family'Noto Serif JP',serif; font-size20px; colorvar(--red); letter-spacing.3em; margin-bottom6px; }
+.hero p { colorvar(--muted); font-size13px; }
+
+ TABS 
+.tabs-wrap { max-width1100px; margin0 auto; padding0 20px 40px; }
+.tab-nav { displayflex; margin-top28px; border-bottom3px solid var(--red); }
+.tab-btn { flex1; padding14px 16px; border2px solid #d4c4a0; border-bottomnone; cursorpointer; font-family'Noto Serif JP',serif; font-size15px; font-weight700; backgroundvar(--paper); colorvar(--muted); displayflex; align-itemscenter; justify-contentcenter; gap8px; transitionall .3s; margin-bottom-3px; }
+.tab-btnfirst-child { border-radius10px 0 0 0; }
+.tab-btnlast-child  { border-radius0 10px 0 0; }
+.tab-btn.active { backgroundwhite; colorvar(--red); border-colorvar(--red); border-bottom-colorwhite; z-index1; }
+.tab-content { backgroundwhite; border2px solid var(--red); border-topnone; border-radius0 0 14px 14px; padding28px; min-height360px; }
+.tab-pane { displaynone; }
+.tab-pane.active { displayblock; animationfadeIn .3s; }
+@keyframes fadeIn { from{opacity0;transformtranslateY(6px)} to{opacity1;transformtranslateY(0)} }
+
+ SECTION TITLE 
+.sec-title { displayflex; align-itemscenter; gap10px; margin-bottom22px; padding-bottom10px; border-bottom2px dashed var(--gold); }
+.sec-title h3 { font-family'Noto Serif JP',serif; font-size18px; font-weight700; colorvar(--red); }
+.sec-badge { backgroundvar(--red); colorwhite; font-size10px; padding3px 9px; border-radius20px; letter-spacing.1em; }
+.sec-badge.teal { backgroundvar(--teal); }
+
+ PRODUCT GRID 
+.product-grid { displaygrid; grid-template-columnsrepeat(auto-fill,minmax(200px,1fr)); gap18px; }
+.product-card { backgroundvar(--cream); border2px solid #e0d0b0; border-radius12px; padding18px; positionrelative; overflowhidden; transitionall .3s; }
+.product-cardbefore { content''; positionabsolute; top0; left0; right0; height4px; backgroundvar(--red); }
+.product-card.konyudobefore { backgroundvar(--teal); }
+.product-cardhover { border-colorvar(--gold); }
+
+ 写真 - 縦横比固定(43)・全体表示 
+.card-photo-wrap { width100%; aspect-ratio43; background#f0ece4; border-radius8px; margin-bottom10px; overflowhidden; displayflex; align-itemscenter; justify-contentcenter; }
+.card-photo { width100%; height100%; object-fitcontain; displayblock; }
+.card-icon { width56px; height56px; margin0 auto 10px; displayflex; align-itemscenter; justify-contentcenter; font-size32px; backgroundwhite; border-radius50%; border2px solid #e0d0b0; }
+.card-name  { font-family'Noto Serif JP',serif; font-size15px; font-weight700; text-aligncenter; margin-bottom5px; }
+.card-price { font-size17px; font-weight700; colorvar(--red); text-aligncenter; margin-bottom6px; }
+.card-price.teal { colorvar(--teal); }
+.card-size  { font-size11px; color#aaa; text-aligncenter; margin-bottom4px; }
+.card-desc  { font-size12px; colorvar(--muted); text-aligncenter; line-height1.6; }
+.card-stock { margin-top8px; font-size11px; font-weight700; text-aligncenter; }
+
+ EMPTY 
+.empty { text-aligncenter; padding40px; colorvar(--muted); }
+.empty .ei { font-size44px; margin-bottom10px; }
+
+ ===================== ADMIN ===================== 
+.admin-wrap { text-alignright; margin-top20px; }
+.admin-toggle { padding6px 14px; backgroundtransparent; border1px solid #ccc; border-radius6px; cursorpointer; font-size11px; color#bbb; displayinline-flex; align-itemscenter; gap6px; transitionall .3s; }
+.admin-togglehover { color#888; border-color#aaa; }
+.admin-toggle .arr { transitiontransform .3s; font-size9px; }
+.admin-toggle.open .arr { transformrotate(180deg); }
+.admin-panel { displaynone; background#fafafa; border1px solid #ddd; border-radius8px; padding24px; margin-top8px; text-alignleft; }
+.admin-panel.open { displayblock; animationfadeIn .3s; }
+
+ 管理タブ 
+.admin-tabs { displayflex; gap0; margin-bottom20px; border-bottom2px solid #ddd; }
+.admin-tab { padding9px 20px; backgroundnone; bordernone; border-bottom2px solid transparent; cursorpointer; font-family'Noto Sans JP',sans-serif; font-size13px; font-weight700; color#aaa; margin-bottom-2px; transitionall .2s; }
+.admin-tab.active { colorvar(--red); border-bottom-colorvar(--red); }
+.admin-subpane { displaynone; }
+.admin-subpane.active { displayblock; animationfadeIn .2s; }
+
+ FORM 
+.form-grid { displaygrid; grid-template-columns1fr 1fr; gap14px; }
+.fg { displayflex; flex-directioncolumn; gap5px; }
+.fg.full { grid-column1-1; }
+.fg label { font-size13px; font-weight700; colorvar(--ink); }
+.fg label .req { colorvar(--red2); margin-left3px; }
+.fg input,.fg select,.fg textarea { padding9px 12px; border2px solid #d4c4a0; border-radius8px; font-family'Noto Sans JP',sans-serif; font-size14px; backgroundwhite; outlinenone; transitionborder-color .2s; colorvar(--ink); }
+.fg inputfocus,.fg selectfocus,.fg textareafocus { border-colorvar(--red); box-shadow0 0 0 3px rgba(139,0,0,.08); }
+.fg textarea { resizevertical; min-height76px; }
+.radio-row { displayflex; gap12px; }
+.rlabel { displayflex; align-itemscenter; gap8px; cursorpointer; font-size14px; font-weight700; padding9px 18px; border2px solid #d4c4a0; border-radius8px; backgroundwhite; flex1; justify-contentcenter; transitionall .2s; }
+.rlabel.redhas(inputchecked)  { border-colorvar(--red);  backgroundrgba(139,0,0,.07); colorvar(--red); }
+.rlabel.tealhas(inputchecked) { border-colorvar(--teal); backgroundrgba(46,125,125,.07); colorvar(--teal); }
+.rlabel input { displaynone; }
+
+ PHOTO UPLOAD 
+.photo-drop { width100%; aspect-ratio43; border2px dashed #d4c4a0; border-radius10px; background#fdf8f0; displayflex; align-itemscenter; justify-contentcenter; cursorpointer; overflowhidden; transitionborder-color .2s,background .2s; positionrelative; }
+.photo-drophover { border-colorvar(--red); background#fff8f5; }
+.photo-hint { text-aligncenter; pointer-eventsnone; padding20px; }
+.photo-hint .ph-icons { font-size28px; margin-bottom8px; }
+.photo-hint .ph-main { font-size14px; font-weight700; colorvar(--red); margin-bottom3px; }
+.photo-hint .ph-sub  { font-size11px; colorvar(--muted); }
+.photo-drop img.prev { width100%; height100%; object-fitcontain; displayblock; }
+.photo-btns { displayflex; gap8px; margin-top8px; flex-wrapwrap; }
+.pbtn { flex1; min-width110px; padding9px 10px; border-radius8px; border2px solid; font-size13px; font-weight700; cursorpointer; font-family'Noto Sans JP',sans-serif; transitionall .2s; white-spacenowrap; backgroundwhite; }
+.pbtn.cam { border-colorvar(--red);  colorvar(--red); }
+.pbtn.camhover { backgroundvar(--red);  colorwhite; }
+.pbtn.lib { border-colorvar(--teal); colorvar(--teal); }
+.pbtn.libhover { backgroundvar(--teal); colorwhite; }
+.pbtn.del { border-color#bbb; color#888; flex0 0 auto; }
+.pbtn.delhover { background#e74c3c; border-color#e74c3c; colorwhite; }
+
+ SUBMIT 
+.reg-btn { margin-top18px; width100%; padding13px; backgroundvar(--red); colorwhite; bordernone; border-radius10px; font-family'Noto Serif JP',serif; font-size16px; font-weight700; cursorpointer; letter-spacing.08em; transitionall .3s; displayflex; align-itemscenter; justify-contentcenter; gap8px; }
+.reg-btnhover { background#6b0000; transformtranslateY(-2px); box-shadow0 4px 12px rgba(139,0,0,.3); }
+.form-err { font-size13px; colorvar(--red2); margin-top10px; displaynone; padding8px 12px; background#fff0f0; border-radius6px; border-left3px solid var(--red2); }
+
+ ===== 商品管理リスト ===== 
+.mgmt-hint { font-size12px; colorvar(--muted); margin-bottom14px; }
+.mgmt-list { displayflex; flex-directioncolumn; gap8px; }
+.mgmt-item { displayflex; align-itemscenter; gap10px; backgroundwhite; border1px solid #e0d0b0; border-radius10px; padding10px 12px; }
+.mgmt-thumb-wrap { width52px; height52px; border-radius6px; overflowhidden; background#f0ece4; flex-shrink0; displayflex; align-itemscenter; justify-contentcenter; }
+.mgmt-thumb { width100%; height100%; object-fitcontain; }
+.mgmt-icon { font-size24px; }
+.mgmt-info { flex1; min-width0; }
+.mgmt-name { font-size13px; font-weight700; white-spacenowrap; overflowhidden; text-overflowellipsis; }
+.mgmt-price { font-size12px; colorvar(--muted); }
+.mgmt-actions { displayflex; gap6px; flex-shrink0; }
+.mgmt-btn { width32px; height32px; border-radius6px; border1px solid #ddd; backgroundwhite; cursorpointer; font-size14px; displayflex; align-itemscenter; justify-contentcenter; transitionall .2s; color#666; }
+.mgmt-btnhover { border-color#999; background#f5f5f5; }
+.mgmt-btn.uphover  { border-colorvar(--teal); colorvar(--teal); }
+.mgmt-btn.downhover { border-colorvar(--teal); colorvar(--teal); }
+.mgmt-btn.trashhover { border-colorvar(--red2); colorvar(--red2); background#fff0f0; }
+.mgmt-btndisabled { opacity.3; cursordefault; }
+.mgmt-btndisabledhover { border-color#ddd; backgroundwhite; color#666; }
+.mgmt-empty { text-aligncenter; padding30px; colorvar(--muted); font-size13px; }
+
+ PASSWORD MODAL 
+.pw-overlay { displaynone; positionfixed; inset0; backgroundrgba(0,0,0,.55); z-index1000; align-itemscenter; justify-contentcenter; backdrop-filterblur(3px); }
+.pw-overlay.show { displayflex; animationfadeIn .2s; }
+.pw-box { backgroundwhite; border-radius14px; padding36px 40px; width320px; box-shadow0 20px 60px rgba(0,0,0,.3); text-aligncenter; }
+.pw-box .pwi { font-size36px; margin-bottom12px; }
+.pw-box h3 { font-family'Noto Serif JP',serif; font-size18px; font-weight700; colorvar(--ink); margin-bottom6px; }
+.pw-box p { font-size12px; colorvar(--muted); margin-bottom20px; }
+.pw-input { width100%; padding12px 14px; border2px solid #ddd; border-radius8px; font-size16px; letter-spacing.2em; outlinenone; text-aligncenter; transitionborder-color .2s; margin-bottom14px; }
+.pw-inputfocus { border-colorvar(--red); }
+.pw-input.err { border-color#e74c3c; animationshake .3s; }
+@keyframes shake { 0%,100%{transformtranslateX(0)} 25%{transformtranslateX(-6px)} 75%{transformtranslateX(6px)} }
+.pw-submit { width100%; padding12px; backgroundvar(--red); colorwhite; bordernone; border-radius8px; font-family'Noto Serif JP',serif; font-size15px; font-weight700; cursorpointer; }
+.pw-submithover { background#6b0000; }
+.pw-cancel { margin-top10px; backgroundnone; bordernone; colorvar(--muted); font-size12px; cursorpointer; text-decorationunderline; }
+.pw-errmsg { font-size12px; color#e74c3c; margin-bottom10px; displaynone; }
+.pw-errmsg.show { displayblock; }
+
+ TOAST 
+.toast { positionfixed; bottom28px; right28px; backgroundvar(--ink); colorwhite; padding12px 22px; border-radius10px; font-size14px; font-weight700; transformtranslateY(80px); opacity0; transitionall .4s; z-index9999; }
+.toast.show { transformtranslateY(0); opacity1; }
+
+ FOOTER 
+footer { backgroundvar(--ink); colorrgba(255,255,255,.6); text-aligncenter; padding22px; font-size12px; margin-top30px; letter-spacing.1em; }
+footer strong { colorvar(--gold); }
+
+@media(max-width600px){
+  .info-bar { padding10px 16px; }
+  .form-grid { grid-template-columns1fr; }
+  .tab-btn { font-size13px; padding11px 8px; }
+  .tabs-wrap { padding0 12px 30px; }
+  .tab-content { padding18px 14px; }
+  .photo-btns { flex-directioncolumn; }
+  .pbtn { min-widthauto; }
+}
+style
+head
+body
+
+header
+  div class=banner-wrap
+    img src=dataimagejpeg;base64,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 alt=太古堂
+  div
+  div class=info-bar
+    span class=tagline印鑑専門店 ＆ こにゅうどうくんグッズ取扱いspan
+    div class=contact
+      div営業時間：1000〜1800（火曜定休）｜三重県四日市市 ●●町 1-2-3div
+      a href=tel0593000000📞 059-300-0000a
+    div
+  div
+header
+
+div class=hero
+  h2〜 四日市のこだわりはんこ専門店 〜h2
+  p銀行印・認印・法人印 ／ こにゅうどうくんグッズ 多数取り揃えておりますp
+div
+
+div class=tabs-wrap
+  div class=tab-nav
+    button class=tab-btn active id=tab-btn-hanko onclick=switchTab('hanko')🔖 印鑑・はんこbutton
+    button class=tab-btn id=tab-btn-konyudo onclick=switchTab('konyudo')🟢 こにゅうどうくんグッズbutton
+  div
+  div class=tab-content
+    div class=tab-pane active id=pane-hanko
+      div class=sec-title
+        h3🔖 印鑑・はんこ 商品一覧h3
+        span class=sec-badgeHANKOspan
+      div
+      div class=product-grid id=grid-hankodiv
+      div class=empty id=empty-hanko style=displaynonediv class=ei🔖divp商品が登録されていませんpdiv
+    div
+    div class=tab-pane id=pane-konyudo
+      div class=sec-title
+        h3🟢 こにゅうどうくんグッズ 一覧h3
+        span class=sec-badge tealKONYUDOspan
+      div
+      div class=product-grid id=grid-konyudodiv
+      div class=empty id=empty-konyudo style=displaynonediv class=ei🟢divp商品が登録されていませんpdiv
+    div
+  div
+
+  !-- ADMIN --
+  div class=admin-wrap
+    button class=admin-toggle id=admin-toggle-btn
+      span管理spanspan class=arr▼span
+    button
+    div class=admin-panel id=admin-panel
+
+      !-- 管理内タブ --
+      div class=admin-tabs
+        button class=admin-tab active id=atab-add  onclick=switchAdminTab('add')＋ 商品を登録button
+        button class=admin-tab        id=atab-mgmt onclick=switchAdminTab('mgmt')📋 商品の管理・並び替えbutton
+      div
+
+      !-- 登録フォーム --
+      div class=admin-subpane active id=apane-add
+        div class=form-grid
+          div class=fg full
+            labelカテゴリspan class=reqspanlabel
+            div class=radio-row
+              label class=rlabel redinput type=radio name=cat value=hanko checked 🔖 印鑑・はんこlabel
+              label class=rlabel tealinput type=radio name=cat value=konyudo 🟢 こにゅうどうくんグッズlabel
+            div
+          div
+          div class=fg full
+            label商品名span class=reqspanlabel
+            input type=text id=f-name placeholder=例：黒水牛 銀行印 15mm
+          div
+          div class=fg
+            label価格（税込）span class=reqspanlabel
+            input type=number id=f-price placeholder=例：3800 min=1
+          div
+          div class=fg
+            labelサイズ  素材label
+            input type=text id=f-size placeholder=例：15mm  黒水牛
+          div
+          div class=fg full
+            label商品特徴・説明span class=reqspanlabel
+            textarea id=f-desc placeholder=例：風格のある黒水牛素材を使用した銀行印。押し心地も抜群です。textarea
+          div
+          div class=fg full
+            label商品写真label
+            div class=photo-drop id=photo-drop
+              div class=photo-hint id=photo-hint
+                div class=ph-icons📷 🖼️div
+                div class=ph-mainここをタップして写真を選択div
+                div class=ph-subカメラ撮影 または 保存済み画像から選択div
+              div
+              img class=prev id=photo-prev src= alt= style=displaynone
+            div
+            div class=photo-btns
+              button type=button class=pbtn cam id=btn-camera📷 カメラで撮影button
+              button type=button class=pbtn lib id=btn-library🖼️ ライブラリから選択button
+              button type=button class=pbtn del id=btn-rmpho style=displaynone✕ 削除button
+            div
+            input type=file id=f-photo-cam accept=image capture=environment style=displaynone
+            input type=file id=f-photo-lib accept=image style=displaynone
+          div
+          div class=fg
+            labelアイコン絵文字（写真なしの場合）label
+            input type=text id=f-icon placeholder=例：🔖 🟢 💎 maxlength=4
+          div
+          div class=fg
+            label在庫状況label
+            select id=f-stock
+              option value=在庫あり在庫ありoption
+              option value=残りわずか残りわずかoption
+              option value=取り寄せ取り寄せoption
+              option value=品切れ品切れoption
+            select
+          div
+        div
+        div class=form-err id=form-errdiv
+        button type=button class=reg-btn id=reg-btn＋ この商品を登録するbutton
+      div
+
+      !-- 商品管理 --
+      div class=admin-subpane id=apane-mgmt
+        p class=mgmt-hint▲▼ で表示順を変更、🗑 で削除できますp
+        div style=margin-bottom12px;
+          strong style=font-size13px;🔖 印鑑・はんこstrong
+        div
+        div class=mgmt-list id=mgmt-hankodiv
+        div style=margin18px 0 12px;
+          strong style=font-size13px;🟢 こにゅうどうくんグッズstrong
+        div
+        div class=mgmt-list id=mgmt-konyudodiv
+      div
+
+    div
+  div
+div
+
+footer
+  strong太古堂strong｜三重県四日市市 ●●町1-2-3br
+  TEL 059-300-0000 ／ 営業時間 1000〜1800（火曜定休）br
+  span style=colorrgba(255,255,255,.3);font-size11px;© 2024 太古堂. All rights reserved.span
+footer
+
+div class=toast id=toastdiv
+
+div class=pw-overlay id=pw-overlay
+  div class=pw-box
+    div class=pwi🔐div
+    h3管理者認証h3
+    p管理画面にアクセスするにはbrパスワードを入力してくださいp
+    input type=password class=pw-input id=pw-input placeholder=パスワード
+    p class=pw-errmsg id=pw-errmsgパスワードが違いますp
+    button type=button class=pw-submit id=pw-submit-btn認証するbuttonbr
+    button type=button class=pw-cancel id=pw-cancel-btnキャンセルbutton
+  div
+div
+
+script
+var ADMIN_PW = 'taikodo2024';
+var products = [
+  {id1, cat'hanko',   name'認印 シヤチハタ式',          price800,   size'10.5mm  朱肉不要',      desc'日常使いに最適なシヤチハタ式の認印。補充インクも販売中です。',                        icon'🔖', stock'在庫あり',  photonull},
+  {id2, cat'hanko',   name'銀行印 黒水牛',               price3800,  size'15mm  黒水牛',           desc'風格ある黒水牛素材の銀行印。重厚感と押し心地を兼ね備えた一品。',                    icon'🏦', stock'在庫あり',  photonull},
+  {id3, cat'hanko',   name'実印 本柘植',                 price4500,  size'18mm  本柘植',           desc'硬度が高く耐久性に優れた本柘植素材の実印。大切な場面に。',                          icon'⭐', stock'在庫あり',  photonull},
+  {id4, cat'hanko',   name'法人印セット',                price18000, size'21mm・18mm  黒水牛',     desc'代表者印・銀行印・角印の3点セット。法人設立に最適です。',                          icon'🏢', stock'取り寄せ',  photonull},
+  {id5, cat'konyudo', name'こにゅうどうくん マグカップ', price1200,  size'直径8cm  陶器製',        desc'四日市の人気ゆるキャラこにゅうどうくんのオリジナルマグカップ。毎朝が楽しくなる♪',  icon'☕', stock'在庫あり',  photonull},
+  {id6, cat'konyudo', name'こにゅうどうくん キーホルダー',price600,  size'5cm  アクリル製',        desc'カバンや鍵につけてどこでも一緒！ふんわりした笑顔が可愛いアクリルキーホルダー。',    icon'🔑', stock'在庫あり',  photonull},
+  {id7, cat'konyudo', name'こにゅうどうくん Tシャツ',    price2500,  size'SMLXL  コットン100%', desc'四日市土産にも人気のオリジナルTシャツ。着心地抜群のコットン素材。',                  icon'👕', stock'残りわずか', photonull}
+];
+var nextId   = 100;
+var authed   = false;
+var photoData = null;
+
+ ── ユーティリティ ── 
+function esc(s) {
+  return String(s).replace(&g,'&amp;').replace(g,'&lt;').replace(g,'&gt;');
+}
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+ ── 公開グリッド描画 ── 
+function renderAll() {
+  var hanko   = products.filter(function(p){ return p.cat==='hanko'; });
+  var konyudo = products.filter(function(p){ return p.cat==='konyudo'; });
+  document.getElementById('grid-hanko').innerHTML   = hanko.map(cardHtml).join('');
+  document.getElementById('grid-konyudo').innerHTML = konyudo.map(cardHtml).join('');
+  document.getElementById('empty-hanko').style.display   = hanko.length    'none''block';
+  document.getElementById('empty-konyudo').style.display = konyudo.length  'none''block';
+}
+
+function cardHtml(p) {
+  var isTeal = p.cat==='konyudo';
+  var sc = p.stock==='品切れ''#c0392b' p.stock==='残りわずか''#e67e22''#27ae60';
+  var media = p.photo
+     'div class=card-photo-wrapimg class=card-photo src='+p.photo+' alt='+esc(p.name)+'div'
+     'div class=card-icon'+(p.icon(isTeal'🟢''🔖'))+'div';
+  return 'div class=product-card'+(isTeal' konyudo''')+''+media
+    +'div class=card-name'+esc(p.name)+'div'
+    +'div class=card-price'+(isTeal' teal''')+'¥'+Number(p.price).toLocaleString()+'div'
+    +(p.size'div class=card-size'+esc(p.size)+'div''')
+    +'div class=card-desc'+esc(p.desc)+'div'
+    +'div class=card-stock style=color'+sc+'● '+esc(p.stock)+'div'
+    +'div';
+}
+
+ ── 管理リスト描画 ── 
+function renderMgmt() {
+  ['hanko','konyudo'].forEach(function(cat) {
+    var list = products.filter(function(p){ return p.cat===cat; });
+    var el   = document.getElementById('mgmt-'+cat);
+    if (!list.length) {
+      el.innerHTML = 'div class=mgmt-empty商品がありませんdiv'; return;
+    }
+    el.innerHTML = list.map(function(p, idx) {
+      var thumb = p.photo
+         'img class=mgmt-thumb src='+p.photo+' alt='
+         'span class=mgmt-icon'+(p.icon'🔖')+'span';
+      var isFirst = (idx===0);
+      var isLast  = (idx===list.length-1);
+      return 'div class=mgmt-item data-id='+p.id+''
+        +'div class=mgmt-thumb-wrap'+thumb+'div'
+        +'div class=mgmt-info'
+          +'div class=mgmt-name'+esc(p.name)+'div'
+          +'div class=mgmt-price¥'+Number(p.price).toLocaleString()+'  '+esc(p.stock)+'div'
+        +'div'
+        +'div class=mgmt-actions'
+          +'button class=mgmt-btn up   data-id='+p.id+' data-cat='+cat+' data-dir=up   title=上へ'+(isFirst' disabled''')+' ▲ button'
+          +'button class=mgmt-btn down data-id='+p.id+' data-cat='+cat+' data-dir=down title=下へ'+(isLast' disabled''')+' ▼ button'
+          +'button class=mgmt-btn trash data-id='+p.id+' title=削除 🗑 button'
+        +'div'
+        +'div';
+    }).join('');
+  });
+
+   並び替え・削除イベント（描画後に毎回付与） 
+  document.querySelectorAll('.mgmt-btn.up, .mgmt-btn.down').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (this.disabled) return;
+      var id  = parseInt(this.dataset.id, 10);
+      var cat = this.dataset.cat;
+      var dir = this.dataset.dir;
+      var arr = products.filter(function(p){ return p.cat===cat; });
+      var idx = arr.findIndex(function(p){ return p.id===id; });
+      var swapIdx = dir==='up'  idx-1  idx+1;
+       products 配列内でのインデックスを特定してスワップ 
+      var gIdx  = products.indexOf(arr[idx]);
+      var gSwap = products.indexOf(arr[swapIdx]);
+      var tmp = products[gIdx]; products[gIdx]=products[gSwap]; products[gSwap]=tmp;
+      renderAll(); renderMgmt();
+    });
+  });
+
+  document.querySelectorAll('.mgmt-btn.trash').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var id = parseInt(this.dataset.id, 10);
+      if (!confirm('この商品を削除しますか？')) return;
+      products = products.filter(function(p){ return p.id!==id; });
+      renderAll(); renderMgmt();
+      showToast('🗑 商品を削除しました');
+    });
+  });
+}
+
+ ── タブ ── 
+function switchTab(name) {
+  document.querySelectorAll('.tab-pane').forEach(function(el){ el.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
+  document.getElementById('pane-'+name).classList.add('active');
+  document.getElementById('tab-btn-'+name).classList.add('active');
+}
+
+function switchAdminTab(name) {
+  document.querySelectorAll('.admin-subpane').forEach(function(el){ el.classList.remove('active'); });
+  document.querySelectorAll('.admin-tab').forEach(function(el){ el.classList.remove('active'); });
+  document.getElementById('apane-'+name).classList.add('active');
+  document.getElementById('atab-'+name).classList.add('active');
+  if (name==='mgmt') renderMgmt();
+}
+
+ ── 写真 ── 
+function setPhoto(dataUrl) {
+  photoData = dataUrl;
+  document.getElementById('photo-prev').src = dataUrl;
+  document.getElementById('photo-prev').style.display = 'block';
+  document.getElementById('photo-hint').style.display = 'none';
+  document.getElementById('btn-rmpho').style.display  = 'inline-flex';
+}
+function removePhoto() {
+  photoData = null;
+  document.getElementById('photo-prev').src = '';
+  document.getElementById('photo-prev').style.display = 'none';
+  document.getElementById('photo-hint').style.display = 'block';
+  document.getElementById('btn-rmpho').style.display  = 'none';
+  document.getElementById('f-photo-cam').value = '';
+  document.getElementById('f-photo-lib').value = '';
+}
+function readFile(file) {
+  if (!file) return;
+  var r = new FileReader();
+  r.onload = function(ev){ setPhoto(ev.target.result); };
+  r.readAsDataURL(file);
+}
+
+ ── 商品登録 ── 
+function addProduct() {
+  var cat   = document.querySelector('input[name=cat]checked').value;
+  var name  = document.getElementById('f-name').value.trim();
+  var price = parseInt(document.getElementById('f-price').value, 10);
+  var size  = document.getElementById('f-size').value.trim();
+  var desc  = document.getElementById('f-desc').value.trim();
+  var icon  = document.getElementById('f-icon').value.trim()  (cat==='konyudo''🟢''🔖');
+  var stock = document.getElementById('f-stock').value;
+  var errEl = document.getElementById('form-err');
+
+  if (!name)          { errEl.textContent='⚠ 商品名を入力してください';       errEl.style.display='block'; return; }
+  if (!priceprice1){ errEl.textContent='⚠ 価格を正しく入力してください';   errEl.style.display='block'; return; }
+  if (!desc)          { errEl.textContent='⚠ 商品特徴・説明を入力してください'; errEl.style.display='block'; return; }
+  errEl.style.display = 'none';
+
+  products.push({idnextId++, catcat, namename, priceprice, sizesize, descdesc, iconicon, stockstock, photophotoData});
+  renderAll();
+
+  document.getElementById('f-name').value  = '';
+  document.getElementById('f-price').value = '';
+  document.getElementById('f-size').value  = '';
+  document.getElementById('f-desc').value  = '';
+  document.getElementById('f-icon').value  = '';
+  document.getElementById('f-stock').selectedIndex = 0;
+  document.querySelector('input[name=cat][value=hanko]').checked = true;
+  removePhoto();
+  switchTab(cat);
+  showToast('✅ 商品を登録しました！');
+}
+
+ ── 管理トグル ── 
+function onAdminToggle() {
+  if (authed) { togglePanel(); }
+  else {
+    document.getElementById('pw-overlay').classList.add('show');
+    setTimeout(function(){ document.getElementById('pw-input').focus(); }, 100);
+  }
+}
+function togglePanel() {
+  document.getElementById('admin-toggle-btn').classList.toggle('open');
+  document.getElementById('admin-panel').classList.toggle('open');
+}
+
+ ── パスワード ── 
+function checkPw() {
+  var inp = document.getElementById('pw-input');
+  var msg = document.getElementById('pw-errmsg');
+  if (inp.value === ADMIN_PW) {
+    authed = true;
+    document.getElementById('pw-overlay').classList.remove('show');
+    inp.value = ''; msg.classList.remove('show');
+    togglePanel();
+  } else {
+    inp.classList.add('err'); msg.classList.add('show');
+    setTimeout(function(){ inp.classList.remove('err'); }, 400);
+    inp.value = ''; inp.focus();
+  }
+}
+function closePw() {
+  document.getElementById('pw-overlay').classList.remove('show');
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-errmsg').classList.remove('show');
+}
+
+ ── DOMContentLoaded ── 
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('admin-toggle-btn').addEventListener('click', onAdminToggle);
+  document.getElementById('reg-btn').addEventListener('click', addProduct);
+
+  document.getElementById('btn-camera').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('f-photo-cam').click();
+  });
+  document.getElementById('btn-library').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('f-photo-lib').click();
+  });
+  document.getElementById('btn-rmpho').addEventListener('click', function(e) {
+    e.stopPropagation(); removePhoto();
+  });
+  document.getElementById('photo-drop').addEventListener('click', function() {
+    document.getElementById('f-photo-lib').click();
+  });
+  document.getElementById('f-photo-cam').addEventListener('change', function() { readFile(this.files[0]); });
+  document.getElementById('f-photo-lib').addEventListener('change', function() { readFile(this.files[0]); });
+
+  document.getElementById('pw-submit-btn').addEventListener('click', checkPw);
+  document.getElementById('pw-input').addEventListener('keydown', function(e) { if(e.key==='Enter') checkPw(); });
+  document.getElementById('pw-cancel-btn').addEventListener('click', closePw);
+  document.getElementById('pw-overlay').addEventListener('click', function(e) { if(e.target===this) closePw(); });
+
+  renderAll();
+});
+script
+body
+html
