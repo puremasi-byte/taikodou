@@ -6,184 +6,162 @@
 <title>太古堂 | 印鑑・こにゅうどうくんグッズ</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --red: #8B0000; --red2: #C0392B;
-  --gold: #C9A84C; --gold2: #F0D080;
-  --ink: #1a1008; --cream: #FAF3E0; --paper: #F5ECD7;
-  --muted: #8a7a6a; --teal: #2E7D7D;
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var(--ink); min-height:100vh; }
-
-.banner-wrap { width:100%; background:#1a0a06; line-height:0; }
-.banner-wrap img { width:100%; height:auto; display:block; object-fit:cover; max-height:220px; object-position:center; }
-.info-bar { background:var(--red); display:flex; align-items:center; justify-content:space-between; padding:10px 32px; flex-wrap:wrap; gap:8px; }
-.info-bar .tagline { font-size:12px; color:rgba(255,255,255,.75); letter-spacing:.2em; }
-.info-bar .contact { text-align:right; color:rgba(255,255,255,.8); font-size:12px; line-height:1.8; }
-.info-bar .contact a { color:var(--gold2); text-decoration:none; font-weight:700; font-size:17px; }
-
-.hero { background:linear-gradient(135deg,var(--paper) 0%,#e8d5b0 100%); padding:28px 40px; text-align:center; border-bottom:3px solid var(--gold); }
-.hero h2 { font-family:'Noto Serif JP',serif; font-size:20px; color:var(--red); letter-spacing:.3em; margin-bottom:6px; }
-.hero p { color:var(--muted); font-size:13px; }
-
-.tabs-wrap { max-width:1100px; margin:0 auto; padding:0 20px 40px; }
-.tab-nav { display:flex; margin-top:28px; border-bottom:3px solid var(--red); }
-.tab-btn { flex:1; padding:14px 16px; border:2px solid #d4c4a0; border-bottom:none; cursor:pointer; font-family:'Noto Serif JP',serif; font-size:15px; font-weight:700; background:var(--paper); color:var(--muted); display:flex; align-items:center; justify-content:center; gap:8px; transition:all .3s; margin-bottom:-3px; }
-.tab-btn:first-child { border-radius:10px 0 0 0; }
-.tab-btn:last-child  { border-radius:0 10px 0 0; }
-.tab-btn.active { background:white; color:var(--red); border-color:var(--red); border-bottom-color:white; z-index:1; }
-.tab-content { background:white; border:2px solid var(--red); border-top:none; border-radius:0 0 14px 14px; padding:28px; min-height:360px; }
-.tab-pane { display:none; }
-.tab-pane.active { display:block; animation:fadeIn .3s; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
-
-.sec-title { display:flex; align-items:center; gap:10px; margin-bottom:22px; padding-bottom:10px; border-bottom:2px dashed var(--gold); }
-.sec-title h3 { font-family:'Noto Serif JP',serif; font-size:18px; font-weight:700; color:var(--red); }
-.sec-badge { background:var(--red); color:white; font-size:10px; padding:3px 9px; border-radius:20px; letter-spacing:.1em; }
-.sec-badge.teal { background:var(--teal); }
-
-.product-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
-.product-card { background:var(--cream); border:2px solid #e0d0b0; border-radius:12px; padding:18px; position:relative; overflow:hidden; transition:border-color .3s; }
-.product-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--red); }
-.product-card.konyudo::before { background:var(--teal); }
-.product-card:hover { border-color:var(--gold); }
-.card-photo-wrap { width:100%; aspect-ratio:4/3; background:#f0ece4; border-radius:8px; margin-bottom:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
-.card-photo { width:100%; height:100%; object-fit:contain; display:block; }
-.card-icon { width:56px; height:56px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:32px; background:white; border-radius:50%; border:2px solid #e0d0b0; }
-.card-name  { font-family:'Noto Serif JP',serif; font-size:15px; font-weight:700; text-align:center; margin-bottom:5px; }
-.card-price { font-size:17px; font-weight:700; color:var(--red); text-align:center; margin-bottom:6px; }
-.card-price.teal { color:var(--teal); }
-.card-size  { font-size:11px; color:#aaa; text-align:center; margin-bottom:4px; }
-.card-desc  { font-size:12px; color:var(--muted); text-align:center; line-height:1.6; }
-.card-stock { margin-top:8px; font-size:11px; font-weight:700; text-align:center; }
-
-.empty { text-align:center; padding:40px; color:var(--muted); }
-.empty .ei { font-size:44px; margin-bottom:10px; }
-
-/* ローディング */
-.loading { text-align:center; padding:40px; color:var(--muted); font-size:14px; }
-
+:root { --red:#8B0000; --red2:#C0392B; --gold:#C9A84C; --gold2:#F0D080; --ink:#1a1008; --cream:#FAF3E0; --paper:#F5ECD7; --muted:#8a7a6a; --teal:#2E7D7D; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Noto Sans JP",sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;}
+.banner-wrap{width:100%;background:#1a0a06;line-height:0;}
+.banner-wrap img{width:100%;height:auto;display:block;object-fit:cover;max-height:220px;object-position:center;}
+.info-bar{background:var(--red);display:flex;align-items:center;justify-content:space-between;padding:10px 32px;flex-wrap:wrap;gap:8px;}
+.info-bar .tagline{font-size:12px;color:rgba(255,255,255,.75);letter-spacing:.2em;}
+.info-bar .contact{text-align:right;color:rgba(255,255,255,.8);font-size:12px;line-height:1.8;}
+.info-bar .contact a{color:var(--gold2);text-decoration:none;font-weight:700;font-size:17px;}
+.hero{background:linear-gradient(135deg,var(--paper) 0%,#e8d5b0 100%);padding:28px 40px;text-align:center;border-bottom:3px solid var(--gold);}
+.hero h2{font-family:"Noto Serif JP",serif;font-size:20px;color:var(--red);letter-spacing:.3em;margin-bottom:6px;}
+.hero p{color:var(--muted);font-size:13px;}
+.tabs-wrap{max-width:1100px;margin:0 auto;padding:0 20px 40px;}
+.tab-nav{display:flex;margin-top:28px;border-bottom:3px solid var(--red);}
+.tab-btn{flex:1;padding:14px 16px;border:2px solid #d4c4a0;border-bottom:none;cursor:pointer;font-family:"Noto Serif JP",serif;font-size:15px;font-weight:700;background:var(--paper);color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;margin-bottom:-3px;}
+.tab-btn:first-child{border-radius:10px 0 0 0;}
+.tab-btn:last-child{border-radius:0 10px 0 0;}
+.tab-btn.active{background:white;color:var(--red);border-color:var(--red);border-bottom-color:white;z-index:1;}
+.tab-content{background:white;border:2px solid var(--red);border-top:none;border-radius:0 0 14px 14px;padding:28px;min-height:360px;}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;animation:fadeIn .3s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{display:flex;align-items:center;gap:10px;margin-bottom:22px;padding-bottom:10px;border-bottom:2px dashed var(--gold);}
+.sec-title h3{font-family:"Noto Serif JP",serif;font-size:18px;font-weight:700;color:var(--red);}
+.sec-badge{background:var(--red);color:white;font-size:10px;padding:3px 9px;border-radius:20px;letter-spacing:.1em;}
+.sec-badge.teal{background:var(--teal);}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px;}
+.product-card{background:var(--cream);border:2px solid #e0d0b0;border-radius:12px;padding:18px;position:relative;overflow:hidden;transition:border-color .3s;}
+.product-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--red);}
+.product-card.konyudo::before{background:var(--teal);}
+.product-card:hover{border-color:var(--gold);}
+.card-photo-wrap{width:100%;aspect-ratio:4/3;background:#f0ece4;border-radius:8px;margin-bottom:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.card-photo{width:100%;height:100%;object-fit:contain;display:block;}
+.card-icon{width:56px;height:56px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:32px;background:white;border-radius:50%;border:2px solid #e0d0b0;}
+.card-name{font-family:"Noto Serif JP",serif;font-size:15px;font-weight:700;text-align:center;margin-bottom:5px;}
+.card-price{font-size:17px;font-weight:700;color:var(--red);text-align:center;margin-bottom:6px;}
+.card-price.teal{color:var(--teal);}
+.card-size{font-size:11px;color:#aaa;text-align:center;margin-bottom:4px;}
+.card-desc{font-size:12px;color:var(--muted);text-align:center;line-height:1.6;}
+.card-stock{margin-top:8px;font-size:11px;font-weight:700;text-align:center;}
+.empty{text-align:center;padding:40px;color:var(--muted);}
+.empty .ei{font-size:44px;margin-bottom:10px;}
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:14px;}
 /* ADMIN */
-.admin-wrap { text-align:right; margin-top:20px; }
-.admin-toggle { padding:6px 14px; background:transparent; border:1px solid #ccc; border-radius:6px; cursor:pointer; font-size:11px; color:#bbb; display:inline-flex; align-items:center; gap:6px; transition:all .3s; }
-.admin-toggle:hover { color:#888; border-color:#aaa; }
-.admin-toggle .arr { transition:transform .3s; font-size:9px; }
-.admin-toggle.open .arr { transform:rotate(180deg); }
-.admin-panel { display:none; background:#fafafa; border:1px solid #ddd; border-radius:8px; padding:24px; margin-top:8px; text-align:left; }
-.admin-panel.open { display:block; animation:fadeIn .3s; }
-
-.admin-tabs { display:flex; gap:0; margin-bottom:20px; border-bottom:2px solid #ddd; }
-.admin-tab { padding:9px 20px; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; font-family:'Noto Sans JP',sans-serif; font-size:13px; font-weight:700; color:#aaa; margin-bottom:-2px; transition:all .2s; }
-.admin-tab.active { color:var(--red); border-bottom-color:var(--red); }
-.admin-subpane { display:none; }
-.admin-subpane.active { display:block; animation:fadeIn .2s; }
-
-.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.fg { display:flex; flex-direction:column; gap:5px; }
-.fg.full { grid-column:1/-1; }
-.fg label { font-size:13px; font-weight:700; color:var(--ink); }
-.fg label .req { color:var(--red2); margin-left:3px; }
-.fg input,.fg select,.fg textarea { padding:9px 12px; border:2px solid #d4c4a0; border-radius:8px; font-family:'Noto Sans JP',sans-serif; font-size:14px; background:white; outline:none; transition:border-color .2s; color:var(--ink); }
-.fg input:focus,.fg select:focus,.fg textarea:focus { border-color:var(--red); box-shadow:0 0 0 3px rgba(139,0,0,.08); }
-.fg textarea { resize:vertical; min-height:76px; }
-.radio-row { display:flex; gap:12px; }
-.rlabel { display:flex; align-items:center; gap:8px; cursor:pointer; font-size:14px; font-weight:700; padding:9px 18px; border:2px solid #d4c4a0; border-radius:8px; background:white; flex:1; justify-content:center; transition:all .2s; }
-.rlabel.red:has(input:checked)  { border-color:var(--red);  background:rgba(139,0,0,.07);    color:var(--red); }
-.rlabel.teal:has(input:checked) { border-color:var(--teal); background:rgba(46,125,125,.07); color:var(--teal); }
-.rlabel input { display:none; }
-
-.photo-drop { width:100%; aspect-ratio:4/3; border:2px dashed #d4c4a0; border-radius:10px; background:#fdf8f0; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; transition:border-color .2s; position:relative; }
-.photo-drop:hover { border-color:var(--red); background:#fff8f5; }
-.photo-hint { text-align:center; pointer-events:none; padding:20px; }
-.photo-hint .ph-icons { font-size:28px; margin-bottom:8px; }
-.photo-hint .ph-main { font-size:14px; font-weight:700; color:var(--red); margin-bottom:3px; }
-.photo-hint .ph-sub  { font-size:11px; color:var(--muted); }
-.photo-drop img.prev { width:100%; height:100%; object-fit:contain; display:block; }
-.photo-btns { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
-.pbtn { flex:1; min-width:110px; padding:9px 10px; border-radius:8px; border:2px solid; font-size:13px; font-weight:700; cursor:pointer; font-family:'Noto Sans JP',sans-serif; transition:all .2s; white-space:nowrap; background:white; }
-.pbtn.cam { border-color:var(--red);  color:var(--red); }
-.pbtn.cam:hover { background:var(--red);  color:white; }
-.pbtn.lib { border-color:var(--teal); color:var(--teal); }
-.pbtn.lib:hover { background:var(--teal); color:white; }
-.pbtn.del { border-color:#bbb; color:#888; flex:0 0 auto; }
-.pbtn.del:hover { background:#e74c3c; border-color:#e74c3c; color:white; }
-
-.reg-btn { margin-top:18px; width:100%; padding:13px; background:var(--red); color:white; border:none; border-radius:10px; font-family:'Noto Serif JP',serif; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:.08em; transition:all .3s; display:flex; align-items:center; justify-content:center; gap:8px; }
-.reg-btn:hover { background:#6b0000; }
-.reg-btn:disabled { background:#aaa; cursor:not-allowed; transform:none; }
-.form-err { font-size:13px; color:var(--red2); margin-top:10px; display:none; padding:8px 12px; background:#fff0f0; border-radius:6px; border-left:3px solid var(--red2); }
-
-.mgmt-hint { font-size:12px; color:var(--muted); margin-bottom:14px; }
-.mgmt-list { display:flex; flex-direction:column; gap:8px; }
-.mgmt-item { display:flex; align-items:center; gap:10px; background:white; border:1px solid #e0d0b0; border-radius:10px; padding:10px 12px; }
-.mgmt-thumb-wrap { width:52px; height:52px; border-radius:6px; overflow:hidden; background:#f0ece4; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-.mgmt-thumb { width:100%; height:100%; object-fit:contain; }
-.mgmt-icon { font-size:24px; }
-.mgmt-info { flex:1; min-width:0; }
-.mgmt-name  { font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.mgmt-price { font-size:12px; color:var(--muted); }
-.mgmt-actions { display:flex; gap:6px; flex-shrink:0; }
-.mgmt-btn { width:32px; height:32px; border-radius:6px; border:1px solid #ddd; background:white; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all .2s; color:#666; }
-.mgmt-btn.up:hover,.mgmt-btn.down:hover { border-color:var(--teal); color:var(--teal); }
-.mgmt-btn.trash:hover { border-color:var(--red2); color:var(--red2); background:#fff0f0; }
-.mgmt-btn:disabled { opacity:.3; cursor:default; }
-.mgmt-empty { text-align:center; padding:30px; color:var(--muted); font-size:13px; }
-
-.pw-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:1000; align-items:center; justify-content:center; backdrop-filter:blur(3px); }
-.pw-overlay.show { display:flex; animation:fadeIn .2s; }
-.pw-box { background:white; border-radius:14px; padding:36px 40px; width:320px; box-shadow:0 20px 60px rgba(0,0,0,.3); text-align:center; }
-.pw-box .pwi { font-size:36px; margin-bottom:12px; }
-.pw-box h3 { font-family:'Noto Serif JP',serif; font-size:18px; font-weight:700; color:var(--ink); margin-bottom:6px; }
-.pw-box p { font-size:12px; color:var(--muted); margin-bottom:20px; }
-.pw-input { width:100%; padding:12px 14px; border:2px solid #ddd; border-radius:8px; font-size:16px; letter-spacing:.2em; outline:none; text-align:center; transition:border-color .2s; margin-bottom:14px; }
-.pw-input:focus { border-color:var(--red); }
-.pw-input.err { border-color:#e74c3c; animation:shake .3s; }
-@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-.pw-submit { width:100%; padding:12px; background:var(--red); color:white; border:none; border-radius:8px; font-family:'Noto Serif JP',serif; font-size:15px; font-weight:700; cursor:pointer; }
-.pw-submit:hover { background:#6b0000; }
-.pw-cancel { margin-top:10px; background:none; border:none; color:var(--muted); font-size:12px; cursor:pointer; text-decoration:underline; }
-.pw-errmsg { font-size:12px; color:#e74c3c; margin-bottom:10px; display:none; }
-.pw-errmsg.show { display:block; }
-
-.toast { position:fixed; bottom:28px; right:28px; background:var(--ink); color:white; padding:12px 22px; border-radius:10px; font-size:14px; font-weight:700; transform:translateY(80px); opacity:0; transition:all .4s; z-index:9999; }
-.toast.show { transform:translateY(0); opacity:1; }
-
-footer { background:var(--ink); color:rgba(255,255,255,.6); text-align:center; padding:22px; font-size:12px; margin-top:30px; letter-spacing:.1em; }
-footer strong { color:var(--gold); }
-
-@media(max-width:600px){
-  .info-bar { padding:10px 16px; }
-  .form-grid { grid-template-columns:1fr; }
-  .tab-btn { font-size:13px; padding:11px 8px; }
-  .tabs-wrap { padding:0 12px 30px; }
-  .tab-content { padding:18px 14px; }
-  .photo-btns { flex-direction:column; }
-  .pbtn { min-width:auto; }
-}
-
+.admin-wrap{text-align:right;margin-top:20px;}
+.admin-toggle{padding:6px 14px;background:transparent;border:1px solid #ccc;border-radius:6px;cursor:pointer;font-size:11px;color:#bbb;display:inline-flex;align-items:center;gap:6px;transition:all .3s;}
+.admin-toggle:hover{color:#888;border-color:#aaa;}
+.admin-toggle .arr{transition:transform .3s;font-size:9px;}
+.admin-toggle.open .arr{transform:rotate(180deg);}
+.admin-panel{display:none;background:#fafafa;border:1px solid #ddd;border-radius:8px;padding:24px;margin-top:8px;text-align:left;}
+.admin-panel.open{display:block;animation:fadeIn .3s;}
+.admin-tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid #ddd;}
+.admin-tab{padding:9px 20px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:"Noto Sans JP",sans-serif;font-size:13px;font-weight:700;color:#aaa;margin-bottom:-2px;transition:all .2s;}
+.admin-tab.active{color:var(--red);border-bottom-color:var(--red);}
+.admin-subpane{display:none;}
+.admin-subpane.active{display:block;animation:fadeIn .2s;}
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg.full{grid-column:1/-1;}
+.fg label{font-size:13px;font-weight:700;color:var(--ink);}
+.fg label .req{color:var(--red2);margin-left:3px;}
+.fg input,.fg select,.fg textarea{padding:9px 12px;border:2px solid #d4c4a0;border-radius:8px;font-family:"Noto Sans JP",sans-serif;font-size:14px;background:white;outline:none;transition:border-color .2s;color:var(--ink);}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(139,0,0,.08);}
+.fg textarea{resize:vertical;min-height:76px;}
+.radio-row{display:flex;gap:12px;}
+.rlabel{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:700;padding:9px 18px;border:2px solid #d4c4a0;border-radius:8px;background:white;flex:1;justify-content:center;transition:all .2s;}
+.rlabel.red:has(input:checked){border-color:var(--red);background:rgba(139,0,0,.07);color:var(--red);}
+.rlabel.teal:has(input:checked){border-color:var(--teal);background:rgba(46,125,125,.07);color:var(--teal);}
+.rlabel input{display:none;}
+.photo-drop{width:100%;aspect-ratio:4/3;border:2px dashed #d4c4a0;border-radius:10px;background:#fdf8f0;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:border-color .2s;position:relative;}
+.photo-drop:hover{border-color:var(--red);background:#fff8f5;}
+.photo-hint{text-align:center;pointer-events:none;padding:20px;}
+.photo-hint .ph-icons{font-size:28px;margin-bottom:8px;}
+.photo-hint .ph-main{font-size:14px;font-weight:700;color:var(--red);margin-bottom:3px;}
+.photo-hint .ph-sub{font-size:11px;color:var(--muted);}
+.photo-drop img.prev{width:100%;height:100%;object-fit:contain;display:block;}
+.photo-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.pbtn{flex:1;min-width:110px;padding:9px 10px;border-radius:8px;border:2px solid;font-size:13px;font-weight:700;cursor:pointer;font-family:"Noto Sans JP",sans-serif;transition:all .2s;white-space:nowrap;background:white;}
+.pbtn.cam{border-color:var(--red);color:var(--red);}
+.pbtn.cam:hover{background:var(--red);color:white;}
+.pbtn.lib{border-color:var(--teal);color:var(--teal);}
+.pbtn.lib:hover{background:var(--teal);color:white;}
+.pbtn.del{border-color:#bbb;color:#888;flex:0 0 auto;}
+.pbtn.del:hover{background:#e74c3c;border-color:#e74c3c;color:white;}
+.reg-btn{margin-top:18px;width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:10px;font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:.08em;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.reg-btn:hover{background:#6b0000;}
+.reg-btn:disabled{background:#aaa;cursor:not-allowed;}
+.form-err{font-size:13px;color:var(--red2);margin-top:10px;display:none;padding:8px 12px;background:#fff0f0;border-radius:6px;border-left:3px solid var(--red2);}
+/* MGMT */
+.mgmt-hint{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.mgmt-list{display:flex;flex-direction:column;gap:8px;}
+.mgmt-item{display:flex;align-items:center;gap:10px;background:white;border:1px solid #e0d0b0;border-radius:10px;padding:10px 12px;}
+.mgmt-thumb-wrap{width:52px;height:52px;border-radius:6px;overflow:hidden;background:#f0ece4;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.mgmt-thumb{width:100%;height:100%;object-fit:contain;}
+.mgmt-icon{font-size:24px;}
+.mgmt-info{flex:1;min-width:0;}
+.mgmt-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mgmt-price{font-size:12px;color:var(--muted);}
+.mgmt-actions{display:flex;gap:6px;flex-shrink:0;}
+.mgmt-btn{width:32px;height:32px;border-radius:6px;border:1px solid #ddd;background:white;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;color:#666;}
+.mgmt-btn.up:hover,.mgmt-btn.down:hover{border-color:var(--teal);color:var(--teal);}
+.mgmt-btn.trash:hover{border-color:var(--red2);color:var(--red2);background:#fff0f0;}
+.mgmt-btn.photo{width:auto;padding:0 8px;font-size:12px;border-color:#d4c4a0;color:var(--muted);}
+.mgmt-btn.photo.has-photo{border-color:var(--teal);color:var(--teal);}
+.mgmt-btn.photo:hover{border-color:var(--red);color:var(--red);background:#fff0f0;}
+.mgmt-btn:disabled{opacity:.3;cursor:default;}
+.mgmt-empty{text-align:center;padding:30px;color:var(--muted);font-size:13px;}
 /* 写真編集モーダル */
-.photo-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:2000; align-items:center; justify-content:center; backdrop-filter:blur(3px); }
-.photo-modal-overlay.show { display:flex; animation:fadeIn .2s; }
-.photo-modal { background:white; border-radius:14px; padding:28px; width:340px; max-width:90vw; box-shadow:0 20px 60px rgba(0,0,0,.3); }
-.photo-modal h4 { font-family:'Noto Serif JP',serif; font-size:16px; font-weight:700; color:var(--ink); margin-bottom:6px; }
-.photo-modal .pm-name { font-size:12px; color:var(--muted); margin-bottom:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.photo-modal-drop { width:100%; aspect-ratio:4/3; border:2px dashed #d4c4a0; border-radius:10px; background:#fdf8f0; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; transition:border-color .2s; }
-.photo-modal-drop:hover { border-color:var(--red); }
-.photo-modal-drop img { width:100%; height:100%; object-fit:contain; }
-.photo-modal-hint { text-align:center; pointer-events:none; padding:16px; }
-.photo-modal-hint .pmh-icon { font-size:28px; margin-bottom:6px; }
-.photo-modal-hint .pmh-text { font-size:13px; font-weight:700; color:var(--red); }
-.pm-btns { display:flex; gap:8px; margin-top:10px; }
-.pm-btns .pbtn { min-width:auto; }
-.pm-footer { display:flex; gap:8px; margin-top:18px; }
-.pm-save { flex:1; padding:11px; background:var(--red); color:white; border:none; border-radius:8px; font-family:'Noto Serif JP',serif; font-size:14px; font-weight:700; cursor:pointer; }
-.pm-save:hover { background:#6b0000; }
-.pm-save:disabled { background:#aaa; cursor:not-allowed; }
-.pm-cancel { padding:11px 16px; background:white; border:2px solid #ddd; border-radius:8px; font-size:13px; cursor:pointer; color:#888; }
-.pm-cancel:hover { border-color:#aaa; }
-.mgmt-btn.photo { border-color:#d4c4a0; color:var(--muted); font-size:12px; width:auto; padding:0 8px; }
-.mgmt-btn.photo.has-photo { border-color:var(--teal); color:var(--teal); }
-.mgmt-btn.photo:hover { border-color:var(--red); color:var(--red); background:#fff0f0; }
+.pm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(3px);}
+.pm-overlay.show{display:flex;animation:fadeIn .2s;}
+.pm-box{background:white;border-radius:14px;padding:28px;width:340px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.pm-box h4{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.pm-pname{font-size:12px;color:var(--muted);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pm-drop{width:100%;aspect-ratio:4/3;border:2px dashed #d4c4a0;border-radius:10px;background:#fdf8f0;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:border-color .2s;}
+.pm-drop:hover{border-color:var(--red);}
+.pm-drop-hint{text-align:center;pointer-events:none;padding:16px;}
+.pm-drop-hint .pdh-icon{font-size:28px;margin-bottom:6px;}
+.pm-drop-hint .pdh-text{font-size:13px;font-weight:700;color:var(--red);}
+.pm-drop img{width:100%;height:100%;object-fit:contain;display:block;}
+.pm-btns{display:flex;gap:8px;margin-top:10px;}
+.pm-footer{display:flex;gap:8px;margin-top:18px;}
+.pm-save-btn{flex:1;padding:11px;background:var(--red);color:white;border:none;border-radius:8px;font-family:"Noto Serif JP",serif;font-size:14px;font-weight:700;cursor:pointer;}
+.pm-save-btn:hover{background:#6b0000;}
+.pm-save-btn:disabled{background:#aaa;cursor:not-allowed;}
+.pm-cancel-btn{padding:11px 16px;background:white;border:2px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer;color:#888;}
+.pm-cancel-btn:hover{border-color:#aaa;}
+/* PW MODAL */
+.pw-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(3px);}
+.pw-overlay.show{display:flex;animation:fadeIn .2s;}
+.pw-box{background:white;border-radius:14px;padding:36px 40px;width:320px;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center;}
+.pw-box .pwi{font-size:36px;margin-bottom:12px;}
+.pw-box h3{font-family:"Noto Serif JP",serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.pw-box p{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.pw-input{width:100%;padding:12px 14px;border:2px solid #ddd;border-radius:8px;font-size:16px;letter-spacing:.2em;outline:none;text-align:center;transition:border-color .2s;margin-bottom:14px;}
+.pw-input:focus{border-color:var(--red);}
+.pw-input.err{border-color:#e74c3c;animation:shake .3s;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.pw-submit{width:100%;padding:12px;background:var(--red);color:white;border:none;border-radius:8px;font-family:"Noto Serif JP",serif;font-size:15px;font-weight:700;cursor:pointer;}
+.pw-submit:hover{background:#6b0000;}
+.pw-cancel{margin-top:10px;background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline;}
+.pw-errmsg{font-size:12px;color:#e74c3c;margin-bottom:10px;display:none;}
+.pw-errmsg.show{display:block;}
+.toast{position:fixed;bottom:28px;right:28px;background:var(--ink);color:white;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:700;transform:translateY(80px);opacity:0;transition:all .4s;z-index:9999;}
+.toast.show{transform:translateY(0);opacity:1;}
+footer{background:var(--ink);color:rgba(255,255,255,.6);text-align:center;padding:22px;font-size:12px;margin-top:30px;letter-spacing:.1em;}
+footer strong{color:var(--gold);}
+@media(max-width:600px){
+  .info-bar{padding:10px 16px;}
+  .form-grid{grid-template-columns:1fr;}
+  .tab-btn{font-size:13px;padding:11px 8px;}
+  .tabs-wrap{padding:0 12px 30px;}
+  .tab-content{padding:18px 14px;}
+  .photo-btns{flex-direction:column;}
+  .pbtn{min-width:auto;}
+}
 </style>
 </head>
 <body>
@@ -227,16 +205,12 @@ footer strong { color:var(--gold); }
   </div>
 
   <div class="admin-wrap">
-    <button class="admin-toggle" id="admin-toggle-btn">
-      <span>管理</span><span class="arr">▼</span>
-    </button>
+    <button class="admin-toggle" id="admin-toggle-btn"><span>管理</span><span class="arr">▼</span></button>
     <div class="admin-panel" id="admin-panel">
       <div class="admin-tabs">
         <button class="admin-tab active" id="atab-add"  onclick="switchAdminTab('add')">＋ 商品を登録</button>
         <button class="admin-tab"        id="atab-mgmt" onclick="switchAdminTab('mgmt')">📋 商品の管理・並び替え</button>
       </div>
-
-      <!-- 登録フォーム -->
       <div class="admin-subpane active" id="apane-add">
         <div class="form-grid">
           <div class="fg full">
@@ -246,22 +220,10 @@ footer strong { color:var(--gold); }
               <label class="rlabel teal"><input type="radio" name="cat" value="konyudo"> 🟢 こにゅうどうくんグッズ</label>
             </div>
           </div>
-          <div class="fg full">
-            <label>商品名<span class="req">*</span></label>
-            <input type="text" id="f-name" placeholder="例：黒水牛 銀行印 15mm">
-          </div>
-          <div class="fg">
-            <label>価格（税込）<span class="req">*</span></label>
-            <input type="number" id="f-price" placeholder="例：3800" min="1">
-          </div>
-          <div class="fg">
-            <label>サイズ / 素材</label>
-            <input type="text" id="f-size" placeholder="例：15mm / 黒水牛">
-          </div>
-          <div class="fg full">
-            <label>商品特徴・説明<span class="req">*</span></label>
-            <textarea id="f-desc" placeholder="例：風格のある黒水牛素材を使用した銀行印。押し心地も抜群です。"></textarea>
-          </div>
+          <div class="fg full"><label>商品名<span class="req">*</span></label><input type="text" id="f-name" placeholder="例：黒水牛 銀行印 15mm"></div>
+          <div class="fg"><label>価格（税込）<span class="req">*</span></label><input type="number" id="f-price" placeholder="例：3800" min="1"></div>
+          <div class="fg"><label>サイズ / 素材</label><input type="text" id="f-size" placeholder="例：15mm / 黒水牛"></div>
+          <div class="fg full"><label>商品特徴・説明<span class="req">*</span></label><textarea id="f-desc" placeholder="例：風格のある黒水牛素材を使用した銀行印。"></textarea></div>
           <div class="fg full">
             <label>商品写真</label>
             <div class="photo-drop" id="photo-drop">
@@ -280,12 +242,8 @@ footer strong { color:var(--gold); }
             <input type="file" id="f-photo-cam" accept="image/*" capture="environment" style="display:none">
             <input type="file" id="f-photo-lib" accept="image/*" style="display:none">
           </div>
-          <div class="fg">
-            <label>アイコン絵文字（写真なしの場合）</label>
-            <input type="text" id="f-icon" placeholder="例：🔖 🟢 💎" maxlength="4">
-          </div>
-          <div class="fg">
-            <label>在庫状況</label>
+          <div class="fg"><label>アイコン絵文字（写真なしの場合）</label><input type="text" id="f-icon" placeholder="例：🔖 🟢 💎" maxlength="4"></div>
+          <div class="fg"><label>在庫状況</label>
             <select id="f-stock">
               <option value="在庫あり">在庫あり</option>
               <option value="残りわずか">残りわずか</option>
@@ -297,10 +255,8 @@ footer strong { color:var(--gold); }
         <div class="form-err" id="form-err"></div>
         <button type="button" class="reg-btn" id="reg-btn">＋ この商品を登録する</button>
       </div>
-
-      <!-- 商品管理 -->
       <div class="admin-subpane" id="apane-mgmt">
-        <p class="mgmt-hint">▲▼ で表示順を変更、🗑 で削除できます</p>
+        <p class="mgmt-hint">📷 で写真を追加・変更、▲▼ で順番変更、🗑 で削除できます</p>
         <div style="margin-bottom:12px;"><strong style="font-size:13px;">🔖 印鑑・はんこ</strong></div>
         <div class="mgmt-list" id="mgmt-hanko"></div>
         <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🟢 こにゅうどうくんグッズ</strong></div>
@@ -318,6 +274,33 @@ footer strong { color:var(--gold); }
 
 <div class="toast" id="toast"></div>
 
+<!-- 写真編集モーダル -->
+<div class="pm-overlay" id="pm-overlay">
+  <div class="pm-box">
+    <h4>📷 商品写真を編集</h4>
+    <p class="pm-pname" id="pm-pname"></p>
+    <div class="pm-drop" id="pm-drop">
+      <div class="pm-drop-hint" id="pm-drop-hint">
+        <div class="pdh-icon">📷</div>
+        <div class="pdh-text">タップして写真を選択</div>
+      </div>
+      <img id="pm-preview" src="" alt="" style="display:none">
+    </div>
+    <div class="pm-btns">
+      <button type="button" class="pbtn cam" id="pm-cam-btn">📷 カメラ</button>
+      <button type="button" class="pbtn lib" id="pm-lib-btn">🖼️ ライブラリ</button>
+      <button type="button" class="pbtn del" id="pm-del-btn" style="display:none">✕ 削除</button>
+    </div>
+    <input type="file" id="pm-cam-input" accept="image/*" capture="environment" style="display:none">
+    <input type="file" id="pm-lib-input" accept="image/*" style="display:none">
+    <div class="pm-footer">
+      <button type="button" class="pm-cancel-btn" id="pm-cancel-btn">キャンセル</button>
+      <button type="button" class="pm-save-btn"   id="pm-save-btn">💾 保存する</button>
+    </div>
+  </div>
+</div>
+
+<!-- パスワードモーダル -->
 <div class="pw-overlay" id="pw-overlay">
   <div class="pw-box">
     <div class="pwi">🔐</div>
@@ -331,11 +314,23 @@ footer strong { color:var(--gold); }
 </div>
 
 <script>
-// =====================================================
-//  Supabase設定
-// =====================================================
 var SUPABASE_URL = 'https://pqylvacqbbpogvvtivcd.supabase.co';
 var SUPABASE_KEY = 'sb_publishable__vKOwqHOIyI-QSsxQ-yCXg_rADJAW3y';
+var ADMIN_PW  = 'taikodo2024';
+var authed    = false;
+var photoData = null;
+var products  = [];
+var pmId      = null;
+var pmPhoto   = null;
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
 
 function sbFetch(method, path, body) {
   var headers = {
@@ -350,61 +345,29 @@ function sbFetch(method, path, body) {
     headers: headers,
     body: body ? JSON.stringify(body) : undefined
   }).then(function(r) {
-    if (r.status === 204 || r.status === 200 && method !== 'GET' && method !== 'POST') return {};
-    return r.json().catch(function() { return {}; });
+    if (r.status === 204) return {};
+    return r.json();
   });
 }
 
-// =====================================================
-//  設定
-// =====================================================
-var ADMIN_PW  = 'taikodo2024';
-var authed    = false;
-var photoData = null;
-var products  = [];
-
-// =====================================================
-//  ユーティリティ
-// =====================================================
-function esc(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 3000);
-}
-
-// =====================================================
-//  Supabaseから商品を読み込む
-// =====================================================
 function loadProducts() {
   document.getElementById('loading-hanko').style.display   = 'block';
   document.getElementById('loading-konyudo').style.display = 'block';
   document.getElementById('grid-hanko').innerHTML   = '';
   document.getElementById('grid-konyudo').innerHTML = '';
-
   sbFetch('GET', 'products?select=*&order=sort_order.asc,id.asc').then(function(data) {
-    if (!Array.isArray(data)) {
-      showToast('⚠ データの読み込みに失敗しました');
-      document.getElementById('loading-hanko').style.display   = 'none';
-      document.getElementById('loading-konyudo').style.display = 'none';
-      return;
-    }
+    document.getElementById('loading-hanko').style.display   = 'none';
+    document.getElementById('loading-konyudo').style.display = 'none';
+    if (!Array.isArray(data)) { showToast('⚠ データ読み込み失敗'); return; }
     products = data;
     renderAll();
-    document.getElementById('loading-hanko').style.display   = 'none';
-    document.getElementById('loading-konyudo').style.display = 'none';
   }).catch(function() {
-    showToast('⚠ 通信エラーが発生しました');
     document.getElementById('loading-hanko').style.display   = 'none';
     document.getElementById('loading-konyudo').style.display = 'none';
+    showToast('⚠ 通信エラー');
   });
 }
 
-// =====================================================
-//  公開グリッド描画
-// =====================================================
 function renderAll() {
   var hanko   = products.filter(function(p){ return p.cat==='hanko'; });
   var konyudo = products.filter(function(p){ return p.cat==='konyudo'; });
@@ -416,7 +379,7 @@ function renderAll() {
 
 function cardHtml(p) {
   var isTeal = p.cat==='konyudo';
-  var sc = p.stock==='品切れ'?'#c0392b': p.stock==='残りわずか'?'#e67e22':'#27ae60';
+  var sc = p.stock==='品切れ'?'#c0392b':p.stock==='残りわずか'?'#e67e22':'#27ae60';
   var media = p.photo
     ? '<div class="card-photo-wrap"><img class="card-photo" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'"></div>'
     : '<div class="card-icon">'+(p.icon||(isTeal?'🟢':'🔖'))+'</div>';
@@ -429,36 +392,29 @@ function cardHtml(p) {
     +'</div>';
 }
 
-// =====================================================
-//  管理リスト描画
-// =====================================================
 function renderMgmt() {
   ['hanko','konyudo'].forEach(function(cat) {
     var list = products.filter(function(p){ return p.cat===cat; });
     var el   = document.getElementById('mgmt-'+cat);
-    if (!list.length) {
-      el.innerHTML = '<div class="mgmt-empty">商品がありません</div>'; return;
-    }
+    if (!list.length) { el.innerHTML = '<div class="mgmt-empty">商品がありません</div>'; return; }
     el.innerHTML = list.map(function(p, idx) {
       var thumb = p.photo
         ? '<img class="mgmt-thumb" src="'+esc(p.photo)+'" alt="">'
         : '<span class="mgmt-icon">'+(p.icon||'🔖')+'</span>';
+      var pBtn = '<button class="mgmt-btn photo'+(p.photo?' has-photo':'')+'" data-id="'+p.id+'" data-name="'+esc(p.name)+'">'+(p.photo?'📷':'📷+')+'</button>';
+      var uBtn = '<button class="mgmt-btn up"    data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'"'+(idx===0?' disabled':'')+'>▲</button>';
+      var dBtn = '<button class="mgmt-btn down"  data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'"'+(idx===list.length-1?' disabled':'')+'>▼</button>';
+      var tBtn = '<button class="mgmt-btn trash" data-id="'+p.id+'">🗑</button>';
       return '<div class="mgmt-item">'
         +'<div class="mgmt-thumb-wrap">'+thumb+'</div>'
-        +'<div class="mgmt-info">'
-          +'<div class="mgmt-name">'+esc(p.name)+'</div>'
-          +'<div class="mgmt-price">¥'+Number(p.price).toLocaleString()+' / '+esc(p.stock)+'</div>'
-        +'</div>'
-        +'<div class="mgmt-actions">'
-          +'<button class="mgmt-btn photo'+(p.photo?' has-photo':'')+'" data-id="'+p.id+'" data-name="'+esc(p.name)+'" title="'+(p.photo?'写真を変更':'写真を追加')+'">'+(p.photo?'📷':'📷+')+'</button>'
-          +'<button class="mgmt-btn up"    data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'" '+(idx===0?'disabled':'')+'> ▲ </button>'
-          +'<button class="mgmt-btn down"  data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'" '+(idx===list.length-1?'disabled':'')+'> ▼ </button>'
-          +'<button class="mgmt-btn trash" data-id="'+p.id+'"> 🗑 </button>'
-        +'</div>'
-        +'</div>';
+        +'<div class="mgmt-info"><div class="mgmt-name">'+esc(p.name)+'</div>'
+        +'<div class="mgmt-price">¥'+Number(p.price).toLocaleString()+' / '+esc(p.stock)+'</div></div>'
+        +'<div class="mgmt-actions">'+pBtn+uBtn+dBtn+tBtn+'</div></div>';
     }).join('');
 
-    // 並び替えイベント
+    el.querySelectorAll('.mgmt-btn.photo').forEach(function(btn) {
+      btn.addEventListener('click', function() { openPmModal(this.dataset.id, this.dataset.name); });
+    });
     el.querySelectorAll('.mgmt-btn.up,.mgmt-btn.down').forEach(function(btn) {
       btn.addEventListener('click', function() {
         if (this.disabled) return;
@@ -468,131 +424,30 @@ function renderMgmt() {
         var arr     = products.filter(function(p){ return p.cat===cat2; });
         var swapIdx = idx2 + dir;
         if (swapIdx < 0 || swapIdx >= arr.length) return;
-
-        // arr内でidx2とswapIdxを入れ替えた新しい配列を作る
-        var newArr = arr.slice();
-        var tmp = newArr[idx2];
-        newArr[idx2] = newArr[swapIdx];
-        newArr[swapIdx] = tmp;
-
-        // 全件を順番に（Promise chainで）DB更新 - Promise.allだと競合する場合があるため
+        var newArr  = arr.slice();
+        var tmp = newArr[idx2]; newArr[idx2] = newArr[swapIdx]; newArr[swapIdx] = tmp;
         var chain = Promise.resolve();
         newArr.forEach(function(p, i) {
-          chain = chain.then(function() {
-            return sbFetch('PATCH', 'products?id=eq.' + p.id, {sort_order: i});
-          });
+          chain = chain.then(function() { return sbFetch('PATCH', 'products?id=eq.'+p.id, {sort_order:i}); });
         });
         chain.then(function() {
           showToast('✅ 順番を変更しました');
           loadProducts();
           setTimeout(function(){ switchAdminTab('mgmt'); }, 600);
-        }).catch(function() {
-          showToast('⚠ 並び替えに失敗しました');
-          loadProducts();
-        });
+        }).catch(function() { showToast('⚠ 並び替えに失敗しました'); loadProducts(); });
       });
     });
-
-    // 削除イベント
     el.querySelectorAll('.mgmt-btn.trash').forEach(function(btn) {
       btn.addEventListener('click', function() {
         if (!confirm('この商品を削除しますか？')) return;
-        var id = this.dataset.id;
-        sbFetch('DELETE', 'products?id=eq.'+id).then(function() {
-          showToast('🗑 商品を削除しました');
-          loadProducts();
+        sbFetch('DELETE', 'products?id=eq.'+this.dataset.id).then(function() {
+          showToast('🗑 商品を削除しました'); loadProducts();
         });
-      });
-    });
-
-    // 写真編集ボタンのイベント
-    el.querySelectorAll('.mgmt-btn.photo').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        openPhotoModal(this.dataset.id, this.dataset.name);
       });
     });
   });
 }
 
-// =====================================================
-//  写真編集モーダル
-// =====================================================
-var pmProductId  = null;
-var pmPhotoData  = null;
-
-function openPhotoModal(id, name) {
-  pmProductId = id;
-  pmPhotoData = null;
-  document.getElementById('pm-product-name').textContent = name;
-  document.getElementById('pm-preview').src = '';
-  document.getElementById('pm-preview').style.display = 'none';
-  document.getElementById('pm-hint').style.display = 'block';
-  document.getElementById('pm-btn-remove').style.display = 'none';
-  document.getElementById('pm-photo-cam').value = '';
-  document.getElementById('pm-photo-lib').value = '';
-  document.getElementById('pm-save').disabled = true;
-
-  // 既存の写真があればプレビュー表示
-  var p = products.find(function(p){ return String(p.id)===String(id); });
-  if (p && p.photo) {
-    document.getElementById('pm-preview').src = p.photo;
-    document.getElementById('pm-preview').style.display = 'block';
-    document.getElementById('pm-hint').style.display = 'none';
-    document.getElementById('pm-btn-remove').style.display = 'inline-flex';
-    pmPhotoData = p.photo;
-    document.getElementById('pm-save').disabled = false;
-  }
-
-  document.getElementById('photo-modal-overlay').classList.add('show');
-}
-
-function closePhotoModal() {
-  document.getElementById('photo-modal-overlay').classList.remove('show');
-  pmProductId = null;
-  pmPhotoData = null;
-}
-
-function pmSetPhoto(dataUrl) {
-  pmPhotoData = dataUrl;
-  document.getElementById('pm-preview').src = dataUrl;
-  document.getElementById('pm-preview').style.display = 'block';
-  document.getElementById('pm-hint').style.display = 'none';
-  document.getElementById('pm-btn-remove').style.display = 'inline-flex';
-  document.getElementById('pm-save').disabled = false;
-}
-
-function pmRemovePhoto() {
-  pmPhotoData = '';
-  document.getElementById('pm-preview').src = '';
-  document.getElementById('pm-preview').style.display = 'none';
-  document.getElementById('pm-hint').style.display = 'block';
-  document.getElementById('pm-btn-remove').style.display = 'none';
-  document.getElementById('pm-save').disabled = false;
-}
-
-function pmSavePhoto() {
-  if (!pmProductId) return;
-  var btn = document.getElementById('pm-save');
-  btn.disabled = true;
-  btn.textContent = '保存中...';
-
-  sbFetch('PATCH', 'products?id=eq.'+pmProductId, {photo: pmPhotoData||null})
-    .then(function() {
-      showToast('✅ 写真を保存しました');
-      closePhotoModal();
-      loadProducts();
-      setTimeout(function(){ switchAdminTab('mgmt'); }, 600);
-    })
-    .catch(function() {
-      showToast('⚠ 保存に失敗しました');
-      btn.disabled = false;
-      btn.textContent = '💾 保存する';
-    });
-}
-
-// =====================================================
-//  タブ
-// =====================================================
 function switchTab(name) {
   document.querySelectorAll('.tab-pane').forEach(function(el){ el.classList.remove('active'); });
   document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
@@ -607,9 +462,7 @@ function switchAdminTab(name) {
   if (name==='mgmt') renderMgmt();
 }
 
-// =====================================================
-//  写真
-// =====================================================
+/* 登録フォーム写真 */
 function setPhoto(dataUrl) {
   photoData = dataUrl;
   document.getElementById('photo-prev').src = dataUrl;
@@ -626,16 +479,65 @@ function removePhoto() {
   document.getElementById('f-photo-cam').value = '';
   document.getElementById('f-photo-lib').value = '';
 }
-function readFile(file) {
-  if (!file) return;
-  var r = new FileReader();
-  r.onload = function(ev){ setPhoto(ev.target.result); };
-  r.readAsDataURL(file);
+
+/* 写真編集モーダル */
+function openPmModal(id, name) {
+  pmId    = id;
+  pmPhoto = null;
+  document.getElementById('pm-pname').textContent = name;
+  document.getElementById('pm-preview').src = '';
+  document.getElementById('pm-preview').style.display   = 'none';
+  document.getElementById('pm-drop-hint').style.display = 'block';
+  document.getElementById('pm-del-btn').style.display   = 'none';
+  document.getElementById('pm-save-btn').disabled = true;
+  document.getElementById('pm-cam-input').value = '';
+  document.getElementById('pm-lib-input').value = '';
+  var p = products.find(function(x){ return String(x.id)===String(id); });
+  if (p && p.photo) {
+    pmPhoto = p.photo;
+    document.getElementById('pm-preview').src = p.photo;
+    document.getElementById('pm-preview').style.display   = 'block';
+    document.getElementById('pm-drop-hint').style.display = 'none';
+    document.getElementById('pm-del-btn').style.display   = 'inline-flex';
+    document.getElementById('pm-save-btn').disabled = false;
+  }
+  document.getElementById('pm-overlay').classList.add('show');
+}
+function closePmModal() {
+  document.getElementById('pm-overlay').classList.remove('show');
+  pmId = null; pmPhoto = null;
+}
+function pmSetPhoto(dataUrl) {
+  pmPhoto = dataUrl;
+  document.getElementById('pm-preview').src = dataUrl;
+  document.getElementById('pm-preview').style.display   = 'block';
+  document.getElementById('pm-drop-hint').style.display = 'none';
+  document.getElementById('pm-del-btn').style.display   = 'inline-flex';
+  document.getElementById('pm-save-btn').disabled = false;
+}
+function pmDelPhoto() {
+  pmPhoto = '';
+  document.getElementById('pm-preview').src = '';
+  document.getElementById('pm-preview').style.display   = 'none';
+  document.getElementById('pm-drop-hint').style.display = 'block';
+  document.getElementById('pm-del-btn').style.display   = 'none';
+  document.getElementById('pm-save-btn').disabled = false;
+}
+function pmSave() {
+  if (!pmId) return;
+  var btn = document.getElementById('pm-save-btn');
+  btn.disabled = true; btn.textContent = '保存中...';
+  sbFetch('PATCH', 'products?id=eq.'+pmId, {photo: pmPhoto||null}).then(function() {
+    showToast('✅ 写真を保存しました');
+    closePmModal(); loadProducts();
+    setTimeout(function(){ switchAdminTab('mgmt'); }, 600);
+  }).catch(function() {
+    showToast('⚠ 保存に失敗しました');
+    btn.disabled = false; btn.textContent = '💾 保存する';
+  });
 }
 
-// =====================================================
-//  商品登録
-// =====================================================
+/* 商品登録 */
 function addProduct() {
   var cat   = document.querySelector('input[name="cat"]:checked').value;
   var name  = document.getElementById('f-name').value.trim();
@@ -646,60 +548,36 @@ function addProduct() {
   var stock = document.getElementById('f-stock').value;
   var errEl = document.getElementById('form-err');
   var btn   = document.getElementById('reg-btn');
-
   if (!name)           { errEl.textContent='⚠ 商品名を入力してください';       errEl.style.display='block'; return; }
   if (!price||price<1) { errEl.textContent='⚠ 価格を正しく入力してください';   errEl.style.display='block'; return; }
   if (!desc)           { errEl.textContent='⚠ 商品特徴・説明を入力してください'; errEl.style.display='block'; return; }
   errEl.style.display = 'none';
-
-  btn.disabled = true;
-  btn.textContent = '登録中...';
-
-  // sort_orderは同カテゴリの最大値+1
-  var catProducts = products.filter(function(p){ return p.cat===cat; });
-  var maxOrder = catProducts.length > 0
-    ? Math.max.apply(null, catProducts.map(function(p){ return p.sort_order||0; })) + 1
-    : 0;
-
-  var newProduct = {
-    cat: cat, name: name, price: price,
-    size_material: size, description: desc,
-    icon: icon, stock: stock,
-    photo: photoData,
-    sort_order: maxOrder
-  };
-
-  sbFetch('POST', 'products', newProduct).then(function(data) {
-    btn.disabled = false;
-    btn.textContent = '＋ この商品を登録する';
-
-    if (data && !data.error) {
-      document.getElementById('f-name').value  = '';
-      document.getElementById('f-price').value = '';
-      document.getElementById('f-size').value  = '';
-      document.getElementById('f-desc').value  = '';
-      document.getElementById('f-icon').value  = '';
-      document.getElementById('f-stock').selectedIndex = 0;
-      document.querySelector('input[name="cat"][value="hanko"]').checked = true;
-      removePhoto();
-      showToast('✅ 商品を登録しました！');
-      loadProducts();
-      switchTab(cat);
-    } else {
-      errEl.textContent = '⚠ 登録に失敗しました: ' + (data.message||'不明なエラー');
-      errEl.style.display = 'block';
-    }
-  }).catch(function(e) {
-    btn.disabled = false;
-    btn.textContent = '＋ この商品を登録する';
-    errEl.textContent = '⚠ 通信エラーが発生しました';
-    errEl.style.display = 'block';
-  });
+  btn.disabled = true; btn.textContent = '登録中...';
+  var catP = products.filter(function(p){ return p.cat===cat; });
+  var maxO = catP.length > 0 ? Math.max.apply(null, catP.map(function(p){ return p.sort_order||0; }))+1 : 0;
+  sbFetch('POST', 'products', {cat:cat, name:name, price:price, size_material:size, description:desc, icon:icon, stock:stock, photo:photoData, sort_order:maxO})
+    .then(function(data) {
+      btn.disabled = false; btn.textContent = '＋ この商品を登録する';
+      if (data && !data.message) {
+        document.getElementById('f-name').value = '';
+        document.getElementById('f-price').value = '';
+        document.getElementById('f-size').value = '';
+        document.getElementById('f-desc').value = '';
+        document.getElementById('f-icon').value = '';
+        document.getElementById('f-stock').selectedIndex = 0;
+        document.querySelector('input[name="cat"][value="hanko"]').checked = true;
+        removePhoto(); showToast('✅ 商品を登録しました！'); loadProducts(); switchTab(cat);
+      } else {
+        errEl.textContent = '⚠ 登録失敗: '+(data&&data.message?data.message:'不明なエラー');
+        errEl.style.display = 'block';
+      }
+    }).catch(function() {
+      btn.disabled = false; btn.textContent = '＋ この商品を登録する';
+      errEl.textContent = '⚠ 通信エラーが発生しました'; errEl.style.display = 'block';
+    });
 }
 
-// =====================================================
-//  管理トグル・パスワード
-// =====================================================
+/* 管理トグル・パスワード */
 function onAdminToggle() {
   if (authed) {
     document.getElementById('admin-toggle-btn').classList.toggle('open');
@@ -730,57 +608,26 @@ function closePw() {
   document.getElementById('pw-errmsg').classList.remove('show');
 }
 
-// =====================================================
-//  イベント登録
-// =====================================================
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('admin-toggle-btn').addEventListener('click', onAdminToggle);
   document.getElementById('reg-btn').addEventListener('click', addProduct);
-  document.getElementById('btn-camera').addEventListener('click', function(e) {
-    e.stopPropagation(); document.getElementById('f-photo-cam').click();
-  });
-  document.getElementById('btn-library').addEventListener('click', function(e) {
-    e.stopPropagation(); document.getElementById('f-photo-lib').click();
-  });
-  document.getElementById('btn-rmpho').addEventListener('click', function(e) {
-    e.stopPropagation(); removePhoto();
-  });
-  document.getElementById('photo-drop').addEventListener('click', function() {
-    document.getElementById('f-photo-lib').click();
-  });
-  document.getElementById('f-photo-cam').addEventListener('change', function() { readFile(this.files[0]); });
-  document.getElementById('f-photo-lib').addEventListener('change', function() { readFile(this.files[0]); });
-  // 写真編集モーダル
-  document.getElementById('pm-drop').addEventListener('click', function() {
-    document.getElementById('pm-photo-lib').click();
-  });
-  document.getElementById('pm-btn-camera').addEventListener('click', function(e) {
-    e.stopPropagation(); document.getElementById('pm-photo-cam').click();
-  });
-  document.getElementById('pm-btn-library').addEventListener('click', function(e) {
-    e.stopPropagation(); document.getElementById('pm-photo-lib').click();
-  });
-  document.getElementById('pm-btn-remove').addEventListener('click', function(e) {
-    e.stopPropagation(); pmRemovePhoto();
-  });
-  document.getElementById('pm-photo-cam').addEventListener('change', function() {
-    if (!this.files[0]) return;
-    var r = new FileReader();
-    r.onload = function(ev){ pmSetPhoto(ev.target.result); };
-    r.readAsDataURL(this.files[0]);
-  });
-  document.getElementById('pm-photo-lib').addEventListener('change', function() {
-    if (!this.files[0]) return;
-    var r = new FileReader();
-    r.onload = function(ev){ pmSetPhoto(ev.target.result); };
-    r.readAsDataURL(this.files[0]);
-  });
-  document.getElementById('pm-save').addEventListener('click', pmSavePhoto);
-  document.getElementById('pm-cancel').addEventListener('click', closePhotoModal);
-  document.getElementById('photo-modal-overlay').addEventListener('click', function(e) {
-    if (e.target===this) closePhotoModal();
-  });
-
+  document.getElementById('photo-drop').addEventListener('click', function() { document.getElementById('f-photo-lib').click(); });
+  document.getElementById('btn-camera').addEventListener('click', function(e) { e.stopPropagation(); document.getElementById('f-photo-cam').click(); });
+  document.getElementById('btn-library').addEventListener('click', function(e) { e.stopPropagation(); document.getElementById('f-photo-lib').click(); });
+  document.getElementById('btn-rmpho').addEventListener('click', function(e) { e.stopPropagation(); removePhoto(); });
+  document.getElementById('f-photo-cam').addEventListener('change', function() { if(this.files[0]){var r=new FileReader();r.onload=function(ev){setPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  document.getElementById('f-photo-lib').addEventListener('change', function() { if(this.files[0]){var r=new FileReader();r.onload=function(ev){setPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  /* 写真編集モーダル */
+  document.getElementById('pm-drop').addEventListener('click', function() { document.getElementById('pm-lib-input').click(); });
+  document.getElementById('pm-cam-btn').addEventListener('click', function(e) { e.stopPropagation(); document.getElementById('pm-cam-input').click(); });
+  document.getElementById('pm-lib-btn').addEventListener('click', function(e) { e.stopPropagation(); document.getElementById('pm-lib-input').click(); });
+  document.getElementById('pm-del-btn').addEventListener('click', function(e) { e.stopPropagation(); pmDelPhoto(); });
+  document.getElementById('pm-cam-input').addEventListener('change', function() { if(this.files[0]){var r=new FileReader();r.onload=function(ev){pmSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  document.getElementById('pm-lib-input').addEventListener('change', function() { if(this.files[0]){var r=new FileReader();r.onload=function(ev){pmSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  document.getElementById('pm-save-btn').addEventListener('click', pmSave);
+  document.getElementById('pm-cancel-btn').addEventListener('click', closePmModal);
+  document.getElementById('pm-overlay').addEventListener('click', function(e) { if(e.target===this) closePmModal(); });
+  /* パスワード */
   document.getElementById('pw-submit-btn').addEventListener('click', checkPw);
   document.getElementById('pw-input').addEventListener('keydown', function(e) { if(e.key==='Enter') checkPw(); });
   document.getElementById('pw-cancel-btn').addEventListener('click', closePw);
