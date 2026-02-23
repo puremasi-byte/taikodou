@@ -160,6 +160,30 @@ footer strong { color:var(--gold); }
   .photo-btns { flex-direction:column; }
   .pbtn { min-width:auto; }
 }
+
+/* 写真編集モーダル */
+.photo-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:2000; align-items:center; justify-content:center; backdrop-filter:blur(3px); }
+.photo-modal-overlay.show { display:flex; animation:fadeIn .2s; }
+.photo-modal { background:white; border-radius:14px; padding:28px; width:340px; max-width:90vw; box-shadow:0 20px 60px rgba(0,0,0,.3); }
+.photo-modal h4 { font-family:'Noto Serif JP',serif; font-size:16px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+.photo-modal .pm-name { font-size:12px; color:var(--muted); margin-bottom:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.photo-modal-drop { width:100%; aspect-ratio:4/3; border:2px dashed #d4c4a0; border-radius:10px; background:#fdf8f0; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; transition:border-color .2s; }
+.photo-modal-drop:hover { border-color:var(--red); }
+.photo-modal-drop img { width:100%; height:100%; object-fit:contain; }
+.photo-modal-hint { text-align:center; pointer-events:none; padding:16px; }
+.photo-modal-hint .pmh-icon { font-size:28px; margin-bottom:6px; }
+.photo-modal-hint .pmh-text { font-size:13px; font-weight:700; color:var(--red); }
+.pm-btns { display:flex; gap:8px; margin-top:10px; }
+.pm-btns .pbtn { min-width:auto; }
+.pm-footer { display:flex; gap:8px; margin-top:18px; }
+.pm-save { flex:1; padding:11px; background:var(--red); color:white; border:none; border-radius:8px; font-family:'Noto Serif JP',serif; font-size:14px; font-weight:700; cursor:pointer; }
+.pm-save:hover { background:#6b0000; }
+.pm-save:disabled { background:#aaa; cursor:not-allowed; }
+.pm-cancel { padding:11px 16px; background:white; border:2px solid #ddd; border-radius:8px; font-size:13px; cursor:pointer; color:#888; }
+.pm-cancel:hover { border-color:#aaa; }
+.mgmt-btn.photo { border-color:#d4c4a0; color:var(--muted); font-size:12px; width:auto; padding:0 8px; }
+.mgmt-btn.photo.has-photo { border-color:var(--teal); color:var(--teal); }
+.mgmt-btn.photo:hover { border-color:var(--red); color:var(--red); background:#fff0f0; }
 </style>
 </head>
 <body>
@@ -426,6 +450,7 @@ function renderMgmt() {
           +'<div class="mgmt-price">¥'+Number(p.price).toLocaleString()+' / '+esc(p.stock)+'</div>'
         +'</div>'
         +'<div class="mgmt-actions">'
+          +'<button class="mgmt-btn photo'+(p.photo?' has-photo':'')+'" data-id="'+p.id+'" data-name="'+esc(p.name)+'" title="'+(p.photo?'写真を変更':'写真を追加')+'">'+(p.photo?'📷':'📷+'+'</button>'
           +'<button class="mgmt-btn up"    data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'" '+(idx===0?'disabled':'')+'> ▲ </button>'
           +'<button class="mgmt-btn down"  data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'" '+(idx===list.length-1?'disabled':'')+'> ▼ </button>'
           +'<button class="mgmt-btn trash" data-id="'+p.id+'"> 🗑 </button>'
@@ -479,7 +504,90 @@ function renderMgmt() {
         });
       });
     });
+
+    // 写真編集ボタンのイベント
+    el.querySelectorAll('.mgmt-btn.photo').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        openPhotoModal(this.dataset.id, this.dataset.name);
+      });
+    });
   });
+}
+
+// =====================================================
+//  写真編集モーダル
+// =====================================================
+var pmProductId  = null;
+var pmPhotoData  = null;
+
+function openPhotoModal(id, name) {
+  pmProductId = id;
+  pmPhotoData = null;
+  document.getElementById('pm-product-name').textContent = name;
+  document.getElementById('pm-preview').src = '';
+  document.getElementById('pm-preview').style.display = 'none';
+  document.getElementById('pm-hint').style.display = 'block';
+  document.getElementById('pm-btn-remove').style.display = 'none';
+  document.getElementById('pm-photo-cam').value = '';
+  document.getElementById('pm-photo-lib').value = '';
+  document.getElementById('pm-save').disabled = true;
+
+  // 既存の写真があればプレビュー表示
+  var p = products.find(function(p){ return String(p.id)===String(id); });
+  if (p && p.photo) {
+    document.getElementById('pm-preview').src = p.photo;
+    document.getElementById('pm-preview').style.display = 'block';
+    document.getElementById('pm-hint').style.display = 'none';
+    document.getElementById('pm-btn-remove').style.display = 'inline-flex';
+    pmPhotoData = p.photo;
+    document.getElementById('pm-save').disabled = false;
+  }
+
+  document.getElementById('photo-modal-overlay').classList.add('show');
+}
+
+function closePhotoModal() {
+  document.getElementById('photo-modal-overlay').classList.remove('show');
+  pmProductId = null;
+  pmPhotoData = null;
+}
+
+function pmSetPhoto(dataUrl) {
+  pmPhotoData = dataUrl;
+  document.getElementById('pm-preview').src = dataUrl;
+  document.getElementById('pm-preview').style.display = 'block';
+  document.getElementById('pm-hint').style.display = 'none';
+  document.getElementById('pm-btn-remove').style.display = 'inline-flex';
+  document.getElementById('pm-save').disabled = false;
+}
+
+function pmRemovePhoto() {
+  pmPhotoData = '';
+  document.getElementById('pm-preview').src = '';
+  document.getElementById('pm-preview').style.display = 'none';
+  document.getElementById('pm-hint').style.display = 'block';
+  document.getElementById('pm-btn-remove').style.display = 'none';
+  document.getElementById('pm-save').disabled = false;
+}
+
+function pmSavePhoto() {
+  if (!pmProductId) return;
+  var btn = document.getElementById('pm-save');
+  btn.disabled = true;
+  btn.textContent = '保存中...';
+
+  sbFetch('PATCH', 'products?id=eq.'+pmProductId, {photo: pmPhotoData||null})
+    .then(function() {
+      showToast('✅ 写真を保存しました');
+      closePhotoModal();
+      loadProducts();
+      setTimeout(function(){ switchAdminTab('mgmt'); }, 600);
+    })
+    .catch(function() {
+      showToast('⚠ 保存に失敗しました');
+      btn.disabled = false;
+      btn.textContent = '💾 保存する';
+    });
 }
 
 // =====================================================
@@ -642,6 +750,37 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   document.getElementById('f-photo-cam').addEventListener('change', function() { readFile(this.files[0]); });
   document.getElementById('f-photo-lib').addEventListener('change', function() { readFile(this.files[0]); });
+  // 写真編集モーダル
+  document.getElementById('pm-drop').addEventListener('click', function() {
+    document.getElementById('pm-photo-lib').click();
+  });
+  document.getElementById('pm-btn-camera').addEventListener('click', function(e) {
+    e.stopPropagation(); document.getElementById('pm-photo-cam').click();
+  });
+  document.getElementById('pm-btn-library').addEventListener('click', function(e) {
+    e.stopPropagation(); document.getElementById('pm-photo-lib').click();
+  });
+  document.getElementById('pm-btn-remove').addEventListener('click', function(e) {
+    e.stopPropagation(); pmRemovePhoto();
+  });
+  document.getElementById('pm-photo-cam').addEventListener('change', function() {
+    if (!this.files[0]) return;
+    var r = new FileReader();
+    r.onload = function(ev){ pmSetPhoto(ev.target.result); };
+    r.readAsDataURL(this.files[0]);
+  });
+  document.getElementById('pm-photo-lib').addEventListener('change', function() {
+    if (!this.files[0]) return;
+    var r = new FileReader();
+    r.onload = function(ev){ pmSetPhoto(ev.target.result); };
+    r.readAsDataURL(this.files[0]);
+  });
+  document.getElementById('pm-save').addEventListener('click', pmSavePhoto);
+  document.getElementById('pm-cancel').addEventListener('click', closePhotoModal);
+  document.getElementById('photo-modal-overlay').addEventListener('click', function(e) {
+    if (e.target===this) closePhotoModal();
+  });
+
   document.getElementById('pw-submit-btn').addEventListener('click', checkPw);
   document.getElementById('pw-input').addEventListener('keydown', function(e) { if(e.key==='Enter') checkPw(); });
   document.getElementById('pw-cancel-btn').addEventListener('click', closePw);
