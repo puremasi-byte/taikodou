@@ -343,6 +343,7 @@ footer strong{color:var(--gold);}
     <h4>💴 サイズ・価格の管理</h4>
     <p class="sz-pname" id="sz-pname"></p>
     <div class="sz-list" id="sz-list"></div>
+    <div class="fg full" style="margin-bottom:8px;"><label style="font-size:13px;font-weight:700;">種類名（任意）</label><input type="text" id="sz-item-name" placeholder="例：極上・上級・中級" style="padding:9px 12px;border:2px solid #d4c4a0;border-radius:8px;font-size:14px;width:100%;outline:none;"></div>
     <div class="sz-add-row">
       <div class="fg"><label>サイズ名</label><input type="text" id="sz-size-name" placeholder="例：15mm"></div>
       <div class="fg"><label>価格（税込）</label><input type="number" id="sz-price" placeholder="例：5800" min="0"></div>
@@ -510,7 +511,7 @@ function openDetail(id){
   else { matEl.style.display='none'; }
 
   // 説明
-  document.getElementById('detail-desc').textContent=p.description||'';
+  document.getElementById('detail-desc').innerHTML=esc(p.description||'').replace(/\n/g,'<br>');
 
   // サイズ別価格
   var titleEl=document.getElementById('detail-sizes-title');
@@ -518,10 +519,11 @@ function openDetail(id){
   var contentEl=document.getElementById('detail-sizes-content');
   if(sizes.length>0){
     titleEl.style.display='block';
+    var hasItemName = sizes.some(function(s){ return s.item_name; });
     contentEl.innerHTML='<table class="detail-size-table'+(isTeal?' teal':'')+'">'
-      +'<thead><tr><th>サイズ</th><th style="text-align:right">価格（税込）</th></tr></thead>'
+      +'<thead><tr>'+(hasItemName?'<th>種類</th>':'')+'<th>サイズ</th><th style="text-align:right">価格（税込）</th></tr></thead>'
       +'<tbody>'+sizes.map(function(s){
-        return '<tr><td>'+esc(s.size_name)+'</td><td>¥'+Number(s.price).toLocaleString()+'</td></tr>';
+        return '<tr>'+(hasItemName?'<td style="color:var(--muted);font-size:13px;">'+esc(s.item_name||'')+'</td>':'')+'<td>'+esc(s.size_name)+'</td><td>¥'+Number(s.price).toLocaleString()+'</td></tr>';
       }).join('')+'</tbody></table>';
   } else if(p.price>0){
     titleEl.style.display='none';
@@ -610,8 +612,9 @@ function renderSzList(){
   var el = document.getElementById('sz-list');
   if(!sizes.length){ el.innerHTML='<div style="font-size:13px;color:var(--muted);text-align:center;padding:12px;">まだサイズが登録されていません</div>'; return; }
   el.innerHTML = sizes.map(function(s){
+    var label = (s.item_name?'<span style="color:var(--muted);font-size:12px;margin-right:6px;">'+esc(s.item_name)+'</span>':'');
     return '<div class="sz-item">'
-      +'<span class="sz-item-name">'+esc(s.size_name)+'</span>'
+      +'<span class="sz-item-name">'+label+esc(s.size_name)+'</span>'
       +'<span class="sz-item-price">¥'+Number(s.price).toLocaleString()+'</span>'
       +'<button class="sz-item-del" data-id="'+s.id+'">🗑</button>'
       +'</div>';
@@ -634,17 +637,21 @@ function renderSzList(){
 }
 
 function addSize(){
+  var itemName = document.getElementById('sz-item-name').value.trim();
   var sizeName = document.getElementById('sz-size-name').value.trim();
   var price    = parseInt(document.getElementById('sz-price').value, 10);
   if(!sizeName){ showToast('⚠ サイズ名を入力してください'); return; }
   if(!price||price<0){ showToast('⚠ 価格を入力してください'); return; }
   var currentSizes = productSizes[szProductId] || [];
   var sortOrder = currentSizes.length;
-  sbFetch('POST','product_sizes',{product_id:parseInt(szProductId),size_name:sizeName,price:price,sort_order:sortOrder})
+  var postData = {product_id:parseInt(szProductId),size_name:sizeName,price:price,sort_order:sortOrder};
+  if(itemName) postData.item_name = itemName;
+  sbFetch('POST','product_sizes',postData)
     .then(function(data){
       if(Array.isArray(data)&&data[0]){
         if(!productSizes[szProductId]) productSizes[szProductId]=[];
         productSizes[szProductId].push(data[0]);
+        document.getElementById('sz-item-name').value='';
         document.getElementById('sz-size-name').value='';
         document.getElementById('sz-price').value='';
         renderSzList();
