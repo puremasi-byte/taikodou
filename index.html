@@ -15,7 +15,6 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var(--ink); min-height:100vh; }
 
-/* BANNER */
 .banner-wrap { width:100%; background:#1a0a06; line-height:0; }
 .banner-wrap img { width:100%; height:auto; display:block; object-fit:cover; max-height:220px; object-position:center; }
 .info-bar { background:var(--red); display:flex; align-items:center; justify-content:space-between; padding:10px 32px; flex-wrap:wrap; gap:8px; }
@@ -23,12 +22,10 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var
 .info-bar .contact { text-align:right; color:rgba(255,255,255,.8); font-size:12px; line-height:1.8; }
 .info-bar .contact a { color:var(--gold2); text-decoration:none; font-weight:700; font-size:17px; }
 
-/* HERO */
 .hero { background:linear-gradient(135deg,var(--paper) 0%,#e8d5b0 100%); padding:28px 40px; text-align:center; border-bottom:3px solid var(--gold); }
 .hero h2 { font-family:'Noto Serif JP',serif; font-size:20px; color:var(--red); letter-spacing:.3em; margin-bottom:6px; }
 .hero p { color:var(--muted); font-size:13px; }
 
-/* TABS */
 .tabs-wrap { max-width:1100px; margin:0 auto; padding:0 20px 40px; }
 .tab-nav { display:flex; margin-top:28px; border-bottom:3px solid var(--red); }
 .tab-btn { flex:1; padding:14px 16px; border:2px solid #d4c4a0; border-bottom:none; cursor:pointer; font-family:'Noto Serif JP',serif; font-size:15px; font-weight:700; background:var(--paper); color:var(--muted); display:flex; align-items:center; justify-content:center; gap:8px; transition:all .3s; margin-bottom:-3px; }
@@ -40,20 +37,16 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var
 .tab-pane.active { display:block; animation:fadeIn .3s; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 
-/* SECTION TITLE */
 .sec-title { display:flex; align-items:center; gap:10px; margin-bottom:22px; padding-bottom:10px; border-bottom:2px dashed var(--gold); }
 .sec-title h3 { font-family:'Noto Serif JP',serif; font-size:18px; font-weight:700; color:var(--red); }
 .sec-badge { background:var(--red); color:white; font-size:10px; padding:3px 9px; border-radius:20px; letter-spacing:.1em; }
 .sec-badge.teal { background:var(--teal); }
 
-/* PRODUCT GRID */
 .product-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
-.product-card { background:var(--cream); border:2px solid #e0d0b0; border-radius:12px; padding:18px; position:relative; overflow:hidden; transition:all .3s; }
+.product-card { background:var(--cream); border:2px solid #e0d0b0; border-radius:12px; padding:18px; position:relative; overflow:hidden; transition:border-color .3s; }
 .product-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--red); }
 .product-card.konyudo::before { background:var(--teal); }
 .product-card:hover { border-color:var(--gold); }
-
-/* 写真 - 縦横比固定(4:3)・全体表示 */
 .card-photo-wrap { width:100%; aspect-ratio:4/3; background:#f0ece4; border-radius:8px; margin-bottom:10px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
 .card-photo { width:100%; height:100%; object-fit:contain; display:block; }
 .card-icon { width:56px; height:56px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:32px; background:white; border-radius:50%; border:2px solid #e0d0b0; }
@@ -64,11 +57,13 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var
 .card-desc  { font-size:12px; color:var(--muted); text-align:center; line-height:1.6; }
 .card-stock { margin-top:8px; font-size:11px; font-weight:700; text-align:center; }
 
-/* EMPTY */
 .empty { text-align:center; padding:40px; color:var(--muted); }
 .empty .ei { font-size:44px; margin-bottom:10px; }
 
-/* ===================== ADMIN ===================== */
+/* ローディング */
+.loading { text-align:center; padding:40px; color:var(--muted); font-size:14px; }
+
+/* ADMIN */
 .admin-wrap { text-align:right; margin-top:20px; }
 .admin-toggle { padding:6px 14px; background:transparent; border:1px solid #ccc; border-radius:6px; cursor:pointer; font-size:11px; color:#bbb; display:inline-flex; align-items:center; gap:6px; transition:all .3s; }
 .admin-toggle:hover { color:#888; border-color:#aaa; }
@@ -77,14 +72,12 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var
 .admin-panel { display:none; background:#fafafa; border:1px solid #ddd; border-radius:8px; padding:24px; margin-top:8px; text-align:left; }
 .admin-panel.open { display:block; animation:fadeIn .3s; }
 
-/* 管理タブ */
 .admin-tabs { display:flex; gap:0; margin-bottom:20px; border-bottom:2px solid #ddd; }
 .admin-tab { padding:9px 20px; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; font-family:'Noto Sans JP',sans-serif; font-size:13px; font-weight:700; color:#aaa; margin-bottom:-2px; transition:all .2s; }
 .admin-tab.active { color:var(--red); border-bottom-color:var(--red); }
 .admin-subpane { display:none; }
 .admin-subpane.active { display:block; animation:fadeIn .2s; }
 
-/* FORM */
 .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
 .fg { display:flex; flex-direction:column; gap:5px; }
 .fg.full { grid-column:1/-1; }
@@ -95,12 +88,11 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var
 .fg textarea { resize:vertical; min-height:76px; }
 .radio-row { display:flex; gap:12px; }
 .rlabel { display:flex; align-items:center; gap:8px; cursor:pointer; font-size:14px; font-weight:700; padding:9px 18px; border:2px solid #d4c4a0; border-radius:8px; background:white; flex:1; justify-content:center; transition:all .2s; }
-.rlabel.red:has(input:checked)  { border-color:var(--red);  background:rgba(139,0,0,.07); color:var(--red); }
+.rlabel.red:has(input:checked)  { border-color:var(--red);  background:rgba(139,0,0,.07);    color:var(--red); }
 .rlabel.teal:has(input:checked) { border-color:var(--teal); background:rgba(46,125,125,.07); color:var(--teal); }
 .rlabel input { display:none; }
 
-/* PHOTO UPLOAD */
-.photo-drop { width:100%; aspect-ratio:4/3; border:2px dashed #d4c4a0; border-radius:10px; background:#fdf8f0; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; transition:border-color .2s,background .2s; position:relative; }
+.photo-drop { width:100%; aspect-ratio:4/3; border:2px dashed #d4c4a0; border-radius:10px; background:#fdf8f0; display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; transition:border-color .2s; position:relative; }
 .photo-drop:hover { border-color:var(--red); background:#fff8f5; }
 .photo-hint { text-align:center; pointer-events:none; padding:20px; }
 .photo-hint .ph-icons { font-size:28px; margin-bottom:8px; }
@@ -116,12 +108,11 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var
 .pbtn.del { border-color:#bbb; color:#888; flex:0 0 auto; }
 .pbtn.del:hover { background:#e74c3c; border-color:#e74c3c; color:white; }
 
-/* SUBMIT */
 .reg-btn { margin-top:18px; width:100%; padding:13px; background:var(--red); color:white; border:none; border-radius:10px; font-family:'Noto Serif JP',serif; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:.08em; transition:all .3s; display:flex; align-items:center; justify-content:center; gap:8px; }
-.reg-btn:hover { background:#6b0000; transform:translateY(-2px); box-shadow:0 4px 12px rgba(139,0,0,.3); }
+.reg-btn:hover { background:#6b0000; }
+.reg-btn:disabled { background:#aaa; cursor:not-allowed; transform:none; }
 .form-err { font-size:13px; color:var(--red2); margin-top:10px; display:none; padding:8px 12px; background:#fff0f0; border-radius:6px; border-left:3px solid var(--red2); }
 
-/* ===== 商品管理リスト ===== */
 .mgmt-hint { font-size:12px; color:var(--muted); margin-bottom:14px; }
 .mgmt-list { display:flex; flex-direction:column; gap:8px; }
 .mgmt-item { display:flex; align-items:center; gap:10px; background:white; border:1px solid #e0d0b0; border-radius:10px; padding:10px 12px; }
@@ -129,19 +120,15 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var
 .mgmt-thumb { width:100%; height:100%; object-fit:contain; }
 .mgmt-icon { font-size:24px; }
 .mgmt-info { flex:1; min-width:0; }
-.mgmt-name { font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mgmt-name  { font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .mgmt-price { font-size:12px; color:var(--muted); }
 .mgmt-actions { display:flex; gap:6px; flex-shrink:0; }
 .mgmt-btn { width:32px; height:32px; border-radius:6px; border:1px solid #ddd; background:white; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all .2s; color:#666; }
-.mgmt-btn:hover { border-color:#999; background:#f5f5f5; }
-.mgmt-btn.up:hover  { border-color:var(--teal); color:var(--teal); }
-.mgmt-btn.down:hover { border-color:var(--teal); color:var(--teal); }
+.mgmt-btn.up:hover,.mgmt-btn.down:hover { border-color:var(--teal); color:var(--teal); }
 .mgmt-btn.trash:hover { border-color:var(--red2); color:var(--red2); background:#fff0f0; }
 .mgmt-btn:disabled { opacity:.3; cursor:default; }
-.mgmt-btn:disabled:hover { border-color:#ddd; background:white; color:#666; }
 .mgmt-empty { text-align:center; padding:30px; color:var(--muted); font-size:13px; }
 
-/* PASSWORD MODAL */
 .pw-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:1000; align-items:center; justify-content:center; backdrop-filter:blur(3px); }
 .pw-overlay.show { display:flex; animation:fadeIn .2s; }
 .pw-box { background:white; border-radius:14px; padding:36px 40px; width:320px; box-shadow:0 20px 60px rgba(0,0,0,.3); text-align:center; }
@@ -158,11 +145,9 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--cream); color:var
 .pw-errmsg { font-size:12px; color:#e74c3c; margin-bottom:10px; display:none; }
 .pw-errmsg.show { display:block; }
 
-/* TOAST */
 .toast { position:fixed; bottom:28px; right:28px; background:var(--ink); color:white; padding:12px 22px; border-radius:10px; font-size:14px; font-weight:700; transform:translateY(80px); opacity:0; transition:all .4s; z-index:9999; }
 .toast.show { transform:translateY(0); opacity:1; }
 
-/* FOOTER */
 footer { background:var(--ink); color:rgba(255,255,255,.6); text-align:center; padding:22px; font-size:12px; margin-top:30px; letter-spacing:.1em; }
 footer strong { color:var(--gold); }
 
@@ -199,36 +184,29 @@ footer strong { color:var(--gold); }
 
 <div class="tabs-wrap">
   <div class="tab-nav">
-    <button class="tab-btn active" id="tab-btn-hanko" onclick="switchTab('hanko')">🔖 印鑑・はんこ</button>
-    <button class="tab-btn" id="tab-btn-konyudo" onclick="switchTab('konyudo')">🟢 こにゅうどうくんグッズ</button>
+    <button class="tab-btn active" id="tab-btn-hanko"   onclick="switchTab('hanko')">🔖 印鑑・はんこ</button>
+    <button class="tab-btn"        id="tab-btn-konyudo" onclick="switchTab('konyudo')">🟢 こにゅうどうくんグッズ</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane active" id="pane-hanko">
-      <div class="sec-title">
-        <h3>🔖 印鑑・はんこ 商品一覧</h3>
-        <span class="sec-badge">HANKO</span>
-      </div>
+      <div class="sec-title"><h3>🔖 印鑑・はんこ 商品一覧</h3><span class="sec-badge">HANKO</span></div>
       <div class="product-grid" id="grid-hanko"></div>
+      <div class="loading" id="loading-hanko">読み込み中...</div>
       <div class="empty" id="empty-hanko" style="display:none"><div class="ei">🔖</div><p>商品が登録されていません</p></div>
     </div>
     <div class="tab-pane" id="pane-konyudo">
-      <div class="sec-title">
-        <h3>🟢 こにゅうどうくんグッズ 一覧</h3>
-        <span class="sec-badge teal">KONYUDO</span>
-      </div>
+      <div class="sec-title"><h3>🟢 こにゅうどうくんグッズ 一覧</h3><span class="sec-badge teal">KONYUDO</span></div>
       <div class="product-grid" id="grid-konyudo"></div>
+      <div class="loading" id="loading-konyudo">読み込み中...</div>
       <div class="empty" id="empty-konyudo" style="display:none"><div class="ei">🟢</div><p>商品が登録されていません</p></div>
     </div>
   </div>
 
-  <!-- ADMIN -->
   <div class="admin-wrap">
     <button class="admin-toggle" id="admin-toggle-btn">
       <span>管理</span><span class="arr">▼</span>
     </button>
     <div class="admin-panel" id="admin-panel">
-
-      <!-- 管理内タブ -->
       <div class="admin-tabs">
         <button class="admin-tab active" id="atab-add"  onclick="switchAdminTab('add')">＋ 商品を登録</button>
         <button class="admin-tab"        id="atab-mgmt" onclick="switchAdminTab('mgmt')">📋 商品の管理・並び替え</button>
@@ -299,16 +277,11 @@ footer strong { color:var(--gold); }
       <!-- 商品管理 -->
       <div class="admin-subpane" id="apane-mgmt">
         <p class="mgmt-hint">▲▼ で表示順を変更、🗑 で削除できます</p>
-        <div style="margin-bottom:12px;">
-          <strong style="font-size:13px;">🔖 印鑑・はんこ</strong>
-        </div>
+        <div style="margin-bottom:12px;"><strong style="font-size:13px;">🔖 印鑑・はんこ</strong></div>
         <div class="mgmt-list" id="mgmt-hanko"></div>
-        <div style="margin:18px 0 12px;">
-          <strong style="font-size:13px;">🟢 こにゅうどうくんグッズ</strong>
-        </div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🟢 こにゅうどうくんグッズ</strong></div>
         <div class="mgmt-list" id="mgmt-konyudo"></div>
       </div>
-
     </div>
   </div>
 </div>
@@ -334,23 +307,38 @@ footer strong { color:var(--gold); }
 </div>
 
 <script>
-var ADMIN_PW = 'taikodo2024';
-var products = [
-  {id:1, cat:'hanko',   name:'認印 シヤチハタ式',          price:800,   size:'10.5mm / 朱肉不要',      desc:'日常使いに最適なシヤチハタ式の認印。補充インクも販売中です。',                        icon:'🔖', stock:'在庫あり',  photo:null},
-  {id:2, cat:'hanko',   name:'銀行印 黒水牛',               price:3800,  size:'15mm / 黒水牛',           desc:'風格ある黒水牛素材の銀行印。重厚感と押し心地を兼ね備えた一品。',                    icon:'🏦', stock:'在庫あり',  photo:null},
-  {id:3, cat:'hanko',   name:'実印 本柘植',                 price:4500,  size:'18mm / 本柘植',           desc:'硬度が高く耐久性に優れた本柘植素材の実印。大切な場面に。',                          icon:'⭐', stock:'在庫あり',  photo:null},
-  {id:4, cat:'hanko',   name:'法人印セット',                price:18000, size:'21mm・18mm / 黒水牛',     desc:'代表者印・銀行印・角印の3点セット。法人設立に最適です。',                          icon:'🏢', stock:'取り寄せ',  photo:null},
-  {id:5, cat:'konyudo', name:'こにゅうどうくん マグカップ', price:1200,  size:'直径8cm / 陶器製',        desc:'四日市の人気ゆるキャラこにゅうどうくんのオリジナルマグカップ。毎朝が楽しくなる♪',  icon:'☕', stock:'在庫あり',  photo:null},
-  {id:6, cat:'konyudo', name:'こにゅうどうくん キーホルダー',price:600,  size:'5cm / アクリル製',        desc:'カバンや鍵につけてどこでも一緒！ふんわりした笑顔が可愛いアクリルキーホルダー。',    icon:'🔑', stock:'在庫あり',  photo:null},
-  {id:7, cat:'konyudo', name:'こにゅうどうくん Tシャツ',    price:2500,  size:'S/M/L/XL / コットン100%', desc:'四日市土産にも人気のオリジナルTシャツ。着心地抜群のコットン素材。',                  icon:'👕', stock:'残りわずか', photo:null}
-];
-var nextId   = 100;
-var authed   = false;
-var photoData = null;
+// =====================================================
+//  Supabase設定
+// =====================================================
+var SUPABASE_URL = 'https://pqylvacqbbpogvvtivcd.supabase.co';
+var SUPABASE_KEY = 'sb_publishable__vKOwqHOIyI-QSsxQ-yCXg_rADJAW3y';
 
-/* ── ユーティリティ ── */
+function sbFetch(method, path, body) {
+  return fetch(SUPABASE_URL + '/rest/v1/' + path, {
+    method: method,
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': method === 'POST' ? 'return=representation' : ''
+    },
+    body: body ? JSON.stringify(body) : undefined
+  }).then(function(r) { return r.json(); });
+}
+
+// =====================================================
+//  設定
+// =====================================================
+var ADMIN_PW  = 'taikodo2024';
+var authed    = false;
+var photoData = null;
+var products  = [];
+
+// =====================================================
+//  ユーティリティ
+// =====================================================
 function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 function showToast(msg) {
   var t = document.getElementById('toast');
@@ -358,7 +346,36 @@ function showToast(msg) {
   setTimeout(function(){ t.classList.remove('show'); }, 3000);
 }
 
-/* ── 公開グリッド描画 ── */
+// =====================================================
+//  Supabaseから商品を読み込む
+// =====================================================
+function loadProducts() {
+  document.getElementById('loading-hanko').style.display   = 'block';
+  document.getElementById('loading-konyudo').style.display = 'block';
+  document.getElementById('grid-hanko').innerHTML   = '';
+  document.getElementById('grid-konyudo').innerHTML = '';
+
+  sbFetch('GET', 'products?select=*&order=sort_order.asc,id.asc').then(function(data) {
+    if (!Array.isArray(data)) {
+      showToast('⚠ データの読み込みに失敗しました');
+      document.getElementById('loading-hanko').style.display   = 'none';
+      document.getElementById('loading-konyudo').style.display = 'none';
+      return;
+    }
+    products = data;
+    renderAll();
+    document.getElementById('loading-hanko').style.display   = 'none';
+    document.getElementById('loading-konyudo').style.display = 'none';
+  }).catch(function() {
+    showToast('⚠ 通信エラーが発生しました');
+    document.getElementById('loading-hanko').style.display   = 'none';
+    document.getElementById('loading-konyudo').style.display = 'none';
+  });
+}
+
+// =====================================================
+//  公開グリッド描画
+// =====================================================
 function renderAll() {
   var hanko   = products.filter(function(p){ return p.cat==='hanko'; });
   var konyudo = products.filter(function(p){ return p.cat==='konyudo'; });
@@ -372,18 +389,20 @@ function cardHtml(p) {
   var isTeal = p.cat==='konyudo';
   var sc = p.stock==='品切れ'?'#c0392b': p.stock==='残りわずか'?'#e67e22':'#27ae60';
   var media = p.photo
-    ? '<div class="card-photo-wrap"><img class="card-photo" src="'+p.photo+'" alt="'+esc(p.name)+'"></div>'
+    ? '<div class="card-photo-wrap"><img class="card-photo" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'"></div>'
     : '<div class="card-icon">'+(p.icon||(isTeal?'🟢':'🔖'))+'</div>';
   return '<div class="product-card'+(isTeal?' konyudo':'')+'">'+media
     +'<div class="card-name">'+esc(p.name)+'</div>'
     +'<div class="card-price'+(isTeal?' teal':'')+'">¥'+Number(p.price).toLocaleString()+'</div>'
-    +(p.size?'<div class="card-size">'+esc(p.size)+'</div>':'')
-    +'<div class="card-desc">'+esc(p.desc)+'</div>'
+    +(p.size_material?'<div class="card-size">'+esc(p.size_material)+'</div>':'')
+    +'<div class="card-desc">'+esc(p.description)+'</div>'
     +'<div class="card-stock" style="color:'+sc+'">● '+esc(p.stock)+'</div>'
     +'</div>';
 }
 
-/* ── 管理リスト描画 ── */
+// =====================================================
+//  管理リスト描画
+// =====================================================
 function renderMgmt() {
   ['hanko','konyudo'].forEach(function(cat) {
     var list = products.filter(function(p){ return p.cat===cat; });
@@ -393,62 +412,78 @@ function renderMgmt() {
     }
     el.innerHTML = list.map(function(p, idx) {
       var thumb = p.photo
-        ? '<img class="mgmt-thumb" src="'+p.photo+'" alt="">'
+        ? '<img class="mgmt-thumb" src="'+esc(p.photo)+'" alt="">'
         : '<span class="mgmt-icon">'+(p.icon||'🔖')+'</span>';
-      var isFirst = (idx===0);
-      var isLast  = (idx===list.length-1);
-      return '<div class="mgmt-item" data-id="'+p.id+'">'
+      return '<div class="mgmt-item">'
         +'<div class="mgmt-thumb-wrap">'+thumb+'</div>'
         +'<div class="mgmt-info">'
           +'<div class="mgmt-name">'+esc(p.name)+'</div>'
           +'<div class="mgmt-price">¥'+Number(p.price).toLocaleString()+' / '+esc(p.stock)+'</div>'
         +'</div>'
         +'<div class="mgmt-actions">'
-          +'<button class="mgmt-btn up"   data-id="'+p.id+'" data-cat="'+cat+'" data-dir="up"   title="上へ"'+(isFirst?' disabled':'')+'> ▲ </button>'
-          +'<button class="mgmt-btn down" data-id="'+p.id+'" data-cat="'+cat+'" data-dir="down" title="下へ"'+(isLast?' disabled':'')+'> ▼ </button>'
-          +'<button class="mgmt-btn trash" data-id="'+p.id+'" title="削除"> 🗑 </button>'
+          +'<button class="mgmt-btn up"    data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'" '+(idx===0?'disabled':'')+'> ▲ </button>'
+          +'<button class="mgmt-btn down"  data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'" '+(idx===list.length-1?'disabled':'')+'> ▼ </button>'
+          +'<button class="mgmt-btn trash" data-id="'+p.id+'"> 🗑 </button>'
         +'</div>'
         +'</div>';
     }).join('');
-  });
 
-  /* 並び替え・削除イベント（描画後に毎回付与） */
-  document.querySelectorAll('.mgmt-btn.up, .mgmt-btn.down').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      if (this.disabled) return;
-      var id  = parseInt(this.dataset.id, 10);
-      var cat = this.dataset.cat;
-      var dir = this.dataset.dir;
-      var arr = products.filter(function(p){ return p.cat===cat; });
-      var idx = arr.findIndex(function(p){ return p.id===id; });
-      var swapIdx = dir==='up' ? idx-1 : idx+1;
-      /* products 配列内でのインデックスを特定してスワップ */
-      var gIdx  = products.indexOf(arr[idx]);
-      var gSwap = products.indexOf(arr[swapIdx]);
-      var tmp = products[gIdx]; products[gIdx]=products[gSwap]; products[gSwap]=tmp;
-      renderAll(); renderMgmt();
+    // 並び替えイベント
+    el.querySelectorAll('.mgmt-btn.up,.mgmt-btn.down').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (this.disabled) return;
+        var cat2 = this.dataset.cat;
+        var idx2 = parseInt(this.dataset.idx, 10);
+        var dir  = this.classList.contains('up') ? -1 : 1;
+        var arr  = products.filter(function(p){ return p.cat===cat2; });
+        var swapIdx = idx2 + dir;
+        if (swapIdx < 0 || swapIdx >= arr.length) return;
+
+        // sort_orderを入れ替える
+        var tmpOrder        = arr[idx2].sort_order;
+        arr[idx2].sort_order   = arr[swapIdx].sort_order;
+        arr[swapIdx].sort_order = tmpOrder;
+
+        // もしsort_orderが同じ場合はidで区別
+        if (arr[idx2].sort_order === arr[swapIdx].sort_order) {
+          arr[idx2].sort_order   = idx2;
+          arr[swapIdx].sort_order = swapIdx;
+        }
+
+        // DB更新（2件）
+        Promise.all([
+          sbFetch('PATCH', 'products?id=eq.'+arr[idx2].id,   {sort_order: arr[idx2].sort_order}),
+          sbFetch('PATCH', 'products?id=eq.'+arr[swapIdx].id, {sort_order: arr[swapIdx].sort_order})
+        ]).then(function() {
+          loadProducts();
+          switchAdminTab('mgmt');
+        });
+      });
     });
-  });
 
-  document.querySelectorAll('.mgmt-btn.trash').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var id = parseInt(this.dataset.id, 10);
-      if (!confirm('この商品を削除しますか？')) return;
-      products = products.filter(function(p){ return p.id!==id; });
-      renderAll(); renderMgmt();
-      showToast('🗑 商品を削除しました');
+    // 削除イベント
+    el.querySelectorAll('.mgmt-btn.trash').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (!confirm('この商品を削除しますか？')) return;
+        var id = this.dataset.id;
+        sbFetch('DELETE', 'products?id=eq.'+id).then(function() {
+          showToast('🗑 商品を削除しました');
+          loadProducts();
+        });
+      });
     });
   });
 }
 
-/* ── タブ ── */
+// =====================================================
+//  タブ
+// =====================================================
 function switchTab(name) {
   document.querySelectorAll('.tab-pane').forEach(function(el){ el.classList.remove('active'); });
   document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
   document.getElementById('pane-'+name).classList.add('active');
   document.getElementById('tab-btn-'+name).classList.add('active');
 }
-
 function switchAdminTab(name) {
   document.querySelectorAll('.admin-subpane').forEach(function(el){ el.classList.remove('active'); });
   document.querySelectorAll('.admin-tab').forEach(function(el){ el.classList.remove('active'); });
@@ -457,7 +492,9 @@ function switchAdminTab(name) {
   if (name==='mgmt') renderMgmt();
 }
 
-/* ── 写真 ── */
+// =====================================================
+//  写真
+// =====================================================
 function setPhoto(dataUrl) {
   photoData = dataUrl;
   document.getElementById('photo-prev').src = dataUrl;
@@ -481,7 +518,9 @@ function readFile(file) {
   r.readAsDataURL(file);
 }
 
-/* ── 商品登録 ── */
+// =====================================================
+//  商品登録
+// =====================================================
 function addProduct() {
   var cat   = document.querySelector('input[name="cat"]:checked').value;
   var name  = document.getElementById('f-name').value.trim();
@@ -491,41 +530,70 @@ function addProduct() {
   var icon  = document.getElementById('f-icon').value.trim() || (cat==='konyudo'?'🟢':'🔖');
   var stock = document.getElementById('f-stock').value;
   var errEl = document.getElementById('form-err');
+  var btn   = document.getElementById('reg-btn');
 
-  if (!name)          { errEl.textContent='⚠ 商品名を入力してください';       errEl.style.display='block'; return; }
-  if (!price||price<1){ errEl.textContent='⚠ 価格を正しく入力してください';   errEl.style.display='block'; return; }
-  if (!desc)          { errEl.textContent='⚠ 商品特徴・説明を入力してください'; errEl.style.display='block'; return; }
+  if (!name)           { errEl.textContent='⚠ 商品名を入力してください';       errEl.style.display='block'; return; }
+  if (!price||price<1) { errEl.textContent='⚠ 価格を正しく入力してください';   errEl.style.display='block'; return; }
+  if (!desc)           { errEl.textContent='⚠ 商品特徴・説明を入力してください'; errEl.style.display='block'; return; }
   errEl.style.display = 'none';
 
-  products.push({id:nextId++, cat:cat, name:name, price:price, size:size, desc:desc, icon:icon, stock:stock, photo:photoData});
-  renderAll();
+  btn.disabled = true;
+  btn.textContent = '登録中...';
 
-  document.getElementById('f-name').value  = '';
-  document.getElementById('f-price').value = '';
-  document.getElementById('f-size').value  = '';
-  document.getElementById('f-desc').value  = '';
-  document.getElementById('f-icon').value  = '';
-  document.getElementById('f-stock').selectedIndex = 0;
-  document.querySelector('input[name="cat"][value="hanko"]').checked = true;
-  removePhoto();
-  switchTab(cat);
-  showToast('✅ 商品を登録しました！');
+  // sort_orderは同カテゴリの最大値+1
+  var catProducts = products.filter(function(p){ return p.cat===cat; });
+  var maxOrder = catProducts.length > 0
+    ? Math.max.apply(null, catProducts.map(function(p){ return p.sort_order||0; })) + 1
+    : 0;
+
+  var newProduct = {
+    cat: cat, name: name, price: price,
+    size_material: size, description: desc,
+    icon: icon, stock: stock,
+    photo: photoData,
+    sort_order: maxOrder
+  };
+
+  sbFetch('POST', 'products', newProduct).then(function(data) {
+    btn.disabled = false;
+    btn.textContent = '＋ この商品を登録する';
+
+    if (data && !data.error) {
+      document.getElementById('f-name').value  = '';
+      document.getElementById('f-price').value = '';
+      document.getElementById('f-size').value  = '';
+      document.getElementById('f-desc').value  = '';
+      document.getElementById('f-icon').value  = '';
+      document.getElementById('f-stock').selectedIndex = 0;
+      document.querySelector('input[name="cat"][value="hanko"]').checked = true;
+      removePhoto();
+      showToast('✅ 商品を登録しました！');
+      loadProducts();
+      switchTab(cat);
+    } else {
+      errEl.textContent = '⚠ 登録に失敗しました: ' + (data.message||'不明なエラー');
+      errEl.style.display = 'block';
+    }
+  }).catch(function(e) {
+    btn.disabled = false;
+    btn.textContent = '＋ この商品を登録する';
+    errEl.textContent = '⚠ 通信エラーが発生しました';
+    errEl.style.display = 'block';
+  });
 }
 
-/* ── 管理トグル ── */
+// =====================================================
+//  管理トグル・パスワード
+// =====================================================
 function onAdminToggle() {
-  if (authed) { togglePanel(); }
-  else {
+  if (authed) {
+    document.getElementById('admin-toggle-btn').classList.toggle('open');
+    document.getElementById('admin-panel').classList.toggle('open');
+  } else {
     document.getElementById('pw-overlay').classList.add('show');
     setTimeout(function(){ document.getElementById('pw-input').focus(); }, 100);
   }
 }
-function togglePanel() {
-  document.getElementById('admin-toggle-btn').classList.toggle('open');
-  document.getElementById('admin-panel').classList.toggle('open');
-}
-
-/* ── パスワード ── */
 function checkPw() {
   var inp = document.getElementById('pw-input');
   var msg = document.getElementById('pw-errmsg');
@@ -533,7 +601,8 @@ function checkPw() {
     authed = true;
     document.getElementById('pw-overlay').classList.remove('show');
     inp.value = ''; msg.classList.remove('show');
-    togglePanel();
+    document.getElementById('admin-toggle-btn').classList.add('open');
+    document.getElementById('admin-panel').classList.add('open');
   } else {
     inp.classList.add('err'); msg.classList.add('show');
     setTimeout(function(){ inp.classList.remove('err'); }, 400);
@@ -546,18 +615,17 @@ function closePw() {
   document.getElementById('pw-errmsg').classList.remove('show');
 }
 
-/* ── DOMContentLoaded ── */
+// =====================================================
+//  イベント登録
+// =====================================================
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('admin-toggle-btn').addEventListener('click', onAdminToggle);
   document.getElementById('reg-btn').addEventListener('click', addProduct);
-
   document.getElementById('btn-camera').addEventListener('click', function(e) {
-    e.stopPropagation();
-    document.getElementById('f-photo-cam').click();
+    e.stopPropagation(); document.getElementById('f-photo-cam').click();
   });
   document.getElementById('btn-library').addEventListener('click', function(e) {
-    e.stopPropagation();
-    document.getElementById('f-photo-lib').click();
+    e.stopPropagation(); document.getElementById('f-photo-lib').click();
   });
   document.getElementById('btn-rmpho').addEventListener('click', function(e) {
     e.stopPropagation(); removePhoto();
@@ -567,13 +635,12 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   document.getElementById('f-photo-cam').addEventListener('change', function() { readFile(this.files[0]); });
   document.getElementById('f-photo-lib').addEventListener('change', function() { readFile(this.files[0]); });
-
   document.getElementById('pw-submit-btn').addEventListener('click', checkPw);
   document.getElementById('pw-input').addEventListener('keydown', function(e) { if(e.key==='Enter') checkPw(); });
   document.getElementById('pw-cancel-btn').addEventListener('click', closePw);
   document.getElementById('pw-overlay').addEventListener('click', function(e) { if(e.target===this) closePw(); });
 
-  renderAll();
+  loadProducts();
 });
 </script>
 </body>
