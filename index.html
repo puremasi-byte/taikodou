@@ -413,6 +413,7 @@ footer a{color:var(--gold2);}
     <button class="tab-btn active" id="tab-btn-hanko"   onclick="switchTab('hanko')">🔖 印鑑・はんこ</button>
     <button class="tab-btn"        id="tab-btn-konyudo" onclick="switchTab('konyudo')">🟢 こにゅうどうくんグッズ</button>
     <button class="tab-btn"        id="tab-btn-blog"    onclick="switchTab('blog')">📝 ブログ</button>
+    <button class="tab-btn"        id="tab-btn-insta"   onclick="switchTab('insta')">📷 Instagram</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane active" id="pane-hanko">
@@ -426,6 +427,13 @@ footer a{color:var(--gold2);}
       <div class="product-grid" id="grid-konyudo"></div>
       <div class="loading" id="loading-konyudo">読み込み中...</div>
       <div class="empty" id="empty-konyudo" style="display:none"><div class="ei">🟢</div><p>商品が登録されていません</p></div>
+    </div>
+    <div class="tab-pane" id="pane-insta">
+      <div class="sec-title"><h3>📷 Instagram</h3><span class="sec-badge">@taikodou_katsuji</span></div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:20px;letter-spacing:.1em;">最新の投稿をご覧いただけます。フォローもよろしくお願いします！</p>
+      <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+      <script src="https://elfsightcdn.com/platform.js" async></script>
+      <div class="elfsight-app-b4be0809-6507-4901-ba28-906ac1a37bff" data-elfsight-app-lazy></div>
     </div>
     <div class="tab-pane" id="pane-blog">
       <div class="sec-title"><h3>📝 ブログ</h3><span class="sec-badge">BLOG</span></div>
