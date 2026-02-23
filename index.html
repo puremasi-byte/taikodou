@@ -450,7 +450,7 @@ function renderMgmt() {
           +'<div class="mgmt-price">¥'+Number(p.price).toLocaleString()+' / '+esc(p.stock)+'</div>'
         +'</div>'
         +'<div class="mgmt-actions">'
-          +'<button class="mgmt-btn photo'+(p.photo?' has-photo':'')+'" data-id="'+p.id+'" data-name="'+esc(p.name)+'" title="'+(p.photo?'写真を変更':'写真を追加')+'">'+(p.photo?'📷':'📷+'+'</button>'
+          +'<button class="mgmt-btn photo'+(p.photo?' has-photo':'')+'" data-id="'+p.id+'" data-name="'+esc(p.name)+'" title="'+(p.photo?'写真を変更':'写真を追加')+'">'+(p.photo?'📷':'📷+')+'</button>'
           +'<button class="mgmt-btn up"    data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'" '+(idx===0?'disabled':'')+'> ▲ </button>'
           +'<button class="mgmt-btn down"  data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'" '+(idx===list.length-1?'disabled':'')+'> ▼ </button>'
           +'<button class="mgmt-btn trash" data-id="'+p.id+'"> 🗑 </button>'
