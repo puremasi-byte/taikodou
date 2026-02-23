@@ -314,16 +314,21 @@ var SUPABASE_URL = 'https://pqylvacqbbpogvvtivcd.supabase.co';
 var SUPABASE_KEY = 'sb_publishable__vKOwqHOIyI-QSsxQ-yCXg_rADJAW3y';
 
 function sbFetch(method, path, body) {
+  var headers = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json'
+  };
+  if (method === 'POST')  headers['Prefer'] = 'return=representation';
+  if (method === 'PATCH') headers['Prefer'] = 'return=minimal';
   return fetch(SUPABASE_URL + '/rest/v1/' + path, {
     method: method,
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': 'Bearer ' + SUPABASE_KEY,
-      'Content-Type': 'application/json',
-      'Prefer': method === 'POST' ? 'return=representation' : ''
-    },
+    headers: headers,
     body: body ? JSON.stringify(body) : undefined
-  }).then(function(r) { return r.json(); });
+  }).then(function(r) {
+    if (r.status === 204 || r.status === 200 && method !== 'GET' && method !== 'POST') return {};
+    return r.json().catch(function() { return {}; });
+  });
 }
 
 // =====================================================
@@ -432,31 +437,33 @@ function renderMgmt() {
     el.querySelectorAll('.mgmt-btn.up,.mgmt-btn.down').forEach(function(btn) {
       btn.addEventListener('click', function() {
         if (this.disabled) return;
-        var cat2 = this.dataset.cat;
-        var idx2 = parseInt(this.dataset.idx, 10);
-        var dir  = this.classList.contains('up') ? -1 : 1;
-        var arr  = products.filter(function(p){ return p.cat===cat2; });
+        var cat2    = this.dataset.cat;
+        var idx2    = parseInt(this.dataset.idx, 10);
+        var dir     = this.classList.contains('up') ? -1 : 1;
+        var arr     = products.filter(function(p){ return p.cat===cat2; });
         var swapIdx = idx2 + dir;
         if (swapIdx < 0 || swapIdx >= arr.length) return;
 
-        // sort_orderを入れ替える
-        var tmpOrder        = arr[idx2].sort_order;
-        arr[idx2].sort_order   = arr[swapIdx].sort_order;
-        arr[swapIdx].sort_order = tmpOrder;
+        // arr内でidx2とswapIdxを入れ替えた新しい配列を作る
+        var newArr = arr.slice();
+        var tmp = newArr[idx2];
+        newArr[idx2] = newArr[swapIdx];
+        newArr[swapIdx] = tmp;
 
-        // もしsort_orderが同じ場合はidで区別
-        if (arr[idx2].sort_order === arr[swapIdx].sort_order) {
-          arr[idx2].sort_order   = idx2;
-          arr[swapIdx].sort_order = swapIdx;
-        }
-
-        // DB更新（2件）
-        Promise.all([
-          sbFetch('PATCH', 'products?id=eq.'+arr[idx2].id,   {sort_order: arr[idx2].sort_order}),
-          sbFetch('PATCH', 'products?id=eq.'+arr[swapIdx].id, {sort_order: arr[swapIdx].sort_order})
-        ]).then(function() {
+        // 全件を順番に（Promise chainで）DB更新 - Promise.allだと競合する場合があるため
+        var chain = Promise.resolve();
+        newArr.forEach(function(p, i) {
+          chain = chain.then(function() {
+            return sbFetch('PATCH', 'products?id=eq.' + p.id, {sort_order: i});
+          });
+        });
+        chain.then(function() {
+          showToast('✅ 順番を変更しました');
           loadProducts();
-          switchAdminTab('mgmt');
+          setTimeout(function(){ switchAdminTab('mgmt'); }, 600);
+        }).catch(function() {
+          showToast('⚠ 並び替えに失敗しました');
+          loadProducts();
         });
       });
     });
