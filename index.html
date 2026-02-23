@@ -137,6 +137,8 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--cream);color:var(--i
 .mgmt-btn.sq{width:32px;padding:0;}
 .mgmt-btn.up:hover,.mgmt-btn.down:hover{border-color:var(--teal);color:var(--teal);}
 .mgmt-btn.trash:hover{border-color:var(--red2);color:var(--red2);background:#fff0f0;}
+.mgmt-btn.edit{border-color:#9b59b6;color:#9b59b6;}
+.mgmt-btn.edit:hover{background:#9b59b6;color:white;}
 .mgmt-btn.photo{border-color:#d4c4a0;color:var(--muted);}
 .mgmt-btn.photo.has-photo{border-color:var(--teal);color:var(--teal);}
 .mgmt-btn.photo:hover{border-color:var(--red);color:var(--red);background:#fff0f0;}
@@ -183,6 +185,16 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--cream);color:var(--i
 .pm-save-btn:disabled{background:#aaa;cursor:not-allowed;}
 .pm-cancel-btn{padding:11px 16px;background:white;border:2px solid #ddd;border-radius:8px;font-size:13px;cursor:pointer;color:#888;}
 .pm-cancel-btn:hover{border-color:#aaa;}
+/* 商品編集モーダル */
+.edit-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1500;align-items:center;justify-content:center;backdrop-filter:blur(3px);padding:16px;}
+.edit-overlay.show{display:flex;animation:fadeIn .2s;}
+.edit-box{background:white;border-radius:14px;padding:24px;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.edit-box h4{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:10px;border-bottom:2px dashed var(--gold);}
+.edit-save-btn{margin-top:16px;width:100%;padding:12px;background:var(--red);color:white;border:none;border-radius:10px;font-family:"Noto Serif JP",serif;font-size:15px;font-weight:700;cursor:pointer;}
+.edit-save-btn:hover{background:#6b0000;}
+.edit-save-btn:disabled{background:#aaa;cursor:not-allowed;}
+.edit-cancel-btn{margin-top:8px;width:100%;padding:10px;background:white;border:2px solid #ddd;border-radius:10px;font-size:14px;cursor:pointer;color:#888;}
+.edit-cancel-btn:hover{border-color:#aaa;}
 /* PW MODAL */
 .pw-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(3px);}
 .pw-overlay.show{display:flex;animation:fadeIn .2s;}
@@ -381,6 +393,31 @@ footer strong{color:var(--gold);}
   </div>
 </div>
 
+<!-- 商品編集モーダル -->
+<div class="edit-overlay" id="edit-overlay">
+  <div class="edit-box">
+    <h4>✏️ 商品を編集</h4>
+    <div class="form-grid">
+      <div class="fg full"><label>商品名<span class="req">*</span></label><input type="text" id="edit-name" placeholder="例：本象牙 印鑑"></div>
+      <div class="fg"><label>価格（税込）※サイズ別価格がある場合は0でOK</label><input type="number" id="edit-price" min="0"></div>
+      <div class="fg"><label>素材・仕様</label><input type="text" id="edit-size" placeholder="例：本象牙 / 最高級素材"></div>
+      <div class="fg full"><label>商品の説明<span class="req">*</span></label><textarea id="edit-desc" style="min-height:100px;"></textarea></div>
+      <div class="fg"><label>アイコン絵文字</label><input type="text" id="edit-icon" maxlength="4"></div>
+      <div class="fg"><label>在庫状況</label>
+        <select id="edit-stock">
+          <option value="在庫あり">在庫あり</option>
+          <option value="残りわずか">残りわずか</option>
+          <option value="取り寄せ">取り寄せ</option>
+          <option value="品切れ">品切れ</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-err" id="edit-err"></div>
+    <button type="button" class="edit-save-btn" id="edit-save-btn">💾 変更を保存する</button>
+    <button type="button" class="edit-cancel-btn" id="edit-cancel-btn">キャンセル</button>
+  </div>
+</div>
+
 <!-- パスワードモーダル -->
 <div class="pw-overlay" id="pw-overlay">
   <div class="pw-box">
@@ -560,6 +597,7 @@ function renderMgmt(){
         +'<div class="mgmt-actions">'
         +'<button class="mgmt-btn photo'+(p.photo?' has-photo':'')+'" data-id="'+p.id+'" data-name="'+esc(p.name)+'">'+(p.photo?'📷':'📷+')+'</button>'
         +'<button class="mgmt-btn sizes" data-id="'+p.id+'" data-name="'+esc(p.name)+'">'+szLabel+'</button>'
+        +'<button class="mgmt-btn edit" data-id="'+p.id+'">✏️</button>'
         +'<button class="mgmt-btn sq up"   data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'"'+(idx===0?' disabled':'')+'>▲</button>'
         +'<button class="mgmt-btn sq down" data-id="'+p.id+'" data-cat="'+cat+'" data-idx="'+idx+'"'+(idx===list.length-1?' disabled':'')+'>▼</button>'
         +'<button class="mgmt-btn sq trash" data-id="'+p.id+'">🗑</button>'
@@ -593,7 +631,56 @@ function renderMgmt(){
         sbFetch('DELETE','products?id=eq.'+this.dataset.id).then(function(){ showToast('🗑 商品を削除しました'); loadProducts(); });
       });
     });
+    el.querySelectorAll('.mgmt-btn.edit').forEach(function(btn){
+      btn.addEventListener('click',function(){ openEditModal(this.dataset.id); });
+    });
   });
+}
+
+// ===== 商品編集モーダル =====
+var editProductId = null;
+function openEditModal(id){
+  var p = products.find(function(x){ return String(x.id)===String(id); });
+  if(!p) return;
+  editProductId = id;
+  document.getElementById('edit-name').value  = p.name||'';
+  document.getElementById('edit-price').value = p.price||0;
+  document.getElementById('edit-size').value  = p.size_material||'';
+  document.getElementById('edit-desc').value  = p.description||'';
+  document.getElementById('edit-icon').value  = p.icon||'';
+  document.getElementById('edit-stock').value = p.stock||'在庫あり';
+  document.getElementById('edit-err').style.display='none';
+  document.getElementById('edit-save-btn').disabled=false;
+  document.getElementById('edit-save-btn').textContent='💾 変更を保存する';
+  document.getElementById('edit-overlay').classList.add('show');
+}
+function closeEditModal(){
+  document.getElementById('edit-overlay').classList.remove('show');
+  editProductId=null;
+}
+function saveEdit(){
+  var name  = document.getElementById('edit-name').value.trim();
+  var price = parseInt(document.getElementById('edit-price').value,10)||0;
+  var size  = document.getElementById('edit-size').value.trim();
+  var desc  = document.getElementById('edit-desc').value.trim();
+  var icon  = document.getElementById('edit-icon').value.trim();
+  var stock = document.getElementById('edit-stock').value;
+  var errEl = document.getElementById('edit-err');
+  var btn   = document.getElementById('edit-save-btn');
+  if(!name){ errEl.textContent='⚠ 商品名を入力してください'; errEl.style.display='block'; return; }
+  if(!desc){ errEl.textContent='⚠ 商品の説明を入力してください'; errEl.style.display='block'; return; }
+  errEl.style.display='none';
+  btn.disabled=true; btn.textContent='保存中...';
+  sbFetch('PATCH','products?id=eq.'+editProductId,{name:name,price:price,size_material:size,description:desc,icon:icon,stock:stock})
+    .then(function(){
+      showToast('✅ 商品情報を更新しました');
+      closeEditModal();
+      loadProducts();
+      setTimeout(function(){ switchAdminTab('mgmt'); },600);
+    }).catch(function(){
+      showToast('⚠ 更新に失敗しました');
+      btn.disabled=false; btn.textContent='💾 変更を保存する';
+    });
 }
 
 // ===== サイズ管理モーダル =====
@@ -774,6 +861,10 @@ document.addEventListener('DOMContentLoaded',function(){
   // 詳細モーダル
   document.getElementById('detail-close').addEventListener('click',closeDetail);
   document.getElementById('detail-overlay').addEventListener('click',function(e){ if(e.target===this) closeDetail(); });
+  // 商品編集モーダル
+  document.getElementById('edit-save-btn').addEventListener('click',saveEdit);
+  document.getElementById('edit-cancel-btn').addEventListener('click',closeEditModal);
+  document.getElementById('edit-overlay').addEventListener('click',function(e){ if(e.target===this) closeEditModal(); });
   // サイズ管理モーダル
   document.getElementById('sz-add-btn').addEventListener('click',addSize);
   document.getElementById('sz-close-btn').addEventListener('click',closeSzModal);
