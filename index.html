@@ -320,6 +320,60 @@ footer::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;
 footer strong{color:var(--gold);}
 footer a{color:var(--gold2);}
 
+/* ===== ブログ ===== */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;}
+.blog-card{background:#faf7f2;border:1px solid #e0d8c8;border-radius:2px;overflow:hidden;cursor:pointer;transition:all .3s;position:relative;}
+.blog-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);opacity:0;transition:opacity .3s;}
+.blog-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.1);border-color:var(--gold-dark);}
+.blog-card:hover::before{opacity:1;}
+.blog-card-thumb{width:100%;aspect-ratio:16/9;background:#f0ece4;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.blog-card-thumb img{width:100%;height:100%;object-fit:cover;}
+.blog-card-thumb-icon{font-size:36px;opacity:.3;}
+.blog-card-body{padding:18px 20px;}
+.blog-card-date{font-size:11px;color:var(--muted);letter-spacing:.15em;margin-bottom:6px;}
+.blog-card-title{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--black);line-height:1.6;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.blog-card-excerpt{font-size:12px;color:var(--muted);line-height:1.8;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.blog-card-footer{padding:12px 20px;border-top:1px solid #f0e8d8;display:flex;align-items:center;justify-content:space-between;}
+.blog-card-more{font-size:11px;color:var(--gold-dark);letter-spacing:.15em;font-weight:700;}
+.blog-draft-badge{font-size:10px;background:#f0e8d8;color:var(--muted);padding:2px 8px;border-radius:2px;letter-spacing:.1em;}
+
+/* ブログ詳細モーダル */
+.blog-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;align-items:flex-start;justify-content:center;backdrop-filter:blur(4px);padding:24px 16px;overflow-y:auto;}
+.blog-overlay.show{display:flex;animation:fadeIn .3s;}
+.blog-box{background:#ffffff;border:1px solid #e0d8c8;border-radius:2px;width:100%;max-width:720px;margin:auto;box-shadow:0 24px 60px rgba(0,0,0,.15);}
+.blog-box-header{position:relative;padding:32px 40px 24px;border-bottom:1px solid #f0e8d8;}
+.blog-box-header::before{content:"";position:absolute;top:0;left:40px;right:40px;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);}
+.blog-box-date{font-size:11px;color:var(--muted);letter-spacing:.2em;margin-bottom:10px;}
+.blog-box-title{font-family:"Noto Serif JP",serif;font-size:24px;font-weight:700;color:var(--black);line-height:1.7;letter-spacing:.1em;padding-right:40px;}
+.blog-box-close{position:absolute;top:28px;right:28px;width:32px;height:32px;border:1px solid #ddd;background:white;border-radius:2px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s;}
+.blog-box-close:hover{border-color:var(--gold-dark);color:var(--gold-dark);}
+.blog-box-thumb{width:100%;aspect-ratio:16/9;background:#f0ece4;overflow:hidden;}
+.blog-box-thumb img{width:100%;height:100%;object-fit:cover;}
+.blog-box-content{padding:32px 40px 40px;font-size:15px;line-height:2;color:#333;}
+.blog-empty{text-align:center;padding:60px;color:var(--muted);}
+.blog-empty .bei{font-size:44px;margin-bottom:12px;opacity:.3;}
+
+/* ブログ管理 */
+.blog-mgmt-list{display:flex;flex-direction:column;gap:8px;}
+.blog-mgmt-item{display:flex;align-items:center;gap:10px;background:white;border:1px solid #e0d8c8;border-radius:2px;padding:10px 14px;}
+.blog-mgmt-thumb{width:60px;height:40px;border-radius:2px;overflow:hidden;background:#f0ece4;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid #e0d8c8;}
+.blog-mgmt-thumb img{width:100%;height:100%;object-fit:cover;}
+.blog-mgmt-thumb-icon{font-size:18px;opacity:.4;}
+.blog-mgmt-info{flex:1;min-width:0;}
+.blog-mgmt-title{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.blog-mgmt-meta{font-size:11px;color:var(--muted);margin-top:2px;}
+.blog-pub-badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:2px;font-weight:700;letter-spacing:.1em;}
+.blog-pub-badge.pub{background:#e8f5e9;color:#2e7d32;}
+.blog-pub-badge.draft{background:#f0e8d8;color:var(--muted);}
+
+/* ブログ投稿フォーム */
+.blog-content-area{width:100%;min-height:240px;padding:12px;border:1px solid var(--border-light);border-radius:2px;font-family:"Noto Sans JP",sans-serif;font-size:14px;outline:none;resize:vertical;line-height:1.8;color:var(--black);}
+.blog-content-area:focus{border-color:var(--gold-dark);box-shadow:0 0 0 3px rgba(200,169,110,.08);}
+.blog-pub-row{display:flex;align-items:center;gap:12px;margin-top:4px;}
+.blog-pub-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:700;padding:10px 18px;border:1px solid var(--border-light);border-radius:2px;background:white;transition:all .2s;}
+.blog-pub-toggle:has(input:checked){border-color:#2e7d32;background:#f0fff0;color:#2e7d32;}
+.blog-pub-toggle input{display:none;}
+
 /* ===== レスポンシブ ===== */
 @media(max-width:600px){
   .info-bar{padding:10px 16px;}
@@ -358,6 +412,7 @@ footer a{color:var(--gold2);}
   <div class="tab-nav">
     <button class="tab-btn active" id="tab-btn-hanko"   onclick="switchTab('hanko')">🔖 印鑑・はんこ</button>
     <button class="tab-btn"        id="tab-btn-konyudo" onclick="switchTab('konyudo')">🟢 こにゅうどうくんグッズ</button>
+    <button class="tab-btn"        id="tab-btn-blog"    onclick="switchTab('blog')">📝 ブログ</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane active" id="pane-hanko">
@@ -372,6 +427,12 @@ footer a{color:var(--gold2);}
       <div class="loading" id="loading-konyudo">読み込み中...</div>
       <div class="empty" id="empty-konyudo" style="display:none"><div class="ei">🟢</div><p>商品が登録されていません</p></div>
     </div>
+    <div class="tab-pane" id="pane-blog">
+      <div class="sec-title"><h3>📝 ブログ</h3><span class="sec-badge">BLOG</span></div>
+      <div class="blog-grid" id="grid-blog"></div>
+      <div class="loading" id="loading-blog" style="display:none">読み込み中...</div>
+      <div class="blog-empty" id="empty-blog" style="display:none"><div class="bei">📝</div><p>まだ記事がありません</p></div>
+    </div>
   </div>
   <div class="admin-wrap">
     <button class="admin-toggle" id="admin-toggle-btn"><span>管理</span><span class="arr">▼</span></button>
@@ -379,6 +440,7 @@ footer a{color:var(--gold2);}
       <div class="admin-tabs">
         <button class="admin-tab active" id="atab-add"  onclick="switchAdminTab('add')">＋ 商品を登録</button>
         <button class="admin-tab"        id="atab-mgmt" onclick="switchAdminTab('mgmt')">📋 商品の管理・並び替え</button>
+        <button class="admin-tab"        id="atab-blog" onclick="switchAdminTab('blog')">📝 ブログ管理</button>
       </div>
       <div class="admin-subpane active" id="apane-add">
         <div class="form-grid">
@@ -431,6 +493,47 @@ footer a{color:var(--gold2);}
         <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🟢 こにゅうどうくんグッズ</strong></div>
         <div class="mgmt-list" id="mgmt-konyudo"></div>
       </div>
+      <div class="admin-subpane" id="apane-blog">
+        <p class="mgmt-hint">✏️ 編集 ／ 🗑 削除 ／ 公開・下書き切り替え可能</p>
+        <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:2px;padding:20px;margin-bottom:20px;">
+          <div id="blog-form-title-label" style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:14px;letter-spacing:.1em;">＋ 新しい記事を書く</div>
+          <div class="form-grid">
+            <div class="fg full"><label>タイトル<span class="req">*</span></label><input type="text" id="bf-title" placeholder="例：象牙の印鑑について"></div>
+            <div class="fg full">
+              <label>本文<span class="req">*</span>（Enterキーで改行できます）</label>
+              <textarea class="blog-content-area" id="bf-content" placeholder="記事の内容を書いてください。&#10;&#10;改行はそのまま反映されます。"></textarea>
+            </div>
+            <div class="fg full">
+              <label>サムネイル写真</label>
+              <div class="photo-drop" id="bf-photo-drop">
+                <div class="photo-hint" id="bf-photo-hint">
+                  <div class="ph-icons">📷 🖼️</div>
+                  <div class="ph-main">タップして写真を選択</div>
+                  <div class="ph-sub">記事のトップ画像になります</div>
+                </div>
+                <img class="prev" id="bf-photo-prev" src="" alt="" style="display:none">
+              </div>
+              <div class="photo-btns">
+                <button type="button" class="pbtn cam" id="bf-btn-camera">📷 カメラ</button>
+                <button type="button" class="pbtn lib" id="bf-btn-library">🖼️ ライブラリ</button>
+                <button type="button" class="pbtn del" id="bf-btn-rmpho" style="display:none">✕ 削除</button>
+              </div>
+              <input type="file" id="bf-photo-cam" accept="image/*" capture="environment" style="display:none">
+              <input type="file" id="bf-photo-lib" accept="image/*" style="display:none">
+            </div>
+            <div class="fg full">
+              <label>公開設定</label>
+              <label class="blog-pub-toggle"><input type="checkbox" id="bf-published"> ✅ すぐに公開する（チェックなしは下書き保存）</label>
+            </div>
+          </div>
+          <div class="form-err" id="bf-err"></div>
+          <input type="hidden" id="bf-edit-id" value="">
+          <button type="button" class="reg-btn" id="bf-submit-btn">📝 この記事を投稿する</button>
+          <button type="button" id="bf-cancel-edit-btn" style="display:none;margin-top:8px;width:100%;padding:10px;background:white;border:1px solid #ddd;border-radius:2px;font-size:13px;cursor:pointer;color:#888;">キャンセル（新規投稿に戻る）</button>
+        </div>
+        <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:12px;letter-spacing:.1em;">投稿済みの記事</div>
+        <div class="blog-mgmt-list" id="blog-mgmt-list"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -447,6 +550,19 @@ footer a{color:var(--gold2);}
   <div style="margin-top:20px;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.15em;">© 2024 TAIKODOU All Rights Reserved.</div>
 </footer>
 <div class="toast" id="toast"></div>
+
+<!-- ブログ詳細モーダル -->
+<div class="blog-overlay" id="blog-overlay">
+  <div class="blog-box">
+    <div class="blog-box-header">
+      <div class="blog-box-date" id="blog-box-date"></div>
+      <div class="blog-box-title" id="blog-box-title"></div>
+      <button class="blog-box-close" id="blog-box-close">✕</button>
+    </div>
+    <div id="blog-box-thumb-wrap"></div>
+    <div class="blog-box-content" id="blog-box-content"></div>
+  </div>
+</div>
 
 <!-- 商品詳細モーダル -->
 <div class="detail-overlay" id="detail-overlay">
@@ -574,6 +690,168 @@ function sbFetch(method, path, body){
 }
 
 // ===== データ読み込み =====
+var blogPosts = [];
+var bfPhotoData = null;
+
+function loadBlogPosts(){
+  document.getElementById('loading-blog').style.display='block';
+  document.getElementById('grid-blog').innerHTML='';
+  sbFetch('GET','blog_posts?select=*&order=created_at.desc').then(function(data){
+    document.getElementById('loading-blog').style.display='none';
+    if(!Array.isArray(data)){ showToast('⚠ ブログ読み込み失敗'); return; }
+    blogPosts = data;
+    renderBlog();
+    renderBlogMgmt();
+  }).catch(function(){ document.getElementById('loading-blog').style.display='none'; showToast('⚠ 通信エラー'); });
+}
+
+function renderBlog(){
+  var published = blogPosts.filter(function(p){ return p.published; });
+  var grid = document.getElementById('grid-blog');
+  var empty = document.getElementById('empty-blog');
+  if(!published.length){ grid.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  grid.innerHTML = published.map(function(p){
+    var d = new Date(p.created_at);
+    var dateStr = d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日';
+    var excerpt = (p.content||'').replace(/
+/g,' ').substring(0,80);
+    var thumb = p.thumbnail
+      ? '<div class="blog-card-thumb"><img src="'+esc(p.thumbnail)+'" alt="'+esc(p.title)+'"></div>'
+      : '<div class="blog-card-thumb"><div class="blog-card-thumb-icon">📝</div></div>';
+    return '<div class="blog-card" data-id="'+p.id+'">'
+      +thumb
+      +'<div class="blog-card-body">'
+      +'<div class="blog-card-date">'+dateStr+'</div>'
+      +'<div class="blog-card-title">'+esc(p.title)+'</div>'
+      +'<div class="blog-card-excerpt">'+esc(excerpt)+'</div>'
+      +'</div>'
+      +'<div class="blog-card-footer"><span class="blog-card-more">続きを読む →</span></div>'
+      +'</div>';
+  }).join('');
+  grid.querySelectorAll('.blog-card').forEach(function(card){
+    card.addEventListener('click',function(){ openBlogDetail(parseInt(this.dataset.id)); });
+  });
+}
+
+function openBlogDetail(id){
+  var p = blogPosts.find(function(x){ return x.id===id; });
+  if(!p) return;
+  var d = new Date(p.created_at);
+  var dateStr = d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日';
+  document.getElementById('blog-box-date').textContent = dateStr;
+  document.getElementById('blog-box-title').textContent = p.title;
+  var thumbWrap = document.getElementById('blog-box-thumb-wrap');
+  thumbWrap.innerHTML = p.thumbnail
+    ? '<div class="blog-box-thumb"><img src="'+esc(p.thumbnail)+'" alt="'+esc(p.title)+'"></div>'
+    : '';
+  document.getElementById('blog-box-content').innerHTML = esc(p.content||'').replace(/
+/g,'<br>');
+  document.getElementById('blog-overlay').classList.add('show');
+}
+function closeBlogDetail(){ document.getElementById('blog-overlay').classList.remove('show'); }
+
+function renderBlogMgmt(){
+  var el = document.getElementById('blog-mgmt-list');
+  if(!blogPosts.length){ el.innerHTML='<div class="mgmt-empty">まだ記事がありません</div>'; return; }
+  el.innerHTML = blogPosts.map(function(p){
+    var d = new Date(p.created_at);
+    var dateStr = d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate();
+    var thumb = p.thumbnail
+      ? '<img src="'+esc(p.thumbnail)+'" style="width:100%;height:100%;object-fit:cover;">'
+      : '<span class="blog-mgmt-thumb-icon">📝</span>';
+    var badge = p.published
+      ? '<span class="blog-pub-badge pub">公開中</span>'
+      : '<span class="blog-pub-badge draft">下書き</span>';
+    var toggleLabel = p.published ? '非公開にする' : '公開する';
+    return '<div class="blog-mgmt-item">'
+      +'<div class="blog-mgmt-thumb">'+thumb+'</div>'
+      +'<div class="blog-mgmt-info">'
+      +'<div class="blog-mgmt-title">'+esc(p.title)+'</div>'
+      +'<div class="blog-mgmt-meta">'+dateStr+' '+badge+'</div>'
+      +'</div>'
+      +'<div class="mgmt-actions">'
+      +'<button class="mgmt-btn" style="border-color:#c9a84c;color:#8a6f3a;font-size:11px;" data-id="'+p.id+'" data-pub="'+(p.published?'1':'0')+'" data-action="toggle">'+toggleLabel+'</button>'
+      +'<button class="mgmt-btn sq edit" data-id="'+p.id+'" data-action="edit">✏️</button>'
+      +'<button class="mgmt-btn sq trash" data-id="'+p.id+'" data-action="del">🗑</button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+  el.querySelectorAll('[data-action]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var id=this.dataset.id, action=this.dataset.action;
+      if(action==='toggle'){
+        var pub=this.dataset.pub==='1';
+        sbFetch('PATCH','blog_posts?id=eq.'+id,{published:!pub}).then(function(){ showToast(pub?'⬜ 非公開にしました':'✅ 公開しました'); loadBlogPosts(); }).catch(function(){ showToast('⚠ 失敗しました'); });
+      } else if(action==='edit'){
+        openBlogEdit(parseInt(id));
+      } else if(action==='del'){
+        if(!confirm('この記事を削除しますか？')) return;
+        sbFetch('DELETE','blog_posts?id=eq.'+id).then(function(){ showToast('🗑 削除しました'); loadBlogPosts(); });
+      }
+    });
+  });
+}
+
+function openBlogEdit(id){
+  var p = blogPosts.find(function(x){ return x.id===id; });
+  if(!p) return;
+  document.getElementById('bf-title').value = p.title||'';
+  document.getElementById('bf-content').value = p.content||'';
+  document.getElementById('bf-published').checked = !!p.published;
+  document.getElementById('bf-edit-id').value = id;
+  document.getElementById('blog-form-title-label').textContent = '✏️ 記事を編集中';
+  document.getElementById('bf-submit-btn').textContent = '💾 変更を保存する';
+  document.getElementById('bf-cancel-edit-btn').style.display='block';
+  bfPhotoData = p.thumbnail||null;
+  if(p.thumbnail){
+    document.getElementById('bf-photo-prev').src=p.thumbnail;
+    document.getElementById('bf-photo-prev').style.display='block';
+    document.getElementById('bf-photo-hint').style.display='none';
+    document.getElementById('bf-btn-rmpho').style.display='inline-flex';
+  } else { bfRemovePhoto(); }
+  switchAdminTab('blog');
+  document.getElementById('bf-title').scrollIntoView({behavior:'smooth'});
+}
+
+function resetBlogForm(){
+  document.getElementById('bf-title').value='';
+  document.getElementById('bf-content').value='';
+  document.getElementById('bf-published').checked=false;
+  document.getElementById('bf-edit-id').value='';
+  document.getElementById('blog-form-title-label').textContent='＋ 新しい記事を書く';
+  document.getElementById('bf-submit-btn').textContent='📝 この記事を投稿する';
+  document.getElementById('bf-cancel-edit-btn').style.display='none';
+  document.getElementById('bf-err').style.display='none';
+  bfRemovePhoto();
+}
+
+function bfSetPhoto(dataUrl){ bfPhotoData=dataUrl; document.getElementById('bf-photo-prev').src=dataUrl; document.getElementById('bf-photo-prev').style.display='block'; document.getElementById('bf-photo-hint').style.display='none'; document.getElementById('bf-btn-rmpho').style.display='inline-flex'; }
+function bfRemovePhoto(){ bfPhotoData=null; document.getElementById('bf-photo-prev').src=''; document.getElementById('bf-photo-prev').style.display='none'; document.getElementById('bf-photo-hint').style.display='block'; document.getElementById('bf-btn-rmpho').style.display='none'; try{document.getElementById('bf-photo-cam').value='';document.getElementById('bf-photo-lib').value='';}catch(e){} }
+
+function submitBlog(){
+  var title = document.getElementById('bf-title').value.trim();
+  var content = document.getElementById('bf-content').value.trim();
+  var published = document.getElementById('bf-published').checked;
+  var editId = document.getElementById('bf-edit-id').value;
+  var errEl = document.getElementById('bf-err');
+  var btn = document.getElementById('bf-submit-btn');
+  if(!title){ errEl.textContent='⚠ タイトルを入力してください'; errEl.style.display='block'; return; }
+  if(!content){ errEl.textContent='⚠ 本文を入力してください'; errEl.style.display='block'; return; }
+  errEl.style.display='none';
+  btn.disabled=true; btn.textContent='保存中...';
+  var body = {title:title, content:content, published:published, thumbnail:bfPhotoData||null, updated_at:new Date().toISOString()};
+  var promise = editId
+    ? sbFetch('PATCH','blog_posts?id=eq.'+editId, body)
+    : sbFetch('POST','blog_posts', body);
+  promise.then(function(){
+    btn.disabled=false;
+    showToast(editId ? '✅ 記事を更新しました' : '✅ 記事を投稿しました');
+    resetBlogForm();
+    loadBlogPosts();
+  }).catch(function(){ btn.disabled=false; btn.textContent=editId?'💾 変更を保存する':'📝 この記事を投稿する'; showToast('⚠ 保存に失敗しました'); });
+}
+
 function loadProducts(){
   document.getElementById('loading-hanko').style.display='block';
   document.getElementById('loading-konyudo').style.display='block';
@@ -942,6 +1220,7 @@ function switchTab(name){
   document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
   document.getElementById('pane-'+name).classList.add('active');
   document.getElementById('tab-btn-'+name).classList.add('active');
+  if(name==='blog' && !blogPosts.length) loadBlogPosts();
 }
 function switchAdminTab(name){
   document.querySelectorAll('.admin-subpane').forEach(function(el){ el.classList.remove('active'); });
@@ -949,6 +1228,7 @@ function switchAdminTab(name){
   document.getElementById('apane-'+name).classList.add('active');
   document.getElementById('atab-'+name).classList.add('active');
   if(name==='mgmt') renderMgmt();
+  if(name==='blog') renderBlogMgmt();
 }
 
 // ===== 登録フォーム写真 =====
@@ -1003,6 +1283,18 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('pw-input').addEventListener('keydown',function(e){ if(e.key==='Enter') checkPw(); });
   document.getElementById('pw-cancel-btn').addEventListener('click',closePw);
   document.getElementById('pw-overlay').addEventListener('click',function(e){ if(e.target===this) closePw(); });
+  // ブログ詳細
+  document.getElementById('blog-box-close').addEventListener('click',closeBlogDetail);
+  document.getElementById('blog-overlay').addEventListener('click',function(e){ if(e.target===this) closeBlogDetail(); });
+  // ブログフォーム
+  document.getElementById('bf-submit-btn').addEventListener('click',submitBlog);
+  document.getElementById('bf-cancel-edit-btn').addEventListener('click',resetBlogForm);
+  document.getElementById('bf-photo-drop').addEventListener('click',function(){ document.getElementById('bf-photo-lib').click(); });
+  document.getElementById('bf-btn-camera').addEventListener('click',function(e){ e.stopPropagation(); document.getElementById('bf-photo-cam').click(); });
+  document.getElementById('bf-btn-library').addEventListener('click',function(e){ e.stopPropagation(); document.getElementById('bf-photo-lib').click(); });
+  document.getElementById('bf-btn-rmpho').addEventListener('click',function(e){ e.stopPropagation(); bfRemovePhoto(); });
+  document.getElementById('bf-photo-cam').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){bfSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  document.getElementById('bf-photo-lib').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){bfSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
 
   loadProducts();
 });
