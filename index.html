@@ -101,6 +101,13 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .slider-next{right:12px;}
 .slider-prev:hover,.slider-next:hover{background:rgba(200,169,110,.2);border-color:var(–gold);}
 .slider-wrap::after{content:””;position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(–gold),transparent);z-index:5;}
+.slider-slide img{transform-origin:center center;will-change:transform;}
+@keyframes kb-zoom-in{0%{transform:scale(1) translate(0,0);}100%{transform:scale(1.13) translate(-2%,-1%);}}
+@keyframes kb-zoom-out{0%{transform:scale(1.13) translate(2%,1%);}100%{transform:scale(1) translate(0,0);}}
+@keyframes kb-pan-left{0%{transform:scale(1.1) translate(3%,0);}100%{transform:scale(1.1) translate(-3%,0);}}
+.slider-slide.kb-active img{animation:kb-zoom-in 6s ease-out forwards;}
+.slider-slide.kb-active.kb-alt img{animation:kb-zoom-out 6s ease-out forwards;}
+.slider-slide.kb-active.kb-pan img{animation:kb-pan-left 6s ease-in-out forwards;}
 
 /* ===== ヒーロー ===== */
 .hero{background:var(–black);padding:50px 40px;text-align:center;position:relative;overflow:hidden;}
@@ -1652,6 +1659,17 @@ document.addEventListener('DOMContentLoaded',function(){
     var pos = 1; // クローンを含めた位置
     track.style.transition = 'none';
     track.style.transform  = 'translateX(-' + (pos * 100) + '%)';
+    applyKB();
+
+    var kbClasses = [['kb-active'],['kb-active','kb-alt'],['kb-active','kb-pan']];
+    function applyKB(){
+      track.querySelectorAll('.slider-slide').forEach(function(s){
+        s.classList.remove('kb-active','kb-alt','kb-pan');
+      });
+      var allSlides = track.querySelectorAll('.slider-slide');
+      var cls = kbClasses[current % kbClasses.length];
+      if(allSlides[pos]){ cls.forEach(function(c){ allSlides[pos].classList.add(c); }); }
+    }
 
     function updateDots(){
       dots.forEach(function(d){ d.classList.remove('active'); });
@@ -1666,6 +1684,7 @@ document.addEventListener('DOMContentLoaded',function(){
       track.style.transition = 'transform .8s cubic-bezier(.77,0,.175,1)';
       track.style.transform  = 'translateX(-' + (pos * 100) + '%)';
       updateDots();
+      applyKB();
     }
 
     // アニメーション完了後、端に来たらジャンプ
@@ -1701,6 +1720,7 @@ document.addEventListener('DOMContentLoaded',function(){
         resetAuto();
       });
     });
+    applyKB();
     startAuto();
   })();
 });
