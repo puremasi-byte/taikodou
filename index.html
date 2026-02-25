@@ -168,7 +168,6 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .card-price.single{font-size:18px;font-weight:700;color:var(--gold);font-family:“Noto Serif JP”,serif;}
 .card-price.single.teal{color:var(--teal2);}
 .card-size{font-size:10px;color:var(--muted);text-align:center;margin-bottom:6px;letter-spacing:.1em;}
-.card-stock{margin-top:10px;font-size:10px;font-weight:700;text-align:center;letter-spacing:.1em;}
 .card-detail-hint{margin-top:10px;font-size:10px;color:var(--gold-dark);text-align:center;letter-spacing:.15em;}
 
 .empty{text-align:center;padding:60px;color:var(--muted);}
@@ -198,7 +197,6 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .detail-size-table.teal td:last-child{color:var(--teal2);}
 .detail-size-table tr:last-child td{border-bottom:none;}
 .detail-no-size{font-size:13px;color:var(--muted);text-align:center;padding:20px;letter-spacing:.1em;}
-.detail-stock{font-size:11px;font-weight:700;text-align:right;margin-top:12px;letter-spacing:.15em;}
 
 /* ===== 管理エリア ===== */
 .admin-wrap{text-align:right;margin-top:0;}
@@ -610,14 +608,6 @@ footer a{color:var(--gold2);}
             <input type="file" id="f-photo-lib" accept="image/*" style="display:none">
           </div>
           <div class="fg"><label>アイコン絵文字（写真なしの場合）</label><input type="text" id="f-icon" placeholder="例：🔖 🟢 💎" maxlength="4"></div>
-          <div class="fg"><label>在庫状況</label>
-            <select id="f-stock">
-              <option value="在庫あり">在庫あり</option>
-              <option value="残りわずか">残りわずか</option>
-              <option value="取り寄せ">取り寄せ</option>
-              <option value="品切れ">品切れ</option>
-            </select>
-          </div>
         </div>
         <div class="form-err" id="form-err"></div>
         <button type="button" class="reg-btn" id="reg-btn">＋ この商品を登録する</button>
@@ -731,7 +721,6 @@ footer a{color:var(--gold2);}
         <div class="detail-sizes-title" id="detail-sizes-title">サイズ別価格</div>
         <div id="detail-sizes-content"></div>
       </div>
-      <div class="detail-stock" id="detail-stock"></div>
     </div>
   </div>
 </div>
@@ -793,14 +782,6 @@ footer a{color:var(--gold2);}
       <div class="fg"><label>素材・仕様</label><input type="text" id="edit-size" placeholder="例：本象牙 / 最高級素材"></div>
       <div class="fg full"><label>商品の説明<span class="req">*</span></label><textarea id="edit-desc" style="min-height:100px;"></textarea></div>
       <div class="fg"><label>アイコン絵文字</label><input type="text" id="edit-icon" maxlength="4"></div>
-      <div class="fg"><label>在庫状況</label>
-        <select id="edit-stock">
-          <option value="在庫あり">在庫あり</option>
-          <option value="残りわずか">残りわずか</option>
-          <option value="取り寄せ">取り寄せ</option>
-          <option value="品切れ">品切れ</option>
-        </select>
-      </div>
     </div>
     <div class="form-err" id="edit-err"></div>
     <button type="button" class="edit-save-btn" id="edit-save-btn">💾 変更を保存する</button>
@@ -1150,7 +1131,6 @@ function renderAll(){
 
 function cardHtml(p){
   var isTeal=p.cat==='konyudo';
-  var sc=p.stock==='品切れ'?'#c0392b':p.stock==='残りわずか'?'#e67e22':'#27ae60';
   var sizes=productSizes[p.id]||[];
   var media=p.photo
     ?'<div class="card-photo-wrap"><img class="card-photo" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'"></div>'
@@ -1171,7 +1151,7 @@ function cardHtml(p){
     +'<div class="card-name">'+esc(p.name)+'</div>'
     +priceHtml
     +(p.size_material?'<div class="card-size">'+esc(p.size_material)+'</div>':'')
-    +'<div class="card-stock" style="color:'+sc+'">● '+esc(p.stock)+'</div>'
+
     +hint
     +'</div>';
 }
@@ -1182,7 +1162,6 @@ function openDetail(id){
   if(!p) return;
   var isTeal=p.cat==='konyudo';
   var sizes=productSizes[p.id]||[];
-  var sc=p.stock==='品切れ'?'#c0392b':p.stock==='残りわずか'?'#e67e22':'#27ae60';
 
   document.getElementById('detail-name').textContent=p.name;
 
@@ -1223,9 +1202,6 @@ function openDetail(id){
     contentEl.innerHTML='<div class="detail-no-size">価格はお問い合わせください</div>';
   }
 
-  // 在庫
-  document.getElementById('detail-stock').innerHTML='<span style="color:'+sc+'">● '+esc(p.stock)+'</span>';
-
   document.getElementById('detail-overlay').classList.add('show');
 }
 function closeDetail(){ document.getElementById('detail-overlay').classList.remove('show'); }
@@ -1245,7 +1221,7 @@ function renderMgmt(){
       return '<div class="mgmt-item">'
         +'<div class="mgmt-thumb-wrap">'+thumb+'</div>'
         +'<div class="mgmt-info"><div class="mgmt-name">'+esc(p.name)+'</div>'
-        +'<div class="mgmt-price">'+esc(p.stock)+(sizes.length?' / '+sizes.length+'サイズ':'')+'</div></div>'
+        +'<div class="mgmt-price">'+(sizes.length?sizes.length+'サイズ':'-')+'</div></div>'
         +'<div class="mgmt-actions">'
         +'<button class="mgmt-btn photo'+(p.photo?' has-photo':'')+'" data-id="'+p.id+'" data-name="'+esc(p.name)+'">'+(p.photo?'📷':'📷+')+'</button>'
         +'<button class="mgmt-btn sizes" data-id="'+p.id+'" data-name="'+esc(p.name)+'">'+szLabel+'</button>'
@@ -1375,7 +1351,6 @@ function openEditModal(id){
   document.getElementById('edit-size').value  = p.size_material||'';
   document.getElementById('edit-desc').value  = p.description||'';
   document.getElementById('edit-icon').value  = p.icon||'';
-  document.getElementById('edit-stock').value = p.stock||'在庫あり';
   document.getElementById('edit-err').style.display='none';
   document.getElementById('edit-save-btn').disabled=false;
   document.getElementById('edit-save-btn').textContent='💾 変更を保存する';
@@ -1391,14 +1366,13 @@ function saveEdit(){
   var size  = document.getElementById('edit-size').value.trim();
   var desc  = document.getElementById('edit-desc').value.trim();
   var icon  = document.getElementById('edit-icon').value.trim();
-  var stock = document.getElementById('edit-stock').value;
   var errEl = document.getElementById('edit-err');
   var btn   = document.getElementById('edit-save-btn');
   if(!name){ errEl.textContent='⚠ 商品名を入力してください'; errEl.style.display='block'; return; }
   if(!desc){ errEl.textContent='⚠ 商品の説明を入力してください'; errEl.style.display='block'; return; }
   errEl.style.display='none';
   btn.disabled=true; btn.textContent='保存中...';
-  sbFetch('PATCH','products?id=eq.'+editProductId,{name:name,price:price,size_material:size,description:desc,icon:icon,stock:stock})
+  sbFetch('PATCH','products?id=eq.'+editProductId,{name:name,price:price,size_material:size,description:desc,icon:icon})
     .then(function(){
       showToast('✅ 商品情報を更新しました');
       closeEditModal();
@@ -1518,7 +1492,7 @@ function addProduct(){
   var size=document.getElementById('f-size').value.trim();
   var desc=document.getElementById('f-desc').value.trim();
   var icon=document.getElementById('f-icon').value.trim()||(cat==='konyudo'?'🟢':'🔖');
-  var stock=document.getElementById('f-stock').value;
+
   var errEl=document.getElementById('form-err');
   var btn=document.getElementById('reg-btn');
   if(!name){ errEl.textContent='⚠ 商品名を入力してください'; errEl.style.display='block'; return; }
@@ -1527,7 +1501,7 @@ function addProduct(){
   btn.disabled=true; btn.textContent='登録中...';
   var catP=products.filter(function(p){ return p.cat===cat; });
   var maxO=catP.length>0?Math.max.apply(null,catP.map(function(p){ return p.sort_order||0; }))+1:0;
-  sbFetch('POST','products',{cat:cat,name:name,price:price,size_material:size,description:desc,icon:icon,stock:stock,photo:photoData,sort_order:maxO})
+  sbFetch('POST','products',{cat:cat,name:name,price:price,size_material:size,description:desc,icon:icon,photo:photoData,sort_order:maxO})
     .then(function(data){
       btn.disabled=false; btn.textContent='＋ この商品を登録する';
       var ok=Array.isArray(data)?data[0]:(!data.message&&data.id);
@@ -1537,7 +1511,6 @@ function addProduct(){
         document.getElementById('f-size').value='';
         document.getElementById('f-desc').value='';
         document.getElementById('f-icon').value='';
-        document.getElementById('f-stock').selectedIndex=0;
         document.querySelector('input[name="cat"][value="hanko"]').checked=true;
         removePhoto(); showToast('✅ 商品を登録しました！'); loadProducts(); switchTab(cat);
       } else { errEl.textContent='⚠ 登録失敗'; errEl.style.display='block'; }
