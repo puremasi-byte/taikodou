@@ -1135,15 +1135,13 @@ function cardHtml(p){
   var media=p.photo
     ?'<div class="card-photo-wrap"><img class="card-photo" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'"></div>'
     :'<div class="card-icon">'+(p.icon||(isTeal?'🟢':'🔖'))+'</div>';
-  var priceHtml;
+  var priceHtml='';
   if(sizes.length>0){
     var minP=Math.min.apply(null,sizes.map(function(s){ return s.price; }));
     var maxP=Math.max.apply(null,sizes.map(function(s){ return s.price; }));
     priceHtml='<div class="card-price">¥'+minP.toLocaleString()+(minP!==maxP?' 〜 ¥'+maxP.toLocaleString():'')+'</div>';
-  } else if(p.price>=0){
   } else if(p.price != null && p.price > 0){
-  } else {
-    priceHtml='';
+    priceHtml='<div class="card-price single'+(isTeal?' teal':'')+'">¥'+Number(p.price).toLocaleString()+'</div>';
   }
   var hint=sizes.length>0?'<div class="card-detail-hint">▶ タップしてサイズ別価格を見る</div>':'<div class="card-detail-hint">▶ タップして詳細を見る</div>';
   return '<div class="product-card'+(isTeal?' konyudo':'')+'" data-id="'+p.id+'">'
