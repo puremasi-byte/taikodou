@@ -458,6 +458,7 @@ footer a{color:var(–gold2);}
     </div>
     <span class="hours-note" id="hours-note"></span>
   </div>
+  <div class="hours-week" id="hours-week"></div>
   <div id="hours-extra-note" style="font-size:12px;color:#c62828;font-weight:700;letter-spacing:.1em;display:none;"></div>
 </div>
 
@@ -892,6 +893,24 @@ function sbFetch(method, path, body){
     note.textContent = todayDow === 6 ? '（第2土曜日）' : '';
   }
 
+
+  // 週間カレンダー生成
+  var weekEl = document.getElementById('hours-week');
+  if(weekEl){
+    var weekHtml = '';
+    for(var d=0; d<7; d++){
+      var dayDate = new Date(now);
+      var diff = d - todayDow;
+      dayDate.setDate(now.getDate() + diff);
+      var dayHours = (d === 6) ? (isSecondSaturday(dayDate) ? null : HOURS[6]) : HOURS[d];
+      var isToday = (d === todayDow);
+      var cls = 'hours-day';
+      if(dayHours) cls += ' open'; else cls += ' closed';
+      if(isToday) cls += ' today';
+      weekHtml += '<div class="'+cls+'">'+DAY_NAMES[d]+'</div>';
+    }
+    weekEl.innerHTML = weekHtml;
+  }
 })();
 
 // ===== データ読み込み =====
