@@ -586,7 +586,7 @@ footer a{color:var(–gold2);}
             </div>
           </div>
           <div class="fg full"><label>商品名<span class="req">*</span></label><input type="text" id="f-name" placeholder="例：本象牙 印鑑"></div>
-          <div class="fg"><label>価格（税込）※サイズ別価格がある場合は0でOK</label><input type="number" id="f-price" placeholder="例：3800" min="0" value="0"></div>
+          <div class="fg"><label>価格（税込）※サイズ別価格がある場合は空白でOK</label><input type="number" id="f-price" placeholder="例：3800" min="0"></div>
           <div class="fg"><label>素材・仕様</label><input type="text" id="f-size" placeholder="例：本象牙 / 最高級素材"></div>
           <div class="fg full"><label>商品の説明<span class="req">*</span></label><textarea id="f-desc" placeholder="例：古来より最高級の印材として珍重されてきた本象牙。"></textarea></div>
           <div class="fg full">
@@ -1141,7 +1141,7 @@ function cardHtml(p){
     var maxP=Math.max.apply(null,sizes.map(function(s){ return s.price; }));
     priceHtml='<div class="card-price">¥'+minP.toLocaleString()+(minP!==maxP?' 〜 ¥'+maxP.toLocaleString():'')+'</div>';
   } else if(p.price>=0){
-    priceHtml='<div class="card-price single'+(isTeal?' teal':'')+'">¥'+Number(p.price).toLocaleString()+'</div>';
+  } else if(p.price != null && p.price > 0){
   } else {
     priceHtml='';
   }
@@ -1193,7 +1193,7 @@ function openDetail(id){
       +'<tbody>'+sizes.map(function(s){
         return '<tr>'+(hasItemName?'<td style="color:var(--muted);font-size:13px;">'+esc(s.item_name||'')+'</td>':'')+'<td>'+esc(s.size_name)+'</td><td>¥'+Number(s.price).toLocaleString()+'</td></tr>';
       }).join('')+'</tbody></table>';
-  } else if(p.price>=0){
+  } else if(p.price != null && p.price > 0){
     titleEl.style.display='none';
     contentEl.innerHTML='<div style="font-size:22px;font-weight:700;color:'+(isTeal?'var(--teal)':'var(--red)')
       +';text-align:center;padding:12px 0;">¥'+Number(p.price).toLocaleString()+'</div>';
@@ -1347,7 +1347,7 @@ function openEditModal(id){
   if(!p) return;
   editProductId = id;
   document.getElementById('edit-name').value  = p.name||'';
-  document.getElementById('edit-price').value = p.price||0;
+  document.getElementById('edit-price').value = (p.price != null && p.price > 0) ? p.price : '';
   document.getElementById('edit-size').value  = p.size_material||'';
   document.getElementById('edit-desc').value  = p.description||'';
   document.getElementById('edit-icon').value  = p.icon||'';
@@ -1363,7 +1363,7 @@ function closeEditModal(){
 function saveEdit(){
   var name  = document.getElementById('edit-name').value.trim();
   var price = parseInt(document.getElementById('edit-price').value,10)||0;
-  var size  = document.getElementById('edit-size').value.trim();
+  var priceRaw=document.getElementById('edit-price').value.trim(); var price=(priceRaw==='')?null:parseInt(priceRaw,10);
   var desc  = document.getElementById('edit-desc').value.trim();
   var icon  = document.getElementById('edit-icon').value.trim();
   var errEl = document.getElementById('edit-err');
@@ -1507,7 +1507,7 @@ function addProduct(){
       var ok=Array.isArray(data)?data[0]:(!data.message&&data.id);
       if(ok){
         document.getElementById('f-name').value='';
-        document.getElementById('f-price').value='0';
+        document.getElementById('f-price').value='';
         document.getElementById('f-size').value='';
         document.getElementById('f-desc').value='';
         document.getElementById('f-icon').value='';
