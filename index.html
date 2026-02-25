@@ -823,7 +823,7 @@ function sbFetch(method, path, body){
   if(method==='POST') headers['Prefer']='return=representation';
   if(method==='PATCH') headers['Prefer']='return=minimal';
   return fetch(SUPABASE_URL+'/rest/v1/'+path,{method:method,headers:headers,body:body?JSON.stringify(body):undefined})
-    .then(function(r){ if(!r.ok && r.status!==204) return r.json().then(function(e){ return Promise.reject(e); }); if(r.status===204||r.status===201) return r.status===201?r.json():{}; return r.json(); });
+    .then(function(r){ if(r.status===204||r.status===201) return r.status===201?r.json():{}; return r.json(); });
 }
 
 // ===== 営業時間 =====
@@ -1143,8 +1143,8 @@ function cardHtml(p){
   } else if(p.price>=0){
     priceHtml='<div class="card-price single'+(isTeal?' teal':'')+'">¥'+Number(p.price).toLocaleString()+'</div>';
   } else {
-  } else {
     priceHtml='';
+  }
   var hint=sizes.length>0?'<div class="card-detail-hint">▶ タップしてサイズ別価格を見る</div>':'<div class="card-detail-hint">▶ タップして詳細を見る</div>';
   return '<div class="product-card'+(isTeal?' konyudo':'')+'" data-id="'+p.id+'">'
     +media
@@ -1198,9 +1198,9 @@ function openDetail(id){
     contentEl.innerHTML='<div style="font-size:22px;font-weight:700;color:'+(isTeal?'var(--teal)':'var(--red)')
       +';text-align:center;padding:12px 0;">¥'+Number(p.price).toLocaleString()+'</div>';
   } else {
-  } else {
     titleEl.style.display='none';
     contentEl.innerHTML='';
+  }
 
   document.getElementById('detail-overlay').classList.add('show');
 }
@@ -1247,11 +1247,11 @@ function renderMgmt(){
         var swapIdx=idx2+dir;
         if(swapIdx<0||swapIdx>=arr.length) return;
         var newArr=arr.slice(); var tmp=newArr[idx2]; newArr[idx2]=newArr[swapIdx]; newArr[swapIdx]=tmp;
-        var newArr=arr.slice(); var tmp=newArr[idx2]; newArr[idx2]=newArr[swapIdx]; newArr[swapIdx]=tmp;
         var btn=this; btn.disabled=true;
         Promise.all(newArr.map(function(p,i){ return sbFetch('PATCH','products?id=eq.'+p.id,{sort_order:i}); }))
           .then(function(){ showToast('✅ 順番を変更しました'); return loadProducts(); })
           .catch(function(e){ console.error('sort error',e); showToast('⚠ 並び替えに失敗しました'); loadProducts(); });
+      });
     });
     el.querySelectorAll('.mgmt-btn.trash').forEach(function(btn){
       btn.addEventListener('click',function(){
