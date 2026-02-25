@@ -1783,7 +1783,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('slider-prev').addEventListener('click', function(){ prev(); resetAuto(); });
     dots.forEach(function(d){
       d.addEventListener('click', function(){
-        var idx = parseInt(this.dataset.idx);
+        var idx = parseInt(d.dataset.idx);
         var diff = idx - current;
         if(diff === 0) return;
         goTo(diff);
@@ -1791,4 +1791,10 @@ document.addEventListener('DOMContentLoaded',function(){
       });
     });
     startAuto();
-  }
+  })();
+
+});
+</script>
+
+</body>
+</html>
