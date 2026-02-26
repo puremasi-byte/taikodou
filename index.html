@@ -1347,16 +1347,23 @@ function renderMgmt(){
   });
 }
 
-// ===== 臨時休業管理 =====
+// ===== 臨時休業管理（Supabase版） =====
 var holidays = [];
-var HOL_KEY = 'taikodo_holidays';
 
 function loadHolidays(){
-  try { holidays = JSON.parse(localStorage.getItem(HOL_KEY)||'[]'); } catch(e){ holidays=[]; }
-  updateHoursBar();
-  renderHolList();
+  sbFetch('GET','holidays?select=*&order=date.asc')
+    .then(function(data){
+      if(!Array.isArray(data)){ holidays=[]; }
+      else { holidays = data; }
+      updateHoursBar();
+      renderHolList();
+    })
+    .catch(function(){
+      holidays=[];
+      updateHoursBar();
+      renderHolList();
+    });
 }
-function saveHolidays(){ localStorage.setItem(HOL_KEY, JSON.stringify(holidays)); }
 
 function addHoliday(){
   var date  = document.getElementById('hol-date').value;
@@ -1364,31 +1371,38 @@ function addHoliday(){
   var end   = document.getElementById('hol-end').value;
   var msg   = document.getElementById('hol-msg').value.trim();
   var err   = document.getElementById('hol-err');
+  var btn   = document.getElementById('hol-add-btn');
   if(!date){ err.textContent='⚠ 日付を選択してください'; err.style.display='block'; return; }
   if(start && end && start >= end){ err.textContent='⚠ 終了時間は開始時間より後にしてください'; err.style.display='block'; return; }
   if(holidays.find(function(h){ return h.date===date; })){ err.textContent='⚠ すでに登録されています'; err.style.display='block'; return; }
   err.style.display='none';
+  btn.disabled=true;
   var entry = {date:date, msg:msg||(start?'営業時間変更':'臨時休業')};
-  if(start) entry.start = start;
-  if(end)   entry.end   = end;
-  holidays.push(entry);
-  holidays.sort(function(a,b){ return a.date.localeCompare(b.date); });
-  saveHolidays();
-  document.getElementById('hol-date').value='';
-  document.getElementById('hol-start').value='';
-  document.getElementById('hol-end').value='';
-  document.getElementById('hol-msg').value='';
-  showToast('✅ 臨時休業日を登録しました');
-  renderHolList();
-  updateHoursBar();
+  if(start) entry.start_time = start;
+  if(end)   entry.end_time   = end;
+  sbFetch('POST','holidays',entry)
+    .then(function(){
+      document.getElementById('hol-date').value='';
+      document.getElementById('hol-start').value='';
+      document.getElementById('hol-end').value='';
+      document.getElementById('hol-msg').value='';
+      showToast('✅ 臨時休業日を登録しました');
+      loadHolidays();
+    })
+    .catch(function(e){
+      showToast('⚠ 登録に失敗しました');
+      console.error(e);
+    })
+    .finally(function(){ btn.disabled=false; });
 }
 
-function deleteHoliday(date){
-  holidays = holidays.filter(function(h){ return h.date!==date; });
-  saveHolidays();
-  showToast('🗑 削除しました');
-  renderHolList();
-  updateHoursBar();
+function deleteHoliday(id){
+  sbFetch('DELETE','holidays?id=eq.'+id)
+    .then(function(){
+      showToast('🗑 削除しました');
+      loadHolidays();
+    })
+    .catch(function(){ showToast('⚠ 削除に失敗しました'); });
 }
 
 function renderHolList(){
@@ -1398,15 +1412,17 @@ function renderHolList(){
     var d = new Date(h.date+'T00:00:00');
     var DAY = ['日','月','火','水','木','金','土'];
     var label = h.date + '（'+DAY[d.getDay()]+'）';
-    var timeLabel = (h.start && h.end) ? h.start+'〜'+h.end : (h.start ? h.start+'〜' : (h.end ? '〜'+h.end : '終日'));
-    var detail = timeLabel + '　' + h.msg;
+    var st = h.start_time || '';
+    var et = h.end_time   || '';
+    var timeLabel = (st && et) ? st+'〜'+et : (st ? st+'〜' : (et ? '〜'+et : '終日'));
+    var detail = timeLabel + '　' + (h.msg||'');
     return '<div class="mgmt-item">'
       +'<div class="mgmt-info"><div class="mgmt-name">'+label+'</div><div class="mgmt-price">'+detail+'</div></div>'
-      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-date="'+h.date+'">🗑</button></div>'
+      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-id="'+h.id+'">🗑</button></div>'
       +'</div>';
   }).join('');
   el.querySelectorAll('.mgmt-btn.trash').forEach(function(btn){
-    btn.addEventListener('click',function(){ deleteHoliday(this.dataset.date); });
+    btn.addEventListener('click',function(){ deleteHoliday(this.dataset.id); });
   });
 }
 
@@ -1420,10 +1436,12 @@ function updateHoursBar(){
   var hol = holidays.find(function(h){ return h.date===today; });
   var extra = document.getElementById('hours-extra-note');
   if(hol){
-    if(hol.start || hol.end){
-      // 時間指定あり → 営業時間変更として表示（通常の時間表示はそのまま）
-      var timeRange = (hol.start && hol.end) ? hol.start+'〜'+hol.end : (hol.start ? hol.start+'〜' : '〜'+hol.end);
-      extra.textContent = '※ '+hol.msg+'（'+timeRange+'）';
+    var st = hol.start_time || hol.start || '';
+    var et = hol.end_time   || hol.end   || '';
+    if(st || et){
+      // 時間指定あり → 営業時間変更として表示
+      var timeRange = (st && et) ? st+'〜'+et : (st ? st+'〜' : '〜'+et);
+      extra.textContent = '※ '+(hol.msg||'営業時間変更')+'（'+timeRange+'）';
       extra.style.display='block';
     } else {
       // 終日休業
@@ -1431,7 +1449,7 @@ function updateHoursBar(){
       document.getElementById('hours-time').className = 'hours-time closed';
       document.getElementById('hours-time').textContent = '本日は臨時休業です';
       document.getElementById('hours-note').textContent = '';
-      extra.textContent = '※ '+hol.msg;
+      extra.textContent = '※ '+(hol.msg||'臨時休業');
       extra.style.display='block';
     }
   } else {
