@@ -1522,8 +1522,7 @@ function addHoliday(){
       document.getElementById('hol-end').value='';
       document.getElementById('hol-msg').value='';
       showToast('✅ 臨時休業日を登録しました');
-      loadSiteInfo();
-  loadHolidays();
+      loadHolidays();
     })
     .catch(function(e){
       showToast('⚠ 登録に失敗しました');
@@ -1839,6 +1838,7 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('detail-overlay').addEventListener('click',function(e){ if(e.target===this) closeDetail(); });
   // 臨時休業
   document.getElementById('hol-add-btn').addEventListener('click',addHoliday);
+  loadSiteInfo();
   loadHolidays();
   // 商品編集モーダル
   document.getElementById('edit-save-btn').addEventListener('click',saveEdit);
