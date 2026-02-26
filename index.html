@@ -498,13 +498,7 @@ footer a{color:var(--gold2);}
 <section class="about-section">
   <div class="about-inner">
     <div class="about-heading">太古堂について</div>
-    <p class="about-lead">太古堂（たいこどう）は1939年（昭和14年）の創業以来、三代にわたって商いさせていただいております。<br>
-創業者の意志である「親切、丁寧、誠実に」の気持ちを忘れることなく、皆様に愛される店を目指して日々勉強中でございます。</p>
-    <p class="about-lead">様々な印材のはんこはもちろん、名刺印刷やゴム印・スタンプ作製、表札やプレート作製、焼印、さらに四日市市マスコットキャラクターこにゅうどうくんのグッズも、キーホルダーやステッカー、ボールペンやスタンプなどなど可愛らしいグッズを多数取り扱っております。</p>
-    <p class="about-lead">既製認印（三文判）は、姓の種類で約２万5千種類、本数にして約４万本在庫しております。<br>
-珍しい姓や、髙・邊・國・澤など、様々な旧字体の認印もございます。</p>
-    <p class="about-lead">初めて印鑑やスタンプ、名刺などを作られる方には、分かりやすく丁寧にご提案をさせていただきます。<br>
-是非お気軽にお立ち寄りくださいませ。</p>
+    <div id="about-text-area"></div>
     <div class="about-info">
       📧 メール：<a href="mailto:info@taikodou.com">info@taikodou.com</a><br>
       各SNSは、ページ下のリンクからどうぞ！
@@ -517,17 +511,7 @@ footer a{color:var(--gold2);}
         <span class="accordion-arrow">▼</span>
       </button>
       <div class="accordion-body" id="history-body" hidden aria-hidden="true">
-        <div class="history-list">
-          <div class="history-item"><span class="history-year">1939年／昭和14年1月</span><span>小林宗市が沖の島町にて創業</span></div>
-          <div class="history-item"><span class="history-year">1950年／昭和25年</span><span>戦後の道路整備により現在地へ移転</span></div>
-          <div class="history-item"><span class="history-year">1978年／昭和53年8月</span><span>店舗改装</span></div>
-          <div class="history-item"><span class="history-year">1990年／平成2年8月</span><span>有限会社に組織変更・小林幹太郎 代表取締役に就任</span></div>
-          <div class="history-item"><span class="history-year">2000年／平成12年4月</span><span>小林克司 入社</span></div>
-          <div class="history-item"><span class="history-year">2011年／平成23年1月</span><span>ホームページ開設</span></div>
-          <div class="history-item"><span class="history-year">2013年／平成25年9月</span><span>四日市市キャラクターこにゅうどうくんグッズ販売開始</span></div>
-          <div class="history-item"><span class="history-year">2016年／平成28年1月</span><span>小林克司 代表取締役に就任</span></div>
-          <div class="history-item"><span class="history-year">2016年／平成28年3月</span><span>こにゅうどうくんグッズネットショップオープン</span></div>
-        </div>
+        <div class="history-list" id="history-list-area"></div>
       </div>
     </div>
   </div>
@@ -636,6 +620,7 @@ footer a{color:var(--gold2);}
         <button class="admin-tab"        id="atab-mgmt" onclick="switchAdminTab('mgmt')">📋 商品の管理・並び替え</button>
         <button class="admin-tab"        id="atab-blog" onclick="switchAdminTab('blog')">📝 ブログ管理</button>
         <button class="admin-tab"        id="atab-hours" onclick="switchAdminTab('hours')">🕐 臨時休業</button>
+        <button class="admin-tab"        id="atab-site"  onclick="switchAdminTab('site')">🏠 サイト情報</button>
       </div>
       <div class="admin-subpane active" id="apane-add">
         <div class="form-grid">
@@ -740,6 +725,24 @@ footer a{color:var(--gold2);}
         </div>
         <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:12px;letter-spacing:.1em;">投稿済みの記事</div>
         <div class="blog-mgmt-list" id="blog-mgmt-list"></div>
+      </div>
+      <div class="admin-subpane" id="apane-site">
+        <!-- 太古堂についての説明文 -->
+        <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:12px;letter-spacing:.1em;">📝 太古堂についての説明文</div>
+        <div style="margin-bottom:20px;">
+          <textarea id="site-about-text" style="width:100%;min-height:180px;padding:12px;border:2px solid #d4c4a0;border-radius:8px;font-size:14px;line-height:2;font-family:'Noto Sans JP',sans-serif;resize:vertical;" placeholder="紹介文を入力..."></textarea>
+          <button type="button" onclick="saveSiteAbout()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;">💾 保存する</button>
+        </div>
+        <!-- 沿革 -->
+        <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:12px;letter-spacing:.1em;">📅 沿革</div>
+        <div id="site-history-list" style="margin-bottom:16px;"></div>
+        <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:8px;padding:16px;">
+          <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-bottom:8px;">
+            <div><label style="font-size:12px;color:#888;display:block;margin-bottom:4px;">年・時期</label><input type="text" id="site-hist-year" placeholder="例：1939年／昭和14年" style="width:100%;padding:8px;border:2px solid #d4c4a0;border-radius:6px;font-size:13px;"></div>
+            <div><label style="font-size:12px;color:#888;display:block;margin-bottom:4px;">内容</label><input type="text" id="site-hist-content" placeholder="例：創業" style="width:100%;padding:8px;border:2px solid #d4c4a0;border-radius:6px;font-size:13px;"></div>
+          </div>
+          <button type="button" onclick="addHistoryItem()" style="padding:8px 20px;background:var(--gold-dark);color:#fff;border:none;border-radius:6px;font-size:13px;cursor:pointer;">＋ 追加</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1343,6 +1346,142 @@ function renderMgmt(){
   });
 }
 
+// ===== サイト情報管理（Supabase版） =====
+
+// デフォルトの紹介文（Supabaseにデータがない場合のフォールバック）
+var DEFAULT_ABOUT = '太古堂（たいこどう）は1939年（昭和14年）の創業以来、三代にわたって商いさせていただいております。\n創業者の意志である「親切、丁寧、誠実に」の気持ちを忘れることなく、皆様に愛される店を目指して日々勉強中でございます。\n\n様々な印材のはんこはもちろん、名刺印刷やゴム印・スタンプ作製、表札やプレート作製、焼印、さらに四日市市マスコットキャラクターこにゅうどうくんのグッズも、キーホルダーやステッカー、ボールペンやスタンプなどなど可愛らしいグッズを多数取り扱っております。\n\n既製認印（三文判）は、姓の種類で約２万5千種類、本数にして約４万本在庫しております。\n珍しい姓や、髙・邊・國・澤など、様々な旧字体の認印もございます。\n\n初めて印鑑やスタンプ、名刺などを作られる方には、分かりやすく丁寧にご提案をさせていただきます。\n是非お気軽にお立ち寄りくださいませ。';
+
+var DEFAULT_HISTORY = [
+  {year:'1939年／昭和14年1月', content:'小林宗市が沖の島町にて創業'},
+  {year:'1950年／昭和25年',    content:'戦後の道路整備により現在地へ移転'},
+  {year:'1978年／昭和53年8月', content:'店舗改装'},
+  {year:'1990年／平成2年8月',  content:'有限会社に組織変更・小林幹太郎 代表取締役に就任'},
+  {year:'2000年／平成12年4月', content:'小林克司 入社'},
+  {year:'2011年／平成23年1月', content:'ホームページ開設'},
+  {year:'2013年／平成25年9月', content:'四日市市キャラクターこにゅうどうくんグッズ販売開始'},
+  {year:'2016年／平成28年1月', content:'小林克司 代表取締役に就任'},
+  {year:'2016年／平成28年3月', content:'こにゅうどうくんグッズネットショップオープン'}
+];
+
+function loadSiteInfo(){
+  // 紹介文をロード
+  sbFetch('GET','site_info?select=*&key=eq.about_text')
+    .then(function(data){
+      var text = (data && data[0] && data[0].value) ? data[0].value : DEFAULT_ABOUT;
+      renderAboutText(text);
+      var ta = document.getElementById('site-about-text');
+      if(ta) ta.value = text;
+    })
+    .catch(function(){
+      renderAboutText(DEFAULT_ABOUT);
+    });
+
+  // 沿革をロード
+  sbFetch('GET','site_history?select=*&order=sort_order.asc')
+    .then(function(data){
+      var items = (data && data.length) ? data : DEFAULT_HISTORY;
+      renderHistory(items);
+      renderHistoryMgmt(items);
+    })
+    .catch(function(){
+      renderHistory(DEFAULT_HISTORY);
+      renderHistoryMgmt(DEFAULT_HISTORY);
+    });
+}
+
+function renderAboutText(text){
+  var el = document.getElementById('about-text-area');
+  if(!el) return;
+  // 改行を<p>タグに変換
+  var paras = text.split('\n\n').filter(function(p){ return p.trim(); });
+  if(!paras.length) paras = [text];
+  el.innerHTML = paras.map(function(p){
+    return '<p class="about-lead">'+esc(p).replace(/\n/g,'<br>')+'</p>';
+  }).join('');
+}
+
+function renderHistory(items){
+  var el = document.getElementById('history-list-area');
+  if(!el) return;
+  if(!items || !items.length){
+    el.innerHTML = '<div style="color:#888;font-size:13px;padding:8px 0;">沿革データがありません</div>';
+    return;
+  }
+  el.innerHTML = items.map(function(h){
+    var y = h.year || h.year_label || '';
+    var c = h.content || h.content_text || '';
+    return '<div class="history-item"><span class="history-year">'+esc(y)+'</span><span>'+esc(c)+'</span></div>';
+  }).join('');
+}
+
+function renderHistoryMgmt(items){
+  var el = document.getElementById('site-history-list');
+  if(!el) return;
+  if(!items || !items.length){
+    el.innerHTML = '<div class="mgmt-empty">沿革データがありません</div>';
+    return;
+  }
+  el.innerHTML = items.map(function(h){
+    var y = h.year || h.year_label || '';
+    var c = h.content || h.content_text || '';
+    var id = h.id || '';
+    return '<div class="mgmt-item">'
+      +'<div class="mgmt-info"><div class="mgmt-name">'+esc(y)+'</div><div class="mgmt-price">'+esc(c)+'</div></div>'
+      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-id="'+id+'" onclick="deleteHistoryItem(''+id+'')">🗑</button></div>'
+      +'</div>';
+  }).join('');
+}
+
+function saveSiteAbout(){
+  var text = document.getElementById('site-about-text').value.trim();
+  if(!text){ showToast('⚠ テキストを入力してください'); return; }
+  var btn = event.target;
+  btn.disabled = true;
+  btn.textContent = '保存中...';
+  // upsert（存在すれば更新、なければ挿入）
+  sbFetch('POST','site_info?on_conflict=key',{key:'about_text',value:text})
+    .then(function(){
+      renderAboutText(text);
+      showToast('✅ 紹介文を保存しました');
+    })
+    .catch(function(e){
+      // POSTが失敗したらPATCHで試みる
+      sbFetch('PATCH','site_info?key=eq.about_text',{value:text})
+        .then(function(){
+          renderAboutText(text);
+          showToast('✅ 紹介文を保存しました');
+        })
+        .catch(function(){
+          showToast('⚠ 保存に失敗しました');
+        });
+    })
+    .finally(function(){ btn.disabled=false; btn.textContent='💾 保存する'; });
+}
+
+function addHistoryItem(){
+  var year = document.getElementById('site-hist-year').value.trim();
+  var ct   = document.getElementById('site-hist-content').value.trim();
+  if(!year || !ct){ showToast('⚠ 年・内容を入力してください'); return; }
+  sbFetch('POST','site_history',{year_label:year, content_text:ct, sort_order:9999})
+    .then(function(){
+      document.getElementById('site-hist-year').value = '';
+      document.getElementById('site-hist-content').value = '';
+      showToast('✅ 沿革を追加しました');
+      loadSiteInfo();
+    })
+    .catch(function(){ showToast('⚠ 追加に失敗しました'); });
+}
+
+function deleteHistoryItem(id){
+  if(!id){ showToast('⚠ IDが不明です'); return; }
+  sbFetch('DELETE','site_history?id=eq.'+id)
+    .then(function(){
+      showToast('🗑 削除しました');
+      loadSiteInfo();
+    })
+    .catch(function(){ showToast('⚠ 削除に失敗しました'); });
+}
+
 // ===== 臨時休業管理（Supabase版） =====
 var holidays = [];
 
@@ -1383,7 +1522,8 @@ function addHoliday(){
       document.getElementById('hol-end').value='';
       document.getElementById('hol-msg').value='';
       showToast('✅ 臨時休業日を登録しました');
-      loadHolidays();
+      loadSiteInfo();
+  loadHolidays();
     })
     .catch(function(e){
       showToast('⚠ 登録に失敗しました');
