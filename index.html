@@ -128,20 +128,15 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 
 /* ===== タブ ===== */
 .tabs-wrap{max-width:1100px;margin:0 auto;padding:0 24px 60px;background:var(--off-white);}
-.tab-nav{display:flex;gap:2px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-.tab-nav::-webkit-scrollbar{display:none;}
-.tab-btn{flex:0 0 auto;min-width:110px;padding:14px 16px;border:none;cursor:pointer;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;background:#2a2418;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .3s;letter-spacing:.05em;white-space:nowrap;position:relative;}
+.tab-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;}
+.tab-btn{padding:14px 8px;border:none;cursor:pointer;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;background:#2a2418;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .3s;letter-spacing:.05em;white-space:nowrap;position:relative;}
 .tab-btn::after{content:””;position:absolute;bottom:0;left:0;right:0;height:2px;background:transparent;transition:background .3s;}
 .tab-btn:first-child{border-radius:2px 0 0 0;}
 .tab-btn:last-child{border-radius:0 2px 0 0;}
 .tab-btn.active{background:#3a3020;color:var(--gold2);}
 .tab-btn.active::after{background:var(--gold-dark);}
-.tab-scroll-wrap{position:relative;margin-top:40px;}
-.tab-scroll-btn{position:absolute;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;z-index:10;transition:opacity .2s;padding:0;}
-.tab-scroll-btn.left{left:0;background:linear-gradient(to right,#2a2418 60%,transparent);}
-.tab-scroll-btn.right{right:0;background:linear-gradient(to left,#2a2418 60%,transparent);}
-.tab-scroll-btn span{color:#fff;font-size:22px;font-weight:bold;line-height:1;}
-.tab-scroll-btn.hidden{opacity:0;pointer-events:none;}
+.tab-scroll-wrap{margin-top:40px;}
+.tab-nav{display:grid !important;grid-template-columns:repeat(5,1fr);gap:2px;overflow:visible !important;}
 .tab-btn:hover:not(.active){background:#3a3020;color:var(--gold);}
 
 .tab-content{background:#ffffff;border:1px solid #e0d8c8;border-top:none;border-radius:0 0 4px 4px;padding:36px;min-height:400px;}
@@ -411,6 +406,7 @@ footer a{color:var(--gold2);}
 
 /* ===== レスポンシブ ===== */
 @media(max-width:600px){
+.tab-nav{grid-template-columns:repeat(3,1fr) !important;}
 .info-bar{padding:10px 16px;}
 .form-grid{grid-template-columns:1fr;}
 .tab-btn{font-size:12px;padding:12px 8px;}
@@ -526,13 +522,11 @@ footer a{color:var(--gold2);}
 </section>
 <div class="tabs-wrap">
   <div class="tab-scroll-wrap">
-    <button class="tab-scroll-btn left hidden" id="tab-arrow-left" onclick="tabScroll(-1)"><span>&#8249;</span></button>
-    <button class="tab-scroll-btn right" id="tab-arrow-right" onclick="tabScroll(1)"><span>&#8250;</span></button>
   <div class="tab-nav" id="tab-nav-scroll">
     <button class="tab-btn active" id="tab-btn-hanko"   onclick="switchTab('hanko')">印鑑・はんこ</button>
     <button class="tab-btn"        id="tab-btn-konyudo" onclick="switchTab('konyudo')">こにゅうどうくんグッズ</button>
     <button class="tab-btn"        id="tab-btn-meishi"  onclick="switchTab('meishi')">名刺</button>
-    <button class="tab-btn"        id="tab-btn-yakiin"  onclick="switchTab('yakiin')">焼き印</button>
+    <button class="tab-btn"        id="tab-btn-yakiin"  onclick="switchTab('yakiin')">焼印</button>
     <button class="tab-btn"        id="tab-btn-nafuda"  onclick="switchTab('nafuda')">名札</button>
     <button class="tab-btn"        id="tab-btn-sonota"  onclick="switchTab('sonota')">その他グッズ</button>
     <button class="tab-btn"        id="tab-btn-coupon"  onclick="switchTab('coupon')">クーポン</button>
@@ -667,7 +661,7 @@ footer a{color:var(--gold2);}
               <label class="rlabel red"><input type="radio" name="cat" value="hanko" checked> 印鑑・はんこ</label>
               <label class="rlabel teal"><input type="radio" name="cat" value="konyudo"> こにゅうどうくんグッズ</label>
               <label class="rlabel"><input type="radio" name="cat" value="meishi"> 名刺</label>
-              <label class="rlabel"><input type="radio" name="cat" value="yakiin"> 焼き印</label>
+              <label class="rlabel"><input type="radio" name="cat" value="yakiin"> 焼印</label>
               <label class="rlabel"><input type="radio" name="cat" value="nafuda"> 名札</label>
               <label class="rlabel"><input type="radio" name="cat" value="sonota"> その他グッズ</label>
               <label class="rlabel"><input type="radio" name="cat" value="coupon"> クーポン</label>
@@ -708,7 +702,7 @@ footer a{color:var(--gold2);}
         <div class="mgmt-list" id="mgmt-konyudo"></div>
         <div style="margin:18px 0 12px;"><strong style="font-size:13px;">名刺</strong></div>
         <div class="mgmt-list" id="mgmt-meishi"></div>
-        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">焼き印</strong></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">焼印</strong></div>
         <div class="mgmt-list" id="mgmt-yakiin"></div>
         <div style="margin:18px 0 12px;"><strong style="font-size:13px;">名札</strong></div>
         <div class="mgmt-list" id="mgmt-nafuda"></div>
