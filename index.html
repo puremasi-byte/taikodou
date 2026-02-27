@@ -908,6 +908,36 @@ function sbFetch(method, path, body){
     });
 }
 
+// ===== 起動診断 =====
+(function(){
+  // Supabase接続テスト
+  var testDiv = document.createElement('div');
+  testDiv.id = 'debug-bar';
+  testDiv.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#333;color:#fff;font-size:12px;padding:8px;z-index:99999;max-height:120px;overflow-y:auto;';
+  testDiv.innerHTML = '🔍 診断中...';
+  document.body.appendChild(testDiv);
+
+  function dbg(msg){ 
+    var d = document.getElementById('debug-bar');
+    if(d){ d.innerHTML += '<br>' + msg; }
+    console.log(msg);
+  }
+
+  // Supabase接続テスト
+  fetch('https://pqylvacqbbpogvvtivcd.supabase.co/rest/v1/products?select=id&limit=1', {
+    headers: {
+      'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxeWx2YWNxYmJwb2d2dnRpdmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4MTY4NjksImV4cCI6MjA4NzM5Mjg2OX0.N1ioSbtt_lk4KbVU-oqFlH8Teyh8q5FX0SbzeptX_h0',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxeWx2YWNxYmJwb2d2dnRpdmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4MTY4NjksImV4cCI6MjA4NzM5Mjg2OX0.N1ioSbtt_lk4KbVU-oqFlH8Teyh8q5FX0SbzeptX_h0'
+    }
+  })
+  .then(function(r){ 
+    dbg('✅ Supabase接続OK: status=' + r.status);
+    return r.json();
+  })
+  .then(function(d){ dbg('✅ データ取得OK: ' + JSON.stringify(d)); })
+  .catch(function(e){ dbg('❌ Supabaseエラー: ' + e.message); });
+})();
+
 // ===== 営業時間 =====
 (function(){
   var DAY_NAMES = ['日','月','火','水','木','金','土'];
