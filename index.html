@@ -528,32 +528,32 @@ footer a{color:var(--gold2);}
     <button class="tab-scroll-btn left hidden" id="tab-arrow-left" onclick="tabScroll(-1)"><span>&#8249;</span></button>
     <button class="tab-scroll-btn right" id="tab-arrow-right" onclick="tabScroll(1)"><span>&#8250;</span></button>
   <div class="tab-nav" id="tab-nav-scroll">
-    <button class="tab-btn active" id="tab-btn-hanko"   onclick="switchTab('hanko')">🔖 印鑑・はんこ</button>
-    <button class="tab-btn"        id="tab-btn-konyudo" onclick="switchTab('konyudo')">🟢 こにゅうどうくんグッズ</button>
-    <button class="tab-btn"        id="tab-btn-meishi"  onclick="switchTab('meishi')">🪪 名刺</button>
-    <button class="tab-btn"        id="tab-btn-yakiin"  onclick="switchTab('yakiin')">🔥 焼き印</button>
-    <button class="tab-btn"        id="tab-btn-nafuda"  onclick="switchTab('nafuda')">📛 名札</button>
-    <button class="tab-btn"        id="tab-btn-sonota"  onclick="switchTab('sonota')">🛍 その他グッズ</button>
-    <button class="tab-btn"        id="tab-btn-coupon"  onclick="switchTab('coupon')">🎟 クーポン</button>
-    <button class="tab-btn"        id="tab-btn-blog"    onclick="switchTab('blog')">📝 ブログ</button>
-    <button class="tab-btn"        id="tab-btn-insta"   onclick="switchTab('insta')">📷 Instagram</button>
+    <button class="tab-btn active" id="tab-btn-hanko"   onclick="switchTab('hanko')">印鑑・はんこ</button>
+    <button class="tab-btn"        id="tab-btn-konyudo" onclick="switchTab('konyudo')">こにゅうどうくんグッズ</button>
+    <button class="tab-btn"        id="tab-btn-meishi"  onclick="switchTab('meishi')">名刺</button>
+    <button class="tab-btn"        id="tab-btn-yakiin"  onclick="switchTab('yakiin')">焼き印</button>
+    <button class="tab-btn"        id="tab-btn-nafuda"  onclick="switchTab('nafuda')">名札</button>
+    <button class="tab-btn"        id="tab-btn-sonota"  onclick="switchTab('sonota')">その他グッズ</button>
+    <button class="tab-btn"        id="tab-btn-coupon"  onclick="switchTab('coupon')">クーポン</button>
+    <button class="tab-btn"        id="tab-btn-blog"    onclick="switchTab('blog')">ブログ</button>
+    <button class="tab-btn"        id="tab-btn-insta"   onclick="switchTab('insta')">Instagram</button>
   </div>
   </div>
   <div class="tab-content">
     <div class="tab-pane active" id="pane-hanko">
-      <div class="sec-title"><h3>🔖 印鑑・はんこ 商品一覧</h3><span class="sec-badge">HANKO</span></div>
+      <div class="sec-title"><h3>印鑑・はんこ 商品一覧</h3><span class="sec-badge">HANKO</span></div>
       <div class="product-grid" id="grid-hanko"></div>
       <div class="loading" id="loading-hanko">読み込み中...</div>
       <div class="empty" id="empty-hanko" style="display:none"><div class="ei">🔖</div><p>商品が登録されていません</p></div>
     </div>
     <div class="tab-pane" id="pane-konyudo">
-      <div class="sec-title"><h3>🟢 こにゅうどうくんグッズ 一覧</h3><span class="sec-badge teal">KONYUDO</span></div>
+      <div class="sec-title"><h3>こにゅうどうくんグッズ 一覧</h3><span class="sec-badge teal">KONYUDO</span></div>
       <div class="product-grid" id="grid-konyudo"></div>
       <div class="loading" id="loading-konyudo">読み込み中...</div>
       <div class="empty" id="empty-konyudo" style="display:none"><div class="ei">🟢</div><p>商品が登録されていません</p></div>
     </div>
     <div class="tab-pane" id="pane-insta">
-      <div class="sec-title"><h3>📷 Instagram</h3><span class="sec-badge">@taikodou_katsuji</span></div>
+      <div class="sec-title"><h3>Instagram</h3><span class="sec-badge">@taikodou_katsuji</span></div>
       <p style="font-size:12px;color:var(--muted);margin-bottom:20px;letter-spacing:.1em;">最新の投稿をご覧いただけます。フォローもよろしくお願いします！</p>
       <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
       <script src="https://elfsightcdn.com/platform.js" async></script>
@@ -580,7 +580,7 @@ footer a{color:var(--gold2);}
   <div class="product-grid" id="grid-coupon"></div>
 </div>
 <div class="tab-pane" id="pane-blog">
-      <div class="sec-title"><h3>📝 ブログ</h3><span class="sec-badge">BLOG</span></div>
+      <div class="sec-title"><h3>ブログ</h3><span class="sec-badge">BLOG</span></div>
       <div class="blog-grid" id="grid-blog"></div>
       <div class="loading" id="loading-blog" style="display:none">読み込み中...</div>
       <div class="blog-empty" id="empty-blog" style="display:none"><div class="bei">📝</div><p>まだ記事がありません</p></div>
@@ -654,7 +654,7 @@ footer a{color:var(--gold2);}
       <div class="admin-tabs">
         <button class="admin-tab active" id="atab-add"  onclick="switchAdminTab('add')">＋ 商品を登録</button>
         <button class="admin-tab"        id="atab-mgmt" onclick="switchAdminTab('mgmt')">📋 商品の管理・並び替え</button>
-        <button class="admin-tab"        id="atab-blog" onclick="switchAdminTab('blog')">📝 ブログ管理</button>
+        <button class="admin-tab"        id="atab-blog" onclick="switchAdminTab('blog')">ブログ管理</button>
         <button class="admin-tab"        id="atab-hours" onclick="switchAdminTab('hours')">🕐 臨時休業</button>
         <button class="admin-tab"        id="atab-site"  onclick="switchAdminTab('site')">🏠 サイト情報</button>
       </div>
@@ -663,13 +663,13 @@ footer a{color:var(--gold2);}
           <div class="fg full">
             <label>カテゴリ<span class="req">*</span></label>
             <div class="radio-row">
-              <label class="rlabel red"><input type="radio" name="cat" value="hanko" checked> 🔖 印鑑・はんこ</label>
-              <label class="rlabel teal"><input type="radio" name="cat" value="konyudo"> 🟢 こにゅうどうくんグッズ</label>
-              <label class="rlabel"><input type="radio" name="cat" value="meishi"> 🪪 名刺</label>
-              <label class="rlabel"><input type="radio" name="cat" value="yakiin"> 🔥 焼き印</label>
-              <label class="rlabel"><input type="radio" name="cat" value="nafuda"> 📛 名札</label>
-              <label class="rlabel"><input type="radio" name="cat" value="sonota"> 🛍 その他グッズ</label>
-              <label class="rlabel"><input type="radio" name="cat" value="coupon"> 🎟 クーポン</label>
+              <label class="rlabel red"><input type="radio" name="cat" value="hanko" checked> 印鑑・はんこ</label>
+              <label class="rlabel teal"><input type="radio" name="cat" value="konyudo"> こにゅうどうくんグッズ</label>
+              <label class="rlabel"><input type="radio" name="cat" value="meishi"> 名刺</label>
+              <label class="rlabel"><input type="radio" name="cat" value="yakiin"> 焼き印</label>
+              <label class="rlabel"><input type="radio" name="cat" value="nafuda"> 名札</label>
+              <label class="rlabel"><input type="radio" name="cat" value="sonota"> その他グッズ</label>
+              <label class="rlabel"><input type="radio" name="cat" value="coupon"> クーポン</label>
             </div>
           </div>
           <div class="fg full"><label>商品名<span class="req">*</span></label><input type="text" id="f-name" placeholder="例：本象牙 印鑑"></div>
@@ -701,19 +701,19 @@ footer a{color:var(--gold2);}
       </div>
       <div class="admin-subpane" id="apane-mgmt">
         <p class="mgmt-hint">📷 写真編集 ／ 💴 サイズ・価格管理 ／ ▲▼ 順番変更 ／ 🗑 削除</p>
-        <div style="margin-bottom:12px;"><strong style="font-size:13px;">🔖 印鑑・はんこ</strong></div>
+        <div style="margin-bottom:12px;"><strong style="font-size:13px;">印鑑・はんこ</strong></div>
         <div class="mgmt-list" id="mgmt-hanko"></div>
-        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🟢 こにゅうどうくんグッズ</strong></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">こにゅうどうくんグッズ</strong></div>
         <div class="mgmt-list" id="mgmt-konyudo"></div>
-        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🪪 名刺</strong></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">名刺</strong></div>
         <div class="mgmt-list" id="mgmt-meishi"></div>
-        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🔥 焼き印</strong></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">焼き印</strong></div>
         <div class="mgmt-list" id="mgmt-yakiin"></div>
-        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">📛 名札</strong></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">名札</strong></div>
         <div class="mgmt-list" id="mgmt-nafuda"></div>
-        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🛍 その他グッズ</strong></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">その他グッズ</strong></div>
         <div class="mgmt-list" id="mgmt-sonota"></div>
-        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🎟 クーポン</strong></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">クーポン</strong></div>
         <div class="mgmt-list" id="mgmt-coupon"></div>
       </div>
       <div class="admin-subpane" id="apane-hours">
