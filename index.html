@@ -1871,6 +1871,8 @@ function removePhoto(){ photoData=null; document.getElementById('photo-prev').sr
 function toggleAccordion(){
   var btn  = document.getElementById('history-btn');
   var body = document.getElementById('history-body');
+  var txt  = document.getElementById('history-btn-text');
+  var arrow = document.getElementById('history-btn-arrow');
   if(!btn || !body) return;
   var isOpen = btn.classList.contains('open');
   if(isOpen){
@@ -1878,12 +1880,16 @@ function toggleAccordion(){
     body.classList.remove('open');
     body.hidden = true;
     body.setAttribute('aria-hidden','true');
+    if(txt) txt.textContent = '沿 革 を 見 る';
+    if(arrow) arrow.textContent = '▼';
   } else {
     btn.classList.add('open');
-    body.classList.remove('open'); // remove first then re-add to force repaint
+    body.classList.remove('open');
     body.hidden = false;
     body.setAttribute('aria-hidden','false');
     body.classList.add('open');
+    if(txt) txt.textContent = '沿 革 を 閉 じ る';
+    if(arrow) arrow.textContent = '▲';
   }
 }
 
