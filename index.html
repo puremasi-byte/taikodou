@@ -127,14 +127,21 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 
 /* ===== タブ ===== */
 .tabs-wrap{max-width:1100px;margin:0 auto;padding:0 24px 60px;background:var(--off-white);}
-.tab-nav{display:flex;margin-top:40px;gap:2px;}
-.tab-btn{flex:1;padding:14px 16px;border:none;cursor:pointer;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;background:#f0ebe0;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;letter-spacing:.1em;position:relative;}
+.tab-nav{display:flex;gap:2px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.tab-nav::-webkit-scrollbar{display:none;}
+.tab-btn{flex:0 0 auto;min-width:110px;padding:14px 16px;border:none;cursor:pointer;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;background:#2a2418;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .3s;letter-spacing:.05em;white-space:nowrap;position:relative;}
 .tab-btn::after{content:””;position:absolute;bottom:0;left:0;right:0;height:2px;background:transparent;transition:background .3s;}
 .tab-btn:first-child{border-radius:2px 0 0 0;}
 .tab-btn:last-child{border-radius:0 2px 0 0;}
-.tab-btn.active{background:#ffffff;color:var(--black2);}
+.tab-btn.active{background:#3a3020;color:var(--gold2);}
 .tab-btn.active::after{background:var(--gold-dark);}
-.tab-btn:hover:not(.active){background:#e8e0d0;color:var(--black2);}
+.tab-scroll-wrap{position:relative;margin-top:40px;}
+.tab-scroll-btn{position:absolute;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;z-index:10;transition:opacity .2s;padding:0;}
+.tab-scroll-btn.left{left:0;background:linear-gradient(to right,#2a2418 60%,transparent);}
+.tab-scroll-btn.right{right:0;background:linear-gradient(to left,#2a2418 60%,transparent);}
+.tab-scroll-btn span{color:#fff;font-size:22px;font-weight:bold;line-height:1;}
+.tab-scroll-btn.hidden{opacity:0;pointer-events:none;}
+.tab-btn:hover:not(.active){background:#3a3020;color:var(--gold);}
 
 .tab-content{background:#ffffff;border:1px solid #e0d8c8;border-top:none;border-radius:0 0 4px 4px;padding:36px;min-height:400px;}
 .tab-pane{display:none;}
@@ -517,11 +524,20 @@ footer a{color:var(--gold2);}
   </div>
 </section>
 <div class="tabs-wrap">
-  <div class="tab-nav">
+  <div class="tab-scroll-wrap">
+    <button class="tab-scroll-btn left hidden" id="tab-arrow-left" onclick="tabScroll(-1)"><span>&#8249;</span></button>
+    <button class="tab-scroll-btn right" id="tab-arrow-right" onclick="tabScroll(1)"><span>&#8250;</span></button>
+  <div class="tab-nav" id="tab-nav-scroll">
     <button class="tab-btn active" id="tab-btn-hanko"   onclick="switchTab('hanko')">🔖 印鑑・はんこ</button>
     <button class="tab-btn"        id="tab-btn-konyudo" onclick="switchTab('konyudo')">🟢 こにゅうどうくんグッズ</button>
+    <button class="tab-btn"        id="tab-btn-meishi"  onclick="switchTab('meishi')">🪪 名刺</button>
+    <button class="tab-btn"        id="tab-btn-yakiin"  onclick="switchTab('yakiin')">🔥 焼き印</button>
+    <button class="tab-btn"        id="tab-btn-nafuda"  onclick="switchTab('nafuda')">📛 名札</button>
+    <button class="tab-btn"        id="tab-btn-sonota"  onclick="switchTab('sonota')">🛍 その他グッズ</button>
+    <button class="tab-btn"        id="tab-btn-coupon"  onclick="switchTab('coupon')">🎟 クーポン</button>
     <button class="tab-btn"        id="tab-btn-blog"    onclick="switchTab('blog')">📝 ブログ</button>
     <button class="tab-btn"        id="tab-btn-insta"   onclick="switchTab('insta')">📷 Instagram</button>
+  </div>
   </div>
   <div class="tab-content">
     <div class="tab-pane active" id="pane-hanko">
@@ -543,7 +559,27 @@ footer a{color:var(--gold2);}
       <script src="https://elfsightcdn.com/platform.js" async></script>
       <div class="elfsight-app-b4be0809-6507-4901-ba28-906ac1a37bff" data-elfsight-app-lazy></div>
     </div>
-    <div class="tab-pane" id="pane-blog">
+    <div class="tab-pane" id="pane-meishi">
+  <div id="loading-meishi" style="text-align:center;padding:40px;color:var(--muted);">読み込み中...</div>
+  <div class="product-grid" id="grid-meishi"></div>
+</div>
+<div class="tab-pane" id="pane-yakiin">
+  <div id="loading-yakiin" style="text-align:center;padding:40px;color:var(--muted);">読み込み中...</div>
+  <div class="product-grid" id="grid-yakiin"></div>
+</div>
+<div class="tab-pane" id="pane-nafuda">
+  <div id="loading-nafuda" style="text-align:center;padding:40px;color:var(--muted);">読み込み中...</div>
+  <div class="product-grid" id="grid-nafuda"></div>
+</div>
+<div class="tab-pane" id="pane-sonota">
+  <div id="loading-sonota" style="text-align:center;padding:40px;color:var(--muted);">読み込み中...</div>
+  <div class="product-grid" id="grid-sonota"></div>
+</div>
+<div class="tab-pane" id="pane-coupon">
+  <div id="loading-coupon" style="text-align:center;padding:40px;color:var(--muted);">読み込み中...</div>
+  <div class="product-grid" id="grid-coupon"></div>
+</div>
+<div class="tab-pane" id="pane-blog">
       <div class="sec-title"><h3>📝 ブログ</h3><span class="sec-badge">BLOG</span></div>
       <div class="blog-grid" id="grid-blog"></div>
       <div class="loading" id="loading-blog" style="display:none">読み込み中...</div>
@@ -629,6 +665,11 @@ footer a{color:var(--gold2);}
             <div class="radio-row">
               <label class="rlabel red"><input type="radio" name="cat" value="hanko" checked> 🔖 印鑑・はんこ</label>
               <label class="rlabel teal"><input type="radio" name="cat" value="konyudo"> 🟢 こにゅうどうくんグッズ</label>
+              <label class="rlabel"><input type="radio" name="cat" value="meishi"> 🪪 名刺</label>
+              <label class="rlabel"><input type="radio" name="cat" value="yakiin"> 🔥 焼き印</label>
+              <label class="rlabel"><input type="radio" name="cat" value="nafuda"> 📛 名札</label>
+              <label class="rlabel"><input type="radio" name="cat" value="sonota"> 🛍 その他グッズ</label>
+              <label class="rlabel"><input type="radio" name="cat" value="coupon"> 🎟 クーポン</label>
             </div>
           </div>
           <div class="fg full"><label>商品名<span class="req">*</span></label><input type="text" id="f-name" placeholder="例：本象牙 印鑑"></div>
@@ -664,6 +705,16 @@ footer a{color:var(--gold2);}
         <div class="mgmt-list" id="mgmt-hanko"></div>
         <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🟢 こにゅうどうくんグッズ</strong></div>
         <div class="mgmt-list" id="mgmt-konyudo"></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🪪 名刺</strong></div>
+        <div class="mgmt-list" id="mgmt-meishi"></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🔥 焼き印</strong></div>
+        <div class="mgmt-list" id="mgmt-yakiin"></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">📛 名札</strong></div>
+        <div class="mgmt-list" id="mgmt-nafuda"></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🛍 その他グッズ</strong></div>
+        <div class="mgmt-list" id="mgmt-sonota"></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">🎟 クーポン</strong></div>
+        <div class="mgmt-list" id="mgmt-coupon"></div>
       </div>
       <div class="admin-subpane" id="apane-hours">
         <p class="mgmt-hint">🕐 予定外の休みを設定すると、その日だけ「臨時休業」と表示されます</p>
@@ -1174,6 +1225,10 @@ function submitBlog(){
 function loadProducts(){
   document.getElementById('loading-hanko').style.display='block';
   document.getElementById('loading-konyudo').style.display='block';
+  ['meishi','yakiin','nafuda','sonota','coupon'].forEach(function(c){
+    var el=document.getElementById('loading-'+c); if(el) el.style.display='block';
+    var g=document.getElementById('grid-'+c); if(g) g.innerHTML='';
+  });
   document.getElementById('grid-hanko').innerHTML='';
   document.getElementById('grid-konyudo').innerHTML='';
   // 商品とサイズを並行取得
@@ -1183,6 +1238,9 @@ function loadProducts(){
   ]).then(function(results){
     document.getElementById('loading-hanko').style.display='none';
     document.getElementById('loading-konyudo').style.display='none';
+    ['meishi','yakiin','nafuda','sonota','coupon'].forEach(function(c){
+      var el=document.getElementById('loading-'+c); if(el) el.style.display='none';
+    });
     var prods = results[0];
     var sizes = results[1];
     if(!Array.isArray(prods)){ showToast('⚠ データ読み込み失敗'); return; }
@@ -1195,7 +1253,7 @@ function loadProducts(){
       });
     }
     renderAll();
-  }).catch(function(e){ document.getElementById('loading-hanko').style.display='none'; document.getElementById('loading-konyudo').style.display='none'; console.error('loadProducts:',e); showToast('⚠ 通信エラー: '+((e&&e.message)||'不明')); });
+  }).catch(function(e){ document.getElementById('loading-hanko').style.display='none'; document.getElementById('loading-konyudo').style.display='none'; ['meishi','yakiin','nafuda','sonota','coupon'].forEach(function(c){ var el=document.getElementById('loading-'+c); if(el) el.style.display='none'; }); console.error('loadProducts:',e); showToast('⚠ 通信エラー: '+((e&&e.message)||'不明')); });
 }
 
 // ===== 公開グリッド =====
@@ -1206,6 +1264,11 @@ function renderAll(){
   document.getElementById('grid-konyudo').innerHTML=konyudo.map(cardHtml).join('');
   document.getElementById('empty-hanko').style.display=hanko.length?'none':'block';
   document.getElementById('empty-konyudo').style.display=konyudo.length?'none':'block';
+  ['meishi','yakiin','nafuda','sonota','coupon'].forEach(function(c){
+    var items=products.filter(function(p){ return p.cat===c; });
+    var g=document.getElementById('grid-'+c);
+    if(g) g.innerHTML=items.map(cardHtml).join('');
+  });
   // カードクリックで詳細表示
   document.querySelectorAll('.product-card').forEach(function(card){
     card.addEventListener('click',function(){ openDetail(parseInt(this.dataset.id)); });
@@ -1289,7 +1352,7 @@ function closeDetail(){ document.getElementById('detail-overlay').classList.remo
 
 // ===== 管理リスト =====
 function renderMgmt(){
-  ['hanko','konyudo'].forEach(function(cat){
+  ['hanko','konyudo','meishi','yakiin','nafuda','sonota','coupon'].forEach(function(cat){
     var list=products.filter(function(p){ return p.cat===cat; });
     var el=document.getElementById('mgmt-'+cat);
     if(!list.length){ el.innerHTML='<div class="mgmt-empty">商品がありません</div>'; return; }
@@ -1771,6 +1834,19 @@ function addProduct(){
 }
 
 // ===== タブ =====
+function tabScroll(dir){
+  var nav = document.getElementById('tab-nav-scroll');
+  nav.scrollLeft += dir * 200;
+  setTimeout(updateTabArrows, 300);
+}
+function updateTabArrows(){
+  var nav = document.getElementById('tab-nav-scroll');
+  if(!nav) return;
+  var l = document.getElementById('tab-arrow-left');
+  var r = document.getElementById('tab-arrow-right');
+  if(l) l.classList.toggle('hidden', nav.scrollLeft <= 0);
+  if(r) r.classList.toggle('hidden', nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 2);
+}
 function switchTab(name){
   document.querySelectorAll('.tab-pane').forEach(function(el){ el.classList.remove('active'); });
   document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
@@ -1840,6 +1916,8 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('hol-add-btn').addEventListener('click',addHoliday);
   loadSiteInfo();
   loadHolidays();
+  updateTabArrows();
+  document.getElementById('tab-nav-scroll').addEventListener('scroll', updateTabArrows);
   // 商品編集モーダル
   document.getElementById('edit-save-btn').addEventListener('click',saveEdit);
   document.getElementById('edit-cancel-btn').addEventListener('click',closeEditModal);
