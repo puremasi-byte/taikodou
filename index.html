@@ -538,7 +538,7 @@ footer a{color:var(--gold2);}
     <!-- 店主紹介アコーディオン -->
     <div class="accordion" style="margin-top:8px;">
       <button class="accordion-btn" id="owner-btn" onclick="toggleOwnerAccordion()">
-        <span id="owner-btn-text">店 主 紹 介 を 見 る</span>
+        <span id="owner-btn-text">■ 店主紹介</span>
         <span class="accordion-arrow" id="owner-btn-arrow">▼</span>
       </button>
       <div class="accordion-body" id="owner-body" hidden aria-hidden="true">
@@ -823,25 +823,19 @@ footer a{color:var(--gold2);}
           <button type="button" onclick="saveOwnerIntro()" style="margin-top:8px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 保存する</button>
         </div>
 
-        <!-- 経歴 -->
-        <div style="margin-bottom:20px;">
-          <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px;">📋 経歴</div>
-          <div id="owner-career-list" style="margin-bottom:12px;"></div>
-          <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:4px;padding:14px;">
-            <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-bottom:8px;">
-              <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">年・時期</label><input type="text" id="owner-career-year" placeholder="例：2000年" style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;"></div>
-              <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">内容</label><input type="text" id="owner-career-content" placeholder="例：〇〇に入社" style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;"></div>
-            </div>
-            <button type="button" onclick="addOwnerCareer()" style="padding:8px 20px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;">＋ 追加</button>
-          </div>
-        </div>
-
-        <!-- メディア掲載 -->
+                <!-- メディア掲載 -->
         <div style="margin-bottom:20px;">
           <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px;">📰 メディア掲載履歴</div>
           <div id="owner-media-list" style="margin-bottom:12px;"></div>
           <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:4px;padding:14px;">
-            <input type="text" id="owner-media-input" placeholder="例：2023年 CTYテレビ 取材" style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;margin-bottom:8px;">
+            <div style="margin-bottom:8px;">
+              <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">掲載名・説明</label>
+              <input type="text" id="owner-media-input" placeholder="例：2023年 CTYテレビ 取材" style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
+            </div>
+            <div style="margin-bottom:10px;">
+              <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">リンクURL（任意）</label>
+              <input type="url" id="owner-media-url" placeholder="https://..." style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
+            </div>
             <button type="button" onclick="addOwnerMedia()" style="padding:8px 20px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;">＋ 追加</button>
           </div>
         </div>
@@ -1994,13 +1988,13 @@ function toggleOwnerAccordion(){
     btn.classList.remove('open');
     body.hidden = true;
     body.setAttribute('aria-hidden','true');
-    if(txt) txt.textContent = '店 主 紹 介 を 見 る';
+    if(txt) txt.textContent = '■ 店主紹介';
     if(arrow) arrow.textContent = '▼';
   } else {
     btn.classList.add('open');
     body.hidden = false;
     body.setAttribute('aria-hidden','false');
-    if(txt) txt.textContent = '店 主 紹 介 を 閉 じ る';
+    if(txt) txt.textContent = '■ 店主紹介';
     if(arrow) arrow.textContent = '▲';
   }
 }
@@ -2066,7 +2060,13 @@ function renderOwnerSection(){
     html += '<div class="owner-block"><div class="owner-block-title">メディア掲載</div>';
     html += '<div class="owner-media-list">';
     mediaItems.forEach(function(item){
-      html += '<div class="owner-media-item">'+esc(item)+'</div>';
+      var label = (typeof item === 'object') ? (item.label || '') : item;
+      var url   = (typeof item === 'object') ? (item.url   || '') : '';
+      if(url){
+        html += '<div class="owner-media-item"><a href="'+esc(url)+'" target="_blank" rel="noopener" style="color:var(--gold-dark);text-decoration:underline;">'+esc(label)+'</a></div>';
+      } else {
+        html += '<div class="owner-media-item">'+esc(label)+'</div>';
+      }
     });
     html += '</div></div>';
   }
@@ -2112,8 +2112,12 @@ function renderOwnerMediaMgmt(){
   try { items = json ? JSON.parse(json) : []; } catch(e){}
   if(!items.length){ el.innerHTML='<div class="mgmt-empty">メディア掲載がありません</div>'; return; }
   el.innerHTML = items.map(function(item, i){
+    var label = (typeof item === 'object') ? (item.label || '') : item;
+    var url   = (typeof item === 'object') ? (item.url   || '') : '';
     return '<div class="mgmt-item">'
-      +'<div class="mgmt-info"><div class="mgmt-name">'+esc(item)+'</div></div>'
+      +'<div class="mgmt-info"><div class="mgmt-name">'+esc(label)+'</div>'
+      +(url ? '<div class="mgmt-price" style="font-size:11px;word-break:break-all;">'+esc(url)+'</div>' : '')
+      +'</div>'
       +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-idx="'+i+'" data-type="media">🗑</button></div>'
       +'</div>';
   }).join('');
@@ -2182,14 +2186,16 @@ function deleteOwnerCareer(idx){
 
 function addOwnerMedia(){
   var val = document.getElementById('owner-media-input').value.trim();
+  var url = document.getElementById('owner-media-url').value.trim();
   if(!val){ showToast('⚠ 内容を入力してください'); return; }
   var json = ownerData['media'] || '';
   var items = [];
   try { items = json ? JSON.parse(json) : []; } catch(e){}
-  items.push(val);
+  items.push({label: val, url: url || ''});
   saveOwnerField('media', JSON.stringify(items), '✅ メディアを追加しました')
     .then(function(){
       document.getElementById('owner-media-input').value = '';
+      document.getElementById('owner-media-url').value = '';
       renderOwnerMediaMgmt();
     });
 }
