@@ -451,6 +451,10 @@ footer a{color:var(--gold2);}
 }
 
 /* ===== 店主紹介 ===== */
+.owner-photos{display:flex;gap:12px;margin-bottom:16px;}
+.owner-photo-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.owner-photo-item img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:2px solid #d4c4a0;}
+.owner-photo-caption{font-size:12px;color:#888;text-align:center;}
 .owner-section{padding:20px 0 4px;}
 .owner-intro{margin-bottom:18px;line-height:1.9;color:#333;}
 .owner-block{margin-bottom:20px;}
@@ -826,6 +830,29 @@ footer a{color:var(--gold2);}
           <div id="owner-quill-editor" style="margin-bottom:0;"></div>
           <input type="hidden" id="owner-intro-text">
           <button type="button" onclick="saveOwnerIntro()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 保存する</button>
+          <!-- 店主写真 -->
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid #e8dcc8;">
+            <label style="font-size:12px;font-weight:700;color:#666;">🖼 店主写真（2枚）</label>
+            <div style="display:flex;gap:12px;margin-top:10px;">
+              <div style="flex:1;">
+                <div style="font-size:11px;color:#888;margin-bottom:4px;">写真1</div>
+                <div id="owner-photo1-preview" style="width:100%;aspect-ratio:1/1;background:#f0ebe0;border:2px dashed #d4c4a0;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;cursor:pointer;" onclick="document.getElementById('owner-photo1-input').click()">
+                  <span style="font-size:24px;">📷</span>
+                </div>
+                <input type="file" id="owner-photo1-input" accept="image/*" style="display:none" onchange="previewOwnerPhoto(1,this)">
+                <input type="text" id="owner-photo1-caption" placeholder="キャプション（任意）" style="width:100%;padding:6px 8px;border:1px solid #d4c4a0;border-radius:4px;font-size:12px;box-sizing:border-box;">
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:11px;color:#888;margin-bottom:4px;">写真2</div>
+                <div id="owner-photo2-preview" style="width:100%;aspect-ratio:1/1;background:#f0ebe0;border:2px dashed #d4c4a0;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;cursor:pointer;" onclick="document.getElementById('owner-photo2-input').click()">
+                  <span style="font-size:24px;">📷</span>
+                </div>
+                <input type="file" id="owner-photo2-input" accept="image/*" style="display:none" onchange="previewOwnerPhoto(2,this)">
+                <input type="text" id="owner-photo2-caption" placeholder="キャプション（任意）" style="width:100%;padding:6px 8px;border:1px solid #d4c4a0;border-radius:4px;font-size:12px;box-sizing:border-box;">
+              </div>
+            </div>
+            <button type="button" onclick="saveOwnerPhotos()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 写真を保存する</button>
+          </div>
         </div>
 
                 <!-- メディア掲載 -->
@@ -2047,6 +2074,20 @@ function loadOwnerProfile(){
       if(igEl) igEl.value = ownerData['instagram_url'] || '';
       if(twEl) twEl.value = ownerData['twitter_url'] || '';
       if(fbEl) fbEl.value = ownerData['facebook_url'] || '';
+      // 写真プレビュー復元
+      ['1','2'].forEach(function(n){
+        var url = ownerData['photo'+n+'_url'] || '';
+        var cap = ownerData['photo'+n+'_caption'] || '';
+        var capEl = document.getElementById('owner-photo'+n+'-caption');
+        if(capEl) capEl.value = cap;
+        if(url){
+          var prev = document.getElementById('owner-photo'+n+'-preview');
+          if(prev){
+            prev.innerHTML = '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;">';
+            prev.dataset.b64 = url;
+          }
+        }
+      });
       // Quillエディタに内容をセット
       if(ownerQuill){
         var introHtml = ownerData['intro_text'] || '';
@@ -2061,6 +2102,25 @@ function renderOwnerSection(){
   var el = document.getElementById('owner-section-area');
   if(!el) return;
   var html = '';
+  // 写真2枚（紹介文の上）
+  var photo1 = ownerData['photo1_url'] || '';
+  var photo2 = ownerData['photo2_url'] || '';
+  var cap1   = ownerData['photo1_caption'] || '';
+  var cap2   = ownerData['photo2_caption'] || '';
+  if(photo1 || photo2){
+    html += '<div class="owner-photos">';
+    if(photo1){
+      html += '<div class="owner-photo-item"><img src="'+esc(photo1)+'" alt="店主写真1">';
+      if(cap1) html += '<div class="owner-photo-caption">'+esc(cap1)+'</div>';
+      html += '</div>';
+    }
+    if(photo2){
+      html += '<div class="owner-photo-item"><img src="'+esc(photo2)+'" alt="店主写真2">';
+      if(cap2) html += '<div class="owner-photo-caption">'+esc(cap2)+'</div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
   // 紹介文
   var introText = ownerData['intro_text'] || '';
   if(introText){
@@ -2166,6 +2226,31 @@ function saveOwnerField(key, value, successMsg){
       showToast(successMsg || '✅ 保存しました');
     })
     .catch(function(){ showToast('⚠ 保存に失敗しました'); });
+}
+
+function previewOwnerPhoto(n, input){
+  var file = input.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var preview = document.getElementById('owner-photo'+n+'-preview');
+    preview.innerHTML = '<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover;">';
+    preview.dataset.b64 = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveOwnerPhotos(){
+  var p1 = document.getElementById('owner-photo1-preview');
+  var p2 = document.getElementById('owner-photo2-preview');
+  var c1 = document.getElementById('owner-photo1-caption').value;
+  var c2 = document.getElementById('owner-photo2-caption').value;
+  var promises = [];
+  if(p1.dataset.b64) promises.push(saveOwnerField('photo1_url', p1.dataset.b64, null));
+  if(p2.dataset.b64) promises.push(saveOwnerField('photo2_url', p2.dataset.b64, null));
+  promises.push(saveOwnerField('photo1_caption', c1, null));
+  promises.push(saveOwnerField('photo2_caption', c2, null));
+  Promise.all(promises).then(function(){ showToast('✅ 写真を保存しました'); renderOwnerSection(); });
 }
 
 function saveOwnerIntro(){
