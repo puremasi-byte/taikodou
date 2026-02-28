@@ -1941,6 +1941,28 @@ function switchTab(name){
   document.getElementById('tab-btn-'+name).classList.add('active');
   if(name==='blog' && !blogPosts.length) loadBlogPosts();
 }
+function initOwnerQuill(){
+  if(ownerQuill) return; // すでに初期化済みならスキップ
+  var el = document.getElementById('owner-quill-editor');
+  if(!el) return;
+  ownerQuill = new Quill('#owner-quill-editor', {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline'],
+        [{ 'color': [] }],
+        [{ 'align': [] }],
+        ['clean']
+      ]
+    },
+    placeholder: '店主の紹介文を入力してください...'
+  });
+  // 読み込み済みデータがあればセット
+  var introHtml = ownerData['intro_text'] || '';
+  if(introHtml) ownerQuill.root.innerHTML = introHtml;
+}
+
 function switchAdminTab(name){
   document.querySelectorAll('.admin-subpane').forEach(function(el){ el.classList.remove('active'); });
   document.querySelectorAll('.admin-tab').forEach(function(el){ el.classList.remove('active'); });
@@ -1948,6 +1970,7 @@ function switchAdminTab(name){
   document.getElementById('atab-'+name).classList.add('active');
   if(name==='mgmt') renderMgmt();
   if(name==='blog') renderBlogMgmt();
+  if(name==='site') setTimeout(initOwnerQuill, 50);
 }
 
 // ===== 登録フォーム写真 =====
@@ -2213,7 +2236,7 @@ function deleteOwnerMedia(idx){
 
 // ===== 管理トグル・PW =====
 function onAdminToggle(){
-  if(authed){ document.getElementById('admin-toggle-btn').classList.toggle('open'); document.getElementById('admin-panel').classList.toggle('open'); }
+  if(authed){ document.getElementById('admin-toggle-btn').classList.toggle('open'); document.getElementById('admin-panel').classList.toggle('open'); var activeSub=document.querySelector('.admin-subpane.active'); if(activeSub && activeSub.id==='apane-site') setTimeout(initOwnerQuill,50); }
   else{ document.getElementById('pw-overlay').classList.add('show'); setTimeout(function(){ document.getElementById('pw-input').focus(); },100); }
 }
 function checkPw(){
@@ -2280,23 +2303,6 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('bf-photo-lib').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){bfSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
 
   loadProducts();
-
-  // ===== Quillエディタ初期化（店主紹介） =====
-  if(document.getElementById('owner-quill-editor')){
-    ownerQuill = new Quill('#owner-quill-editor', {
-      theme: 'snow',
-      modules: {
-        toolbar: [
-          [{ 'size': ['small', false, 'large', 'huge'] }],
-          ['bold', 'italic', 'underline'],
-          [{ 'color': [] }],
-          [{ 'align': [] }],
-          ['clean']
-        ]
-      },
-      placeholder: '店主の紹介文を入力してください...'
-    });
-  }
 
   // ===== スライダー（無限ループ） =====
   (function(){
