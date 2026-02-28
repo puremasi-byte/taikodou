@@ -703,8 +703,8 @@ footer a{color:var(--gold2);}
             <input type="hidden" id="selected-cat" value="hanko">
           </div>
           <div class="fg full"><label>商品名<span class="req">*</span></label><input type="text" id="f-name" placeholder="例：本象牙 印鑑"></div>
-          <div class="fg"><label>価格（税込）※サイズ別価格がある場合は空白でOK</label><input type="number" id="f-price" placeholder="例：3800" min="0"></div>
-          <div class="fg"><label>素材・仕様</label><input type="text" id="f-size" placeholder="例：本象牙 / 最高級素材"></div>
+          <div class="fg" id="fg-price"><label>価格（税込）※サイズ別価格がある場合は空白でOK</label><input type="number" id="f-price" placeholder="例：3800" min="0"></div>
+          <div class="fg" id="fg-size"><label>素材・仕様</label><input type="text" id="f-size" placeholder="例：本象牙 / 最高級素材"></div>
           <div class="fg full"><label>商品の説明<span class="req">*</span></label><textarea id="f-desc" placeholder="例：古来より最高級の印材として珍重されてきた本象牙。"></textarea></div>
           <div class="fg full">
             <label>商品写真</label>
@@ -2333,14 +2333,57 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('admin-toggle-btn').addEventListener('click',onAdminToggle);
   document.getElementById('reg-btn').addEventListener('click',addProduct);
   // カテゴリ選択ボタン
+  function updateFormByCat(cat){
+    var fgPrice = document.getElementById('fg-price');
+    var fgSize  = document.getElementById('fg-size');
+    var fName   = document.getElementById('f-name');
+    // カテゴリ別フォーム切り替え
+    if(cat === 'coupon'){
+      // クーポン: 素材・仕様を非表示
+      if(fgSize)  fgSize.style.display  = 'none';
+      if(fgPrice) fgPrice.style.display = '';
+      if(fName)   fName.placeholder = '例：夏のお得クーポン';
+    } else if(cat === 'hanko'){
+      // 印鑑: 全項目表示
+      if(fgSize)  fgSize.style.display  = '';
+      if(fgPrice) fgPrice.style.display = '';
+      if(fName)   fName.placeholder = '例：本象牙 印鑑';
+    } else if(cat === 'konyudo'){
+      if(fgSize)  fgSize.style.display  = '';
+      if(fgPrice) fgPrice.style.display = '';
+      if(fName)   fName.placeholder = '例：こにゅうどうくん ぬいぐるみ';
+    } else if(cat === 'meishi'){
+      if(fgSize)  fgSize.style.display  = '';
+      if(fgPrice) fgPrice.style.display = '';
+      if(fName)   fName.placeholder = '例：名刺作成';
+    } else if(cat === 'yakiin'){
+      if(fgSize)  fgSize.style.display  = '';
+      if(fgPrice) fgPrice.style.display = '';
+      if(fName)   fName.placeholder = '例：焼印';
+    } else if(cat === 'nafuda'){
+      if(fgSize)  fgSize.style.display  = '';
+      if(fgPrice) fgPrice.style.display = '';
+      if(fName)   fName.placeholder = '例：木製名札';
+    } else {
+      if(fgSize)  fgSize.style.display  = '';
+      if(fgPrice) fgPrice.style.display = '';
+      if(fName)   fName.placeholder = '例：商品名';
+    }
+  }
+
   function initRlabels(){
     document.querySelectorAll('.rlabel[data-cat]').forEach(function(btn){
       btn.addEventListener('click', function(){
         document.querySelectorAll('.rlabel[data-cat]').forEach(function(b){ b.classList.remove('active'); });
         btn.classList.add('active');
-        document.getElementById('selected-cat').value = btn.dataset.cat;
+        var cat = btn.dataset.cat;
+        document.getElementById('selected-cat').value = cat;
+        updateFormByCat(cat);
       });
     });
+    // 初期表示
+    var initCat = document.getElementById('selected-cat').value || 'hanko';
+    updateFormByCat(initCat);
   }
   initRlabels();
   // カテゴリ選択ボタンのアクティブ状態管理
@@ -2453,6 +2496,7 @@ document.addEventListener('DOMContentLoaded',function(){
   })();
 
 });
+
 </script>
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 </body>
