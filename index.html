@@ -2325,8 +2325,11 @@ document.addEventListener('DOMContentLoaded',function(){
 
     // 初期位置を1枚目（index=1）に設定
     var pos = 1; // クローンを含めた位置
-    track.style.transition = 'none';
-    track.style.transform  = 'translateX(-' + (pos * 100) + '%)';
+    // DOMレンダリング後に確実に適用
+    requestAnimationFrame(function(){
+      track.style.transition = 'none';
+      track.style.transform  = 'translateX(-' + (pos * 100) + '%)';
+    });
 
     function updateDots(){
       dots.forEach(function(d){ d.classList.remove('active'); });
@@ -3739,7 +3742,7 @@ document.addEventListener('DOMContentLoaded',function(){
     dots.forEach(function(d){
       d.addEventListener('click', function(){
       var idx = parseInt(d.dataset.idx);
-     var diff = idx - current;
+    var diff = idx - current;
         if(diff === 0) return;
         goTo(diff);
         resetAuto();
