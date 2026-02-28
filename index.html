@@ -449,6 +449,22 @@ footer a{color:var(--gold2);}
   .about-heading{font-size:16px;}
   .history-year{min-width:110px;}
 }
+
+/* ===== 店主紹介 ===== */
+.owner-section{padding:20px 0 4px;}
+.owner-intro{margin-bottom:18px;line-height:1.9;color:#333;}
+.owner-block{margin-bottom:20px;}
+.owner-block-title{font-family:"Noto Serif JP",serif;font-size:12px;font-weight:700;color:var(--gold-dark);letter-spacing:.25em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e0d8c8;}
+.owner-career-list{display:flex;flex-direction:column;gap:8px;}
+.owner-career-item{display:flex;gap:12px;font-size:13px;line-height:1.7;color:#444;}
+.owner-career-year{color:var(--gold-dark);font-weight:700;min-width:60px;flex-shrink:0;font-family:"Noto Serif JP",serif;}
+.owner-media-list{display:flex;flex-direction:column;gap:6px;}
+.owner-media-item{font-size:13px;color:#444;line-height:1.7;padding-left:14px;position:relative;}
+.owner-media-item::before{content:"▶";position:absolute;left:0;font-size:9px;color:var(--gold-dark);top:4px;}
+.owner-sns{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;}
+.owner-sns-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid #e0d8c8;border-radius:2px;font-size:13px;color:#444;text-decoration:none;transition:all .2s;background:#faf7f2;font-weight:700;}
+.owner-sns-btn:hover{border-color:var(--gold-dark);color:var(--gold-dark);background:#fff;}
+.owner-sns-btn .sns-icon{font-size:16px;}
 </style>
 
 </head>
@@ -516,6 +532,18 @@ footer a{color:var(--gold2);}
       </button>
       <div class="accordion-body" id="history-body" hidden aria-hidden="true">
         <div class="history-list" id="history-list-area"></div>
+      </div>
+    </div>
+  </div>
+
+    <!-- 店主紹介アコーディオン -->
+    <div class="accordion" style="margin-top:8px;">
+      <button class="accordion-btn" id="owner-btn" onclick="toggleOwnerAccordion()">
+        <span id="owner-btn-text">店 主 紹 介 を 見 る</span>
+        <span class="accordion-arrow" id="owner-btn-arrow">▼</span>
+      </button>
+      <div class="accordion-body" id="owner-body" hidden aria-hidden="true">
+        <div class="owner-section" id="owner-section-area"></div>
       </div>
     </div>
   </div>
@@ -779,6 +807,69 @@ footer a{color:var(--gold2);}
           <textarea id="site-about-text" style="width:100%;min-height:180px;padding:12px;border:2px solid #d4c4a0;border-radius:8px;font-size:14px;line-height:2;font-family:'Noto Sans JP',sans-serif;resize:vertical;" placeholder="紹介文を入力..."></textarea>
           <button type="button" onclick="saveSiteAbout()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;">💾 保存する</button>
         </div>
+        <!-- 店主紹介 -->
+        <div style="font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e0d8c8;letter-spacing:.1em;">👤 店主紹介</div>
+
+        <!-- テキスト入力 -->
+        <div style="margin-bottom:20px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+            <label style="font-size:12px;font-weight:700;color:#666;">📝 紹介文</label>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <label style="font-size:11px;color:#888;">文字サイズ：</label>
+              <input type="number" id="owner-font-size" value="15" min="10" max="24" style="width:60px;padding:4px 8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
+              <span style="font-size:11px;color:#888;">px</span>
+            </div>
+          </div>
+          <textarea id="owner-intro-text" style="width:100%;min-height:160px;padding:12px;border:1px solid #d4c4a0;border-radius:4px;font-size:14px;line-height:2;font-family:'Noto Sans JP',sans-serif;resize:vertical;" placeholder="店主の紹介文を入力...（改行できます）"></textarea>
+          <button type="button" onclick="saveOwnerIntro()" style="margin-top:8px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 保存する</button>
+        </div>
+
+        <!-- 経歴 -->
+        <div style="margin-bottom:20px;">
+          <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px;">📋 経歴</div>
+          <div id="owner-career-list" style="margin-bottom:12px;"></div>
+          <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:4px;padding:14px;">
+            <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-bottom:8px;">
+              <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">年・時期</label><input type="text" id="owner-career-year" placeholder="例：2000年" style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;"></div>
+              <div><label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">内容</label><input type="text" id="owner-career-content" placeholder="例：〇〇に入社" style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;"></div>
+            </div>
+            <button type="button" onclick="addOwnerCareer()" style="padding:8px 20px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;">＋ 追加</button>
+          </div>
+        </div>
+
+        <!-- メディア掲載 -->
+        <div style="margin-bottom:20px;">
+          <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px;">📰 メディア掲載履歴</div>
+          <div id="owner-media-list" style="margin-bottom:12px;"></div>
+          <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:4px;padding:14px;">
+            <input type="text" id="owner-media-input" placeholder="例：2023年 CTYテレビ 取材" style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;margin-bottom:8px;">
+            <button type="button" onclick="addOwnerMedia()" style="padding:8px 20px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;">＋ 追加</button>
+          </div>
+        </div>
+
+        <!-- SNS -->
+        <div style="margin-bottom:20px;">
+          <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:10px;">🔗 SNSリンク</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:18px;">📷</span>
+              <span style="font-size:12px;font-weight:700;color:#888;min-width:90px;">Instagram</span>
+              <input type="url" id="owner-instagram" placeholder="https://www.instagram.com/..." style="flex:1;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:18px;">✖️</span>
+              <span style="font-size:12px;font-weight:700;color:#888;min-width:90px;">X（旧Twitter）</span>
+              <input type="url" id="owner-twitter" placeholder="https://x.com/..." style="flex:1;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:18px;">👥</span>
+              <span style="font-size:12px;font-weight:700;color:#888;min-width:90px;">Facebook</span>
+              <input type="url" id="owner-facebook" placeholder="https://www.facebook.com/..." style="flex:1;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
+            </div>
+          </div>
+          <button type="button" onclick="saveOwnerSns()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 SNSを保存する</button>
+        </div>
+
         <!-- 沿革 -->
         <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:12px;letter-spacing:.1em;">📅 沿革</div>
         <div id="site-history-list" style="margin-bottom:16px;"></div>
@@ -1891,6 +1982,228 @@ function toggleAccordion(){
   }
 }
 
+
+// ===== アコーディオン（店主紹介） =====
+function toggleOwnerAccordion(){
+  var btn  = document.getElementById('owner-btn');
+  var body = document.getElementById('owner-body');
+  var txt  = document.getElementById('owner-btn-text');
+  var arrow = document.getElementById('owner-btn-arrow');
+  if(!btn || !body) return;
+  var isOpen = btn.classList.contains('open');
+  if(isOpen){
+    btn.classList.remove('open');
+    body.hidden = true;
+    body.setAttribute('aria-hidden','true');
+    if(txt) txt.textContent = '店 主 紹 介 を 見 る';
+    if(arrow) arrow.textContent = '▼';
+  } else {
+    btn.classList.add('open');
+    body.hidden = false;
+    body.setAttribute('aria-hidden','false');
+    if(txt) txt.textContent = '店 主 紹 介 を 閉 じ る';
+    if(arrow) arrow.textContent = '▲';
+  }
+}
+
+// ===== 店主紹介データ =====
+var ownerData = {};
+
+function loadOwnerProfile(){
+  sbFetch('GET','owner_profile?select=*')
+    .then(function(data){
+      if(!Array.isArray(data)) return;
+      ownerData = {};
+      data.forEach(function(row){ ownerData[row.key] = row.value || ''; });
+      renderOwnerSection();
+      // 管理画面フォームに値をセット
+      var itEl = document.getElementById('owner-intro-text');
+      var fsEl = document.getElementById('owner-font-size');
+      var igEl = document.getElementById('owner-instagram');
+      var twEl = document.getElementById('owner-twitter');
+      var fbEl = document.getElementById('owner-facebook');
+      if(itEl) itEl.value = ownerData['intro_text'] || '';
+      if(fsEl) fsEl.value = ownerData['intro_font_size'] || '15';
+      if(igEl) igEl.value = ownerData['instagram_url'] || '';
+      if(twEl) twEl.value = ownerData['twitter_url'] || '';
+      if(fbEl) fbEl.value = ownerData['facebook_url'] || '';
+      renderOwnerCareerMgmt();
+      renderOwnerMediaMgmt();
+    })
+    .catch(function(){ console.log('owner_profile not found'); });
+}
+
+function renderOwnerSection(){
+  var el = document.getElementById('owner-section-area');
+  if(!el) return;
+  var html = '';
+  // 紹介文
+  var introText = ownerData['intro_text'] || '';
+  var fontSize  = parseInt(ownerData['intro_font_size'] || '15', 10);
+  if(introText){
+    html += '<div class="owner-intro" style="font-size:'+fontSize+'px;">'
+      + esc(introText).replace(/\n/g,'<br>') + '</div>';
+  }
+  // 経歴
+  var careerJson = ownerData['career'] || '';
+  var careerItems = [];
+  try { careerItems = careerJson ? JSON.parse(careerJson) : []; } catch(e){}
+  if(careerItems.length){
+    html += '<div class="owner-block"><div class="owner-block-title">経 歴</div>';
+    html += '<div class="owner-career-list">';
+    careerItems.forEach(function(item){
+      html += '<div class="owner-career-item">'
+        + '<span class="owner-career-year">'+esc(item.year||'')+'</span>'
+        + '<span>'+esc(item.content||'')+'</span>'
+        + '</div>';
+    });
+    html += '</div></div>';
+  }
+  // メディア掲載
+  var mediaJson = ownerData['media'] || '';
+  var mediaItems = [];
+  try { mediaItems = mediaJson ? JSON.parse(mediaJson) : []; } catch(e){}
+  if(mediaItems.length){
+    html += '<div class="owner-block"><div class="owner-block-title">メディア掲載</div>';
+    html += '<div class="owner-media-list">';
+    mediaItems.forEach(function(item){
+      html += '<div class="owner-media-item">'+esc(item)+'</div>';
+    });
+    html += '</div></div>';
+  }
+  // SNS
+  var ig = ownerData['instagram_url'] || '';
+  var tw = ownerData['twitter_url']   || '';
+  var fb = ownerData['facebook_url']  || '';
+  if(ig || tw || fb){
+    html += '<div class="owner-block"><div class="owner-block-title">SNS</div>';
+    html += '<div class="owner-sns">';
+    if(ig) html += '<a href="'+esc(ig)+'" target="_blank" rel="noopener" class="owner-sns-btn"><span class="sns-icon">📷</span>Instagram</a>';
+    if(tw) html += '<a href="'+esc(tw)+'" target="_blank" rel="noopener" class="owner-sns-btn"><span class="sns-icon">✖️</span>X（旧Twitter）</a>';
+    if(fb) html += '<a href="'+esc(fb)+'" target="_blank" rel="noopener" class="owner-sns-btn"><span class="sns-icon">👥</span>Facebook</a>';
+    html += '</div></div>';
+  }
+  el.innerHTML = html || '<div style="color:#888;font-size:13px;padding:8px;">まだ内容が登録されていません</div>';
+}
+
+function renderOwnerCareerMgmt(){
+  var el = document.getElementById('owner-career-list');
+  if(!el) return;
+  var json = ownerData['career'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  if(!items.length){ el.innerHTML='<div class="mgmt-empty">経歴がありません</div>'; return; }
+  el.innerHTML = items.map(function(item, i){
+    return '<div class="mgmt-item">'
+      +'<div class="mgmt-info"><div class="mgmt-name">'+esc(item.year||'')+'</div>'
+      +'<div class="mgmt-price">'+esc(item.content||'')+'</div></div>'
+      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-idx="'+i+'" data-type="career">🗑</button></div>'
+      +'</div>';
+  }).join('');
+  el.querySelectorAll('[data-type="career"]').forEach(function(btn){
+    btn.addEventListener('click', function(){ deleteOwnerCareer(parseInt(this.dataset.idx)); });
+  });
+}
+
+function renderOwnerMediaMgmt(){
+  var el = document.getElementById('owner-media-list');
+  if(!el) return;
+  var json = ownerData['media'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  if(!items.length){ el.innerHTML='<div class="mgmt-empty">メディア掲載がありません</div>'; return; }
+  el.innerHTML = items.map(function(item, i){
+    return '<div class="mgmt-item">'
+      +'<div class="mgmt-info"><div class="mgmt-name">'+esc(item)+'</div></div>'
+      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-idx="'+i+'" data-type="media">🗑</button></div>'
+      +'</div>';
+  }).join('');
+  el.querySelectorAll('[data-type="media"]').forEach(function(btn){
+    btn.addEventListener('click', function(){ deleteOwnerMedia(parseInt(this.dataset.idx)); });
+  });
+}
+
+function saveOwnerField(key, value, successMsg){
+  return sbFetch('POST','owner_profile?on_conflict=key',{key:key, value:value})
+    .catch(function(){
+      return sbFetch('PATCH','owner_profile?key=eq.'+key,{value:value});
+    })
+    .then(function(){
+      ownerData[key] = value;
+      renderOwnerSection();
+      showToast(successMsg || '✅ 保存しました');
+    })
+    .catch(function(){ showToast('⚠ 保存に失敗しました'); });
+}
+
+function saveOwnerIntro(){
+  var text = (document.getElementById('owner-intro-text').value || '');
+  var size = (document.getElementById('owner-font-size').value || '15');
+  Promise.all([
+    saveOwnerField('intro_text', text, null),
+    saveOwnerField('intro_font_size', size, null)
+  ]).then(function(){ showToast('✅ 紹介文を保存しました'); });
+}
+
+function saveOwnerSns(){
+  var ig = (document.getElementById('owner-instagram').value || '').trim();
+  var tw = (document.getElementById('owner-twitter').value || '').trim();
+  var fb = (document.getElementById('owner-facebook').value || '').trim();
+  Promise.all([
+    saveOwnerField('instagram_url', ig, null),
+    saveOwnerField('twitter_url', tw, null),
+    saveOwnerField('facebook_url', fb, null)
+  ]).then(function(){ showToast('✅ SNSリンクを保存しました'); });
+}
+
+function addOwnerCareer(){
+  var year = document.getElementById('owner-career-year').value.trim();
+  var ct   = document.getElementById('owner-career-content').value.trim();
+  if(!year || !ct){ showToast('⚠ 年・内容を入力してください'); return; }
+  var json = ownerData['career'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  items.push({year:year, content:ct});
+  saveOwnerField('career', JSON.stringify(items), '✅ 経歴を追加しました')
+    .then(function(){
+      document.getElementById('owner-career-year').value = '';
+      document.getElementById('owner-career-content').value = '';
+      renderOwnerCareerMgmt();
+    });
+}
+
+function deleteOwnerCareer(idx){
+  var json = ownerData['career'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  items.splice(idx, 1);
+  saveOwnerField('career', JSON.stringify(items), '🗑 削除しました')
+    .then(function(){ renderOwnerCareerMgmt(); });
+}
+
+function addOwnerMedia(){
+  var val = document.getElementById('owner-media-input').value.trim();
+  if(!val){ showToast('⚠ 内容を入力してください'); return; }
+  var json = ownerData['media'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  items.push(val);
+  saveOwnerField('media', JSON.stringify(items), '✅ メディアを追加しました')
+    .then(function(){
+      document.getElementById('owner-media-input').value = '';
+      renderOwnerMediaMgmt();
+    });
+}
+
+function deleteOwnerMedia(idx){
+  var json = ownerData['media'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  items.splice(idx, 1);
+  saveOwnerField('media', JSON.stringify(items), '🗑 削除しました')
+    .then(function(){ renderOwnerMediaMgmt(); });
+}
+
 // ===== 管理トグル・PW =====
 function onAdminToggle(){
   if(authed){ document.getElementById('admin-toggle-btn').classList.toggle('open'); document.getElementById('admin-panel').classList.toggle('open'); }
@@ -1919,6 +2232,7 @@ document.addEventListener('DOMContentLoaded',function(){
   // 臨時休業
   document.getElementById('hol-add-btn').addEventListener('click',addHoliday);
   loadSiteInfo();
+  loadOwnerProfile();
   loadHolidays();
   updateTabArrows();
   document.getElementById('tab-nav-scroll').addEventListener('scroll', updateTabArrows);
