@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -10,15 +11,18 @@
 <meta name="keywords" content="四日市 印鑑,四日市 はんこ,印鑑 専門店 三重,こにゅうどうくん グッズ,四日市 銀行印,四日市 実印,太古堂">
 <meta name="robots" content="index, follow">
 <meta name="author" content="太古堂">
+<!-- OGP（SNSシェア用） -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="太古堂｜四日市の印鑑・はんこ専門店">
 <meta property="og:description" content="三重県四日市市の印鑑・はんこ専門店。銀行印・認印・実印・法人印、こにゅうどうくんグッズも多数取扱い。">
 <meta property="og:url" content="https://www.taikodou.com/">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="太古堂">
+<!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="太古堂｜四日市の印鑑・はんこ専門店">
 <meta name="twitter:description" content="三重県四日市市の印鑑・はんこ専門店。銀行印・認印・実印・法人印、こにゅうどうくんグッズも多数取扱い。">
+<!-- 構造化データ（Googleの地域ビジネス情報） -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -76,7 +80,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 
 /* ===== ヘッダー ===== */
 .banner-wrap{width:100%;background:var(--black);line-height:0;position:relative;overflow:hidden;}
-.banner-wrap::after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.banner-wrap::after{content:””;position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .banner-wrap img{width:100%;height:auto;display:block;object-fit:cover;max-height:240px;object-position:top;opacity:.95;}
 
 .info-bar{background:var(--black2);display:flex;align-items:center;justify-content:space-between;padding:12px 40px;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--border);}
@@ -84,31 +88,12 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .info-bar .contact{text-align:right;color:rgba(255,255,255,.6);font-size:11px;line-height:2;}
 .info-bar .contact a{color:var(--gold2);text-decoration:none;font-weight:700;font-size:18px;letter-spacing:.05em;}
 
-/* ===== スライダー (2000:1000固定設定) ===== */
+/* ===== スライダー ===== */
 .slider-wrap{width:100%;background:var(--black);position:relative;overflow:hidden;line-height:0;}
 .slider-track{position:relative;}
 .slider-slide{width:100%;position:relative;display:none;}
-.slider-slide img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 2 / 1; /* アスペクト比を2:1に固定 */
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  opacity: .95;
-}
-.slider-slide-dummy {
-  width: 100%;
-  aspect-ratio: 2 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Noto Serif JP",serif;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: .3em;
-  color: var(--gold);
-}
+.slider-slide img{width:100%;height:auto;display:block;object-fit:cover;max-height:560px;object-position:center;opacity:.95;}
+.slider-slide-dummy{width:100%;height:560px;display:flex;align-items:center;justify-content:center;font-family:“Noto Serif JP”,serif;font-size:18px;font-weight:700;letter-spacing:.3em;color:var(--gold);}
 .slider-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;}
 .slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s;border:none;padding:0;}
 .slider-dot.active{background:var(--gold);transform:scale(1.3);}
@@ -116,15 +101,15 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .slider-prev{left:12px;}
 .slider-next{right:12px;}
 .slider-prev:hover,.slider-next:hover{background:rgba(200,169,110,.2);border-color:var(--gold);}
-.slider-wrap::after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:5;}
+.slider-wrap::after{content:””;position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:5;}
 
 /* ===== ヒーロー ===== */
 .hero{background:var(--black);padding:50px 40px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,#2a2010 0%,var(--black) 70%);opacity:.8;}
-.hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.hero::before{content:””;position:absolute;inset:0;background:radial-gradient(ellipse at center,#2a2010 0%,var(--black) 70%);opacity:.8;}
+.hero::after{content:””;position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .hero-inner{position:relative;z-index:1;}
-.hero-subtitle{font-size:10px;letter-spacing:.6em;color:var(--gold);margin-bottom:16px;font-family:"Noto Serif JP",serif;}
-.hero h1{font-family:"Noto Serif JP",serif;font-size:22px;color:var(--white);letter-spacing:.4em;margin-bottom:12px;font-weight:400;line-height:1.8;}
+.hero-subtitle{font-size:10px;letter-spacing:.6em;color:var(--gold);margin-bottom:16px;font-family:“Noto Serif JP”,serif;}
+.hero h1{font-family:“Noto Serif JP”,serif;font-size:22px;color:var(--white);letter-spacing:.4em;margin-bottom:12px;font-weight:400;line-height:1.8;}
 .hero-line{width:40px;height:1px;background:var(--gold);margin:0 auto 12px;}
 .hero p{color:rgba(255,255,255,.5);font-size:12px;letter-spacing:.15em;}
 
@@ -136,7 +121,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .hours-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .hours-dot.open{background:#2e7d32;box-shadow:0 0 6px rgba(46,125,50,.5);}
 .hours-dot.closed{background:#c62828;}
-.hours-time{font-family:"Noto Serif JP",serif;font-size:15px;font-weight:700;color:var(--black);letter-spacing:.05em;}
+.hours-time{font-family:“Noto Serif JP”,serif;font-size:15px;font-weight:700;color:var(--black);letter-spacing:.05em;}
 .hours-time.closed{color:#c62828;}
 
 .hours-note{font-size:10px;color:var(--muted);letter-spacing:.1em;}
@@ -144,8 +129,8 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 /* ===== タブ ===== */
 .tabs-wrap{max-width:1100px;margin:0 auto;padding:0 24px 60px;background:var(--off-white);}
 .tab-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;}
-.tab-btn{padding:14px 8px;border:none;cursor:pointer;font-family:"Noto Serif JP",serif;font-size:14px;font-weight:700;background:#2a2418;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .3s;letter-spacing:.05em;white-space:nowrap;position:relative;}
-.tab-btn::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:transparent;transition:background .3s;}
+.tab-btn{padding:14px 8px;border:none;cursor:pointer;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;background:#2a2418;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .3s;letter-spacing:.05em;white-space:nowrap;position:relative;}
+.tab-btn::after{content:””;position:absolute;bottom:0;left:0;right:0;height:2px;background:transparent;transition:background .3s;}
 .tab-btn:first-child{border-radius:2px 0 0 0;}
 .tab-btn:last-child{border-radius:0 2px 0 0;}
 .tab-btn.active{background:#3a3020;color:var(--gold2);}
@@ -160,14 +145,14 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 .sec-title{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid #e0d8c8;}
-.sec-title::before{content:"";width:3px;height:20px;background:var(--gold);flex-shrink:0;}
-.sec-title h3{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--black2);letter-spacing:.2em;}
+.sec-title::before{content:””;width:3px;height:20px;background:var(--gold);flex-shrink:0;}
+.sec-title h3{font-family:“Noto Serif JP”,serif;font-size:16px;font-weight:700;color:var(--black2);letter-spacing:.2em;}
 .sec-badge{color:var(--gold-dark);font-size:10px;padding:3px 10px;border:1px solid var(--gold-dark);border-radius:2px;letter-spacing:.2em;margin-left:auto;}
 
 /* ===== 商品グリッド ===== */
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px;}
 .product-card{background:#faf7f2;border:1px solid #e0d8c8;padding:24px 20px;position:relative;overflow:hidden;transition:all .4s;cursor:pointer;}
-.product-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s;}
+.product-card::before{content:””;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s;}
 .product-card.konyudo{border-color:#1a3a3a;}
 .product-card.konyudo::before{background:linear-gradient(90deg,transparent,var(--teal2),transparent);}
 .product-card:hover{background:#ffffff;border-color:var(--gold-dark);box-shadow:0 4px 20px rgba(0,0,0,.08);}
@@ -177,9 +162,9 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .card-photo{width:100%;height:100%;object-fit:contain;display:block;filter:brightness(.95);}
 .card-icon{width:64px;height:64px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#ffffff;border:1px solid #e0d8c8;}
 
-.card-name{font-family:"Noto Serif JP",serif;font-size:14px;font-weight:700;text-align:center;margin-bottom:8px;color:var(--black);letter-spacing:.1em;}
+.card-name{font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;text-align:center;margin-bottom:8px;color:var(--black);letter-spacing:.1em;}
 .card-price{font-size:12px;color:var(--muted);text-align:center;margin-bottom:6px;letter-spacing:.05em;}
-.card-price.single{font-size:18px;font-weight:700;color:var(--gold);font-family:"Noto Serif JP",serif;}
+.card-price.single{font-size:18px;font-weight:700;color:var(--gold);font-family:“Noto Serif JP”,serif;}
 .card-price.single.teal{color:var(--teal2);}
 .card-size{font-size:10px;color:var(--muted);text-align:center;margin-bottom:6px;letter-spacing:.1em;}
 .card-detail-hint{margin-top:10px;font-size:10px;color:var(--gold-dark);text-align:center;letter-spacing:.15em;}
@@ -193,8 +178,8 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .detail-overlay.show{display:flex;animation:fadeIn .3s;}
 .detail-box{background:#ffffff;border:1px solid #e0d8c8;border-radius:2px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.2);}
 .detail-header{position:relative;padding:28px 32px 20px;border-bottom:1px solid #e0d8c8;}
-.detail-header::before{content:"";position:absolute;top:0;left:32px;right:32px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);}
-.detail-header h3{font-family:"Noto Serif JP",serif;font-size:22px;font-weight:700;color:var(--black);margin-bottom:0;padding-right:40px;letter-spacing:.15em;}
+.detail-header::before{content:””;position:absolute;top:0;left:32px;right:32px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);}
+.detail-header h3{font-family:“Noto Serif JP”,serif;font-size:22px;font-weight:700;color:var(--black);margin-bottom:0;padding-right:40px;letter-spacing:.15em;}
 .detail-close{position:absolute;top:24px;right:24px;width:32px;height:32px;border:1px solid var(--border);background:transparent;border-radius:2px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s;}
 .detail-close:hover{border-color:var(--gold);color:var(--gold);}
 .detail-photo-wrap{width:100%;aspect-ratio:4/3;background:#f0ece4;overflow:hidden;display:flex;align-items:center;justify-content:center;}
@@ -203,11 +188,11 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .detail-body{padding:28px 32px 36px;}
 .detail-material{font-size:12px;color:var(--gold-dark);margin-bottom:16px;padding:10px 14px;background:var(--cream);border:1px solid #e0d8c8;letter-spacing:.1em;}
 .detail-desc{font-size:14px;line-height:2;color:#444;margin-bottom:24px;}
-.detail-sizes-title{font-family:"Noto Serif JP",serif;font-size:13px;font-weight:700;color:var(--black2);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0d8c8;letter-spacing:.25em;}
+.detail-sizes-title{font-family:“Noto Serif JP”,serif;font-size:13px;font-weight:700;color:var(--black2);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #e0d8c8;letter-spacing:.25em;}
 .detail-size-table{width:100%;border-collapse:collapse;margin-bottom:8px;}
 .detail-size-table th{font-size:11px;color:var(--muted);font-weight:700;padding:8px 12px;text-align:left;border-bottom:1px solid #e0d8c8;letter-spacing:.15em;}
 .detail-size-table td{padding:12px;border-bottom:1px solid #f0e8d8;font-size:14px;color:#333;}
-.detail-size-table td:last-child{text-align:right;font-weight:700;font-size:17px;color:var(--gold);font-family:"Noto Serif JP",serif;}
+.detail-size-table td:last-child{text-align:right;font-weight:700;font-size:17px;color:var(--gold);font-family:“Noto Serif JP”,serif;}
 .detail-size-table.teal td:last-child{color:var(--teal2);}
 .detail-size-table tr:last-child td{border-bottom:none;}
 .detail-no-size{font-size:13px;color:var(--muted);text-align:center;padding:20px;letter-spacing:.1em;}
@@ -221,7 +206,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .admin-panel{display:none;background:#ffffff;border:1px solid var(--border-light);border-radius:2px;padding:28px;margin-top:8px;text-align:left;}
 .admin-panel.open{display:block;animation:fadeIn .3s;}
 .admin-tabs{display:flex;gap:0;margin-bottom:24px;border-bottom:2px solid var(--border-light);}
-.admin-tab{padding:9px 20px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:"Noto Sans JP",sans-serif;font-size:13px;font-weight:700;color:#aaa;margin-bottom:-2px;transition:all .2s;letter-spacing:.05em;}
+.admin-tab{padding:9px 20px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:“Noto Sans JP”,sans-serif;font-size:13px;font-weight:700;color:#aaa;margin-bottom:-2px;transition:all .2s;letter-spacing:.05em;}
 .admin-tab.active{color:var(--red);border-bottom-color:var(--red);}
 .admin-subpane{display:none;}
 .admin-subpane.active{display:block;animation:fadeIn .2s;}
@@ -232,7 +217,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .fg.full{grid-column:1/-1;}
 .fg label{font-size:12px;font-weight:700;color:#666;letter-spacing:.1em;}
 .fg label .req{color:var(--red);margin-left:3px;}
-.fg input,.fg select,.fg textarea{padding:10px 12px;border:1px solid var(--border-light);border-radius:2px;font-family:"Noto Sans JP",sans-serif;font-size:14px;background:white;outline:none;transition:border-color .2s;color:var(--black);}
+.fg input,.fg select,.fg textarea{padding:10px 12px;border:1px solid var(--border-light);border-radius:2px;font-family:“Noto Sans JP”,sans-serif;font-size:14px;background:white;outline:none;transition:border-color .2s;color:var(--black);}
 .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold-dark);box-shadow:0 0 0 3px rgba(200,169,110,.08);}
 .fg textarea{resize:vertical;min-height:76px;}
 .radio-row{display:flex;gap:10px;}
@@ -248,14 +233,14 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .photo-hint .ph-sub{font-size:11px;color:#aaa;}
 .photo-drop img.prev{width:100%;height:100%;object-fit:contain;display:block;}
 .photo-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
-.pbtn{flex:1;min-width:110px;padding:9px 10px;border-radius:2px;border:1px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:"Noto Sans JP",sans-serif;transition:all .2s;white-space:nowrap;background:white;letter-spacing:.05em;}
+.pbtn{flex:1;min-width:110px;padding:9px 10px;border-radius:2px;border:1px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:“Noto Sans JP”,sans-serif;transition:all .2s;white-space:nowrap;background:white;letter-spacing:.05em;}
 .pbtn.cam{border-color:var(--red);color:var(--red);}
 .pbtn.cam:hover{background:var(--red);color:white;}
 .pbtn.lib{border-color:var(--teal);color:var(--teal);}
 .pbtn.lib:hover{background:var(--teal);color:white;}
 .pbtn.del{border-color:#ccc;color:#888;flex:0 0 auto;}
 .pbtn.del:hover{background:#e74c3c;border-color:#e74c3c;color:white;}
-.reg-btn{margin-top:20px;width:100%;padding:14px;background:var(--black2);color:var(--gold);border:1px solid var(--gold-dark);border-radius:2px;font-family:"Noto Serif JP",serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.2em;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.reg-btn{margin-top:20px;width:100%;padding:14px;background:var(--black2);color:var(--gold);border:1px solid var(--gold-dark);border-radius:2px;font-family:“Noto Serif JP”,serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.2em;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .reg-btn:hover{background:var(--gold);color:var(--black);}
 .reg-btn:disabled{background:#ccc;border-color:#ccc;color:#888;cursor:not-allowed;}
 .form-err{font-size:12px;color:var(--red);margin-top:10px;display:none;padding:8px 12px;background:#fff0f0;border-radius:2px;border-left:3px solid var(--red);}
@@ -289,7 +274,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .sz-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1500;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:16px;}
 .sz-overlay.show{display:flex;animation:fadeIn .2s;}
 .sz-box{background:var(--off-white);border:1px solid var(--border-light);border-radius:2px;padding:28px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.5);}
-.sz-box h4{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:4px;letter-spacing:.15em;}
+.sz-box h4{font-family:“Noto Serif JP”,serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:4px;letter-spacing:.15em;}
 .sz-pname{font-size:12px;color:var(--muted);margin-bottom:16px;}
 .sz-list{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
 .sz-item{display:flex;align-items:center;gap:8px;background:white;border:1px solid var(--border-light);border-radius:2px;padding:10px 14px;}
@@ -310,8 +295,8 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .edit-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1500;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:16px;}
 .edit-overlay.show{display:flex;animation:fadeIn .2s;}
 .edit-box{background:var(--off-white);border:1px solid var(--border-light);border-radius:2px;padding:28px;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.5);}
-.edit-box h4{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-light);letter-spacing:.15em;}
-.edit-save-btn{margin-top:16px;width:100%;padding:12px;background:var(--black2);color:var(--gold);border:1px solid var(--gold-dark);border-radius:2px;font-family:"Noto Serif JP",serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.1em;}
+.edit-box h4{font-family:“Noto Serif JP”,serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-light);letter-spacing:.15em;}
+.edit-save-btn{margin-top:16px;width:100%;padding:12px;background:var(--black2);color:var(--gold);border:1px solid var(--gold-dark);border-radius:2px;font-family:“Noto Serif JP”,serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.1em;}
 .edit-save-btn:hover{background:var(--gold);color:var(--black);}
 .edit-save-btn:disabled{background:#ccc;border-color:#ccc;color:#888;cursor:not-allowed;}
 .edit-cancel-btn{margin-top:8px;width:100%;padding:10px;background:white;border:1px solid #ddd;border-radius:2px;font-size:13px;cursor:pointer;color:#888;}
@@ -321,7 +306,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .pm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 .pm-overlay.show{display:flex;animation:fadeIn .2s;}
 .pm-box{background:var(--off-white);border:1px solid var(--border-light);border-radius:2px;padding:28px;width:340px;max-width:90vw;box-shadow:0 24px 64px rgba(0,0,0,.5);}
-.pm-box h4{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:4px;letter-spacing:.15em;}
+.pm-box h4{font-family:“Noto Serif JP”,serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:4px;letter-spacing:.15em;}
 .pm-pname{font-size:12px;color:var(--muted);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .pm-drop{width:100%;aspect-ratio:4/3;border:1px dashed var(--border-light);border-radius:2px;background:#fafaf8;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:border-color .2s;}
 .pm-drop:hover{border-color:var(--gold-dark);}
@@ -331,7 +316,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .pm-drop img{width:100%;height:100%;object-fit:contain;display:block;}
 .pm-btns{display:flex;gap:8px;margin-top:10px;}
 .pm-footer{display:flex;gap:8px;margin-top:18px;}
-.pm-save-btn{flex:1;padding:11px;background:var(--black2);color:var(--gold);border:1px solid var(--gold-dark);border-radius:2px;font-family:"Noto Serif JP",serif;font-size:14px;font-weight:700;cursor:pointer;}
+.pm-save-btn{flex:1;padding:11px;background:var(--black2);color:var(--gold);border:1px solid var(--gold-dark);border-radius:2px;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;cursor:pointer;}
 .pm-save-btn:hover{background:var(--gold);color:var(--black);}
 .pm-save-btn:disabled{background:#ccc;border-color:#ccc;color:#888;cursor:not-allowed;}
 .pm-cancel-btn{padding:11px 16px;background:white;border:1px solid #ddd;border-radius:2px;font-size:13px;cursor:pointer;color:#888;}
@@ -341,15 +326,15 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .pw-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 .pw-overlay.show{display:flex;animation:fadeIn .2s;}
 .pw-box{background:var(--black2);border:1px solid var(--border);border-radius:2px;padding:40px;width:320px;box-shadow:0 32px 80px rgba(0,0,0,.8);text-align:center;position:relative;}
-.pw-box::before{content:"";position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.pw-box::before{content:””;position:absolute;top:0;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 .pw-box .pwi{font-size:32px;margin-bottom:12px;opacity:.7;}
-.pw-box h3{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px;letter-spacing:.2em;}
+.pw-box h3{font-family:“Noto Serif JP”,serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px;letter-spacing:.2em;}
 .pw-box p{font-size:11px;color:var(--muted);margin-bottom:24px;letter-spacing:.1em;}
 .pw-input{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:2px;font-size:16px;letter-spacing:.2em;outline:none;text-align:center;transition:border-color .2s;margin-bottom:14px;background:var(--black3);color:var(--white);}
 .pw-input:focus{border-color:var(--gold-dark);}
 .pw-input.err{border-color:#e74c3c;animation:shake .3s;}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.pw-submit{width:100%;padding:12px;background:transparent;color:var(--gold);border:1px solid var(--gold-dark);border-radius:2px;font-family:"Noto Serif JP",serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.15em;transition:all .3s;}
+.pw-submit{width:100%;padding:12px;background:transparent;color:var(--gold);border:1px solid var(--gold-dark);border-radius:2px;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.15em;transition:all .3s;}
 .pw-submit:hover{background:var(--gold);color:var(--black);}
 .pw-cancel{margin-top:12px;background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;letter-spacing:.1em;}
 .pw-errmsg{font-size:11px;color:#e74c3c;margin-bottom:10px;display:none;letter-spacing:.1em;}
@@ -361,14 +346,14 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 
 /* ===== フッター ===== */
 footer{background:var(--black);color:rgba(255,255,255,.4);text-align:center;padding:36px 24px;font-size:11px;margin-top:0;letter-spacing:.2em;position:relative;}
-footer::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+footer::before{content:””;position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 footer strong{color:var(--gold);}
 footer a{color:var(--gold2);}
 
 /* ===== ブログ ===== */
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;}
 .blog-card{background:#faf7f2;border:1px solid #e0d8c8;border-radius:2px;overflow:hidden;cursor:pointer;transition:all .3s;position:relative;}
-.blog-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);opacity:0;transition:opacity .3s;}
+.blog-card::before{content:””;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);opacity:0;transition:opacity .3s;}
 .blog-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.1);border-color:var(--gold-dark);}
 .blog-card:hover::before{opacity:1;}
 .blog-card-thumb{width:100%;aspect-ratio:16/9;background:#f0ece4;overflow:hidden;display:flex;align-items:center;justify-content:center;}
@@ -376,7 +361,7 @@ footer a{color:var(--gold2);}
 .blog-card-thumb-icon{font-size:36px;opacity:.3;}
 .blog-card-body{padding:18px 20px;}
 .blog-card-date{font-size:11px;color:var(--muted);letter-spacing:.15em;margin-bottom:6px;}
-.blog-card-title{font-family:"Noto Serif JP",serif;font-size:16px;font-weight:700;color:var(--black);line-height:1.6;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.blog-card-title{font-family:“Noto Serif JP”,serif;font-size:16px;font-weight:700;color:var(--black);line-height:1.6;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .blog-card-excerpt{font-size:12px;color:var(--muted);line-height:1.8;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .blog-card-footer{padding:12px 20px;border-top:1px solid #f0e8d8;display:flex;align-items:center;justify-content:space-between;}
 .blog-card-more{font-size:11px;color:var(--gold-dark);letter-spacing:.15em;font-weight:700;}
@@ -387,9 +372,9 @@ footer a{color:var(--gold2);}
 .blog-overlay.show{display:flex;animation:fadeIn .3s;}
 .blog-box{background:#ffffff;border:1px solid #e0d8c8;border-radius:2px;width:100%;max-width:720px;margin:auto;box-shadow:0 24px 60px rgba(0,0,0,.15);}
 .blog-box-header{position:relative;padding:32px 40px 24px;border-bottom:1px solid #f0e8d8;}
-.blog-box-header::before{content:"";position:absolute;top:0;left:40px;right:40px;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);}
+.blog-box-header::before{content:””;position:absolute;top:0;left:40px;right:40px;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);}
 .blog-box-date{font-size:11px;color:var(--muted);letter-spacing:.2em;margin-bottom:10px;}
-.blog-box-title{font-family:"Noto Serif JP",serif;font-size:24px;font-weight:700;color:var(--black);line-height:1.7;letter-spacing:.1em;padding-right:40px;}
+.blog-box-title{font-family:“Noto Serif JP”,serif;font-size:24px;font-weight:700;color:var(--black);line-height:1.7;letter-spacing:.1em;padding-right:40px;}
 .blog-box-close{position:absolute;top:28px;right:28px;width:32px;height:32px;border:1px solid #ddd;background:white;border-radius:2px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s;}
 .blog-box-close:hover{border-color:var(--gold-dark);color:var(--gold-dark);}
 .blog-box-thumb{width:100%;aspect-ratio:16/9;background:#f0ece4;overflow:hidden;}
@@ -412,7 +397,7 @@ footer a{color:var(--gold2);}
 .blog-pub-badge.draft{background:#f0e8d8;color:var(--muted);}
 
 /* ブログ投稿フォーム */
-.blog-content-area{width:100%;min-height:240px;padding:12px;border:1px solid var(--border-light);border-radius:2px;font-family:"Noto Sans JP",sans-serif;font-size:14px;outline:none;resize:vertical;line-height:1.8;color:var(--black);}
+.blog-content-area{width:100%;min-height:240px;padding:12px;border:1px solid var(--border-light);border-radius:2px;font-family:“Noto Sans JP”,sans-serif;font-size:14px;outline:none;resize:vertical;line-height:1.8;color:var(--black);}
 .blog-content-area:focus{border-color:var(--gold-dark);box-shadow:0 0 0 3px rgba(200,169,110,.08);}
 .blog-pub-row{display:flex;align-items:center;gap:12px;margin-top:4px;}
 .blog-pub-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;font-weight:700;padding:10px 18px;border:1px solid var(--border-light);border-radius:2px;background:white;transition:all .2s;user-select:none;}
@@ -500,26 +485,17 @@ footer a{color:var(--gold2);}
   <div class="slider-wrap" id="main-slider">
     <div class="slider-track" id="slider-track">
       <div class="slider-slide">
-        <picture>
-          <source media="(min-width: 768px)" srcset="images/slide1-pc.jpg">
-          <img src="images/slide1.jpg" alt="太古堂 外観">
-        </picture>
+        <img src="images/slide1.jpg" alt="太古堂 外観">
       </div>
       <div class="slider-slide">
-        <picture>
-          <source media="(min-width: 768px)" srcset="images/slide2-pc.jpg">
-          <img src="images/slide2.jpg" alt="はんこ・印鑑 商品">
-        </picture>
+        <img src="images/slide2.jpg" alt="はんこ・印鑑 商品">
       </div>
       <div class="slider-slide">
-        <picture>
-          <source media="(min-width: 768px)" srcset="images/slide3-pc.jpg">
-          <img src="images/slide3.jpg" alt="こにゅうどうくん グッズ">
-        </picture>
+        <img src="images/slide3.jpg" alt="こにゅうどうくん グッズ">
       </div>
     </div>
-    <button class="slider-prev" id="slider-prev">‹</button>
-    <button class="slider-next" id="slider-next">›</button>
+    <button class="slider-prev" id="slider-prev">&#8249;</button>
+    <button class="slider-next" id="slider-next">&#8250;</button>
     <div class="slider-dots" id="slider-dots">
       <button class="slider-dot active" data-idx="0"></button>
       <button class="slider-dot" data-idx="1"></button>
@@ -528,6 +504,7 @@ footer a{color:var(--gold2);}
   </div>
   <div class="info-bar">
     <span class="tagline">印鑑専門店 ＆ こにゅうどうくんグッズ取扱い</span>
+
   </div>
 </header>
 <div class="hours-bar" id="hours-bar">
@@ -559,6 +536,7 @@ footer a{color:var(--gold2);}
       各SNSは、ページ下のリンクからどうぞ！
     </div>
 
+    <!-- 沿革アコーディオン -->
     <div class="accordion">
       <button class="accordion-btn" id="history-btn" onclick="toggleAccordion()">
         <span>■ 沿革</span>
@@ -569,6 +547,7 @@ footer a{color:var(--gold2);}
       </div>
     </div>
 
+    <!-- 店主紹介アコーディオン -->
     <div class="accordion" style="margin-top:8px;">
       <button class="accordion-btn" id="owner-btn" onclick="toggleOwnerAccordion()">
         <span id="owner-btn-text">■ 店主紹介</span>
@@ -610,6 +589,7 @@ footer a{color:var(--gold2);}
     <div class="tab-pane" id="pane-insta">
       <div class="sec-title"><h3>Instagram</h3><span class="sec-badge">@taikodou_katsuji</span></div>
       <p style="font-size:12px;color:var(--muted);margin-bottom:20px;letter-spacing:.1em;">最新の投稿をご覧いただけます。フォローもよろしくお願いします！</p>
+      <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
       <script src="https://elfsightcdn.com/platform.js" async></script>
       <div class="elfsight-app-b4be0809-6507-4901-ba28-906ac1a37bff" data-elfsight-app-lazy></div>
     </div>
@@ -694,6 +674,7 @@ footer a{color:var(--gold2);}
   </div>
 </div>
 
+<!-- Google Map embed placeholder -->
 <div style="margin-top:24px;width:100%;height:180px;background:#1a1a1a;border:1px solid #333;border-radius:2px;overflow:hidden;">
   <iframe
     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3269.626203912619!2d136.6267853752179!3d34.96597636893398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60038ee3d575f3f9%3A0xf8e0e1585e7ba885!2z44CSNTEwLTAwOTQg5LiJ6YeN55yM5Zub5pel5biC5biC5paw44CF55S677yR4oiS77yV!5e0!3m2!1sja!2sjp!4v1771931050201!5m2!1sja!2sjp"
@@ -718,7 +699,7 @@ footer a{color:var(--gold2);}
             <div class="radio-row">
               <label class="rlabel red"><input type="radio" name="cat" value="hanko" checked> 印鑑・はんこ</label>
               <label class="rlabel teal"><input type="radio" name="cat" value="konyudo"> こにゅうどうくんグッズ</label>
-              <label class="rlabel"><input type="radio" name="cat" value="meishi"> 名札</label>
+              <label class="rlabel"><input type="radio" name="cat" value="meishi"> 名刺</label>
               <label class="rlabel"><input type="radio" name="cat" value="yakiin"> 焼印</label>
               <label class="rlabel"><input type="radio" name="cat" value="nafuda"> 名札</label>
               <label class="rlabel"><input type="radio" name="cat" value="sonota"> その他グッズ</label>
@@ -793,9 +774,7 @@ footer a{color:var(--gold2);}
             <div class="fg full"><label>タイトル<span class="req">*</span></label><input type="text" id="bf-title" placeholder="例：象牙の印鑑について"></div>
             <div class="fg full">
               <label>本文<span class="req">*</span>（Enterキーで改行できます）</label>
-              <textarea class="blog-content-area" id="bf-content" placeholder="記事の内容を書いてください。
-
-改行はそのまま反映されます。"></textarea>
+              <textarea class="blog-content-area" id="bf-content" placeholder="記事の内容を書いてください。&#10;&#10;改行はそのまま反映されます。"></textarea>
             </div>
             <div class="fg full">
               <label>サムネイル写真</label>
@@ -833,13 +812,16 @@ footer a{color:var(--gold2);}
         <div class="blog-mgmt-list" id="blog-mgmt-list"></div>
       </div>
       <div class="admin-subpane" id="apane-site">
+        <!-- 太古堂についての説明文 -->
         <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:12px;letter-spacing:.1em;">📝 太古堂についての説明文</div>
         <div style="margin-bottom:20px;">
           <textarea id="site-about-text" style="width:100%;min-height:180px;padding:12px;border:2px solid #d4c4a0;border-radius:8px;font-size:14px;line-height:2;font-family:'Noto Sans JP',sans-serif;resize:vertical;" placeholder="紹介文を入力..."></textarea>
           <button type="button" onclick="saveSiteAbout()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;">💾 保存する</button>
         </div>
+        <!-- 店主紹介 -->
         <div style="font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e0d8c8;letter-spacing:.1em;">👤 店主紹介</div>
 
+        <!-- テキスト入力 -->
         <div style="margin-bottom:20px;">
           <div style="margin-bottom:8px;">
             <label style="font-size:12px;font-weight:700;color:#666;">📝 紹介文</label>
@@ -848,6 +830,7 @@ footer a{color:var(--gold2);}
           <div id="owner-quill-editor" style="margin-bottom:0;"></div>
           <input type="hidden" id="owner-intro-text">
           <button type="button" onclick="saveOwnerIntro()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 保存する</button>
+          <!-- 店主写真 -->
           <div style="margin-top:20px;padding-top:16px;border-top:1px solid #e8dcc8;">
             <label style="font-size:12px;font-weight:700;color:#666;">🖼 店主写真（2枚）</label>
             <div style="display:flex;gap:12px;margin-top:10px;">
@@ -872,7 +855,8 @@ footer a{color:var(--gold2);}
           </div>
         </div>
 
-                <div style="margin-bottom:20px;">
+                <!-- メディア掲載 -->
+        <div style="margin-bottom:20px;">
           <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px;">📰 メディア掲載履歴</div>
           <div id="owner-media-list" style="margin-bottom:12px;"></div>
           <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:4px;padding:14px;">
@@ -888,6 +872,7 @@ footer a{color:var(--gold2);}
           </div>
         </div>
 
+        <!-- SNS -->
         <div style="margin-bottom:20px;">
           <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:10px;">🔗 SNSリンク</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
@@ -910,6 +895,7 @@ footer a{color:var(--gold2);}
           <button type="button" onclick="saveOwnerSns()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 SNSを保存する</button>
         </div>
 
+        <!-- 沿革 -->
         <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:12px;letter-spacing:.1em;">📅 沿革</div>
         <div id="site-history-list" style="margin-bottom:16px;"></div>
         <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:8px;padding:16px;">
@@ -939,6 +925,8 @@ footer a{color:var(--gold2);}
 </footer>
 <div class="toast" id="toast"></div>
 
+<!-- ブログ詳細モーダル -->
+
 <div class="blog-overlay" id="blog-overlay">
   <div class="blog-box">
     <div class="blog-box-header">
@@ -950,6 +938,8 @@ footer a{color:var(--gold2);}
     <div class="blog-box-content" id="blog-box-content"></div>
   </div>
 </div>
+
+<!-- 商品詳細モーダル -->
 
 <div class="detail-overlay" id="detail-overlay">
   <div class="detail-box">
@@ -969,6 +959,8 @@ footer a{color:var(--gold2);}
   </div>
 </div>
 
+<!-- サイズ管理モーダル -->
+
 <div class="sz-overlay" id="sz-overlay">
   <div class="sz-box">
     <h4>💴 サイズ・価格の管理</h4>
@@ -985,6 +977,8 @@ footer a{color:var(--gold2);}
     </div>
   </div>
 </div>
+
+<!-- 写真編集モーダル -->
 
 <div class="pm-overlay" id="pm-overlay">
   <div class="pm-box">
@@ -1011,6 +1005,8 @@ footer a{color:var(--gold2);}
   </div>
 </div>
 
+<!-- 商品編集モーダル -->
+
 <div class="edit-overlay" id="edit-overlay">
   <div class="edit-box">
     <h4>✏️ 商品を編集</h4>
@@ -1026,6 +1022,8 @@ footer a{color:var(--gold2);}
     <button type="button" class="edit-cancel-btn" id="edit-cancel-btn">キャンセル</button>
   </div>
 </div>
+
+<!-- パスワードモーダル -->
 
 <div class="pw-overlay" id="pw-overlay">
   <div class="pw-box">
@@ -1077,6 +1075,8 @@ function sbFetch(method, path, body){
 // ===== 営業時間 =====
 (function(){
   var DAY_NAMES = ['日','月','火','水','木','金','土'];
+  // 営業時間定義 [開始時, 終了時] or null(定休)
+  // 0=日, 1=月, 2=火, 3=水, 4=木, 5=金, 6=土
   var HOURS = {
     0: null,              // 日: 定休
     1: ['8:00','18:00'],  // 月
@@ -1088,6 +1088,7 @@ function sbFetch(method, path, body){
   };
 
   function isSecondSaturday(date){
+    // 第2土曜日かどうか判定
     if(date.getDay() !== 6) return false;
     var d = new Date(date.getFullYear(), date.getMonth(), 1);
     var count = 0;
@@ -1100,7 +1101,7 @@ function sbFetch(method, path, body){
 
   function getTodayHours(date){
     var dow = date.getDay();
-    if(isSecondSaturday(date)) return null;
+    if(isSecondSaturday(date)) return null; // 第2土曜は定休
     return HOURS[dow];
   }
 
@@ -1117,6 +1118,7 @@ function sbFetch(method, path, body){
   var todayDow = now.getDay();
   var todayHours = getTodayHours(now);
 
+  // 本日の表示
   var dot  = document.getElementById('hours-dot');
   var time = document.getElementById('hours-time');
   var note = document.getElementById('hours-note');
@@ -1135,6 +1137,8 @@ function sbFetch(method, path, body){
     time.textContent = '本日は定休日です';
     note.textContent = todayDow === 6 ? '（第2土曜日）' : '';
   }
+
+
 })();
 
 // ===== データ読み込み =====
@@ -1340,6 +1344,7 @@ function loadProducts(){
   });
   document.getElementById('grid-hanko').innerHTML='';
   document.getElementById('grid-konyudo').innerHTML='';
+  // 商品とサイズを並行取得
   return Promise.all([
     sbFetch('GET','products?select=*&order=sort_order.asc,id.asc'),
     sbFetch('GET','product_sizes?select=*&order=sort_order.asc,id.asc')
@@ -1364,6 +1369,7 @@ function loadProducts(){
   }).catch(function(e){ document.getElementById('loading-hanko').style.display='none'; document.getElementById('loading-konyudo').style.display='none'; ['meishi','yakiin','nafuda','sonota','coupon'].forEach(function(c){ var el=document.getElementById('loading-'+c); if(el) el.style.display='none'; }); console.error('loadProducts:',e); showToast('⚠ 通信エラー: '+((e&&e.message)||'不明')); });
 }
 
+// ===== 公開グリッド =====
 function renderAll(){
   var hanko=products.filter(function(p){ return p.cat==='hanko'; });
   var konyudo=products.filter(function(p){ return p.cat==='konyudo'; });
@@ -1376,6 +1382,7 @@ function renderAll(){
     var g=document.getElementById('grid-'+c);
     if(g) g.innerHTML=items.map(cardHtml).join('');
   });
+  // カードクリックで詳細表示
   document.querySelectorAll('.product-card').forEach(function(card){
     card.addEventListener('click',function(){ openDetail(parseInt(this.dataset.id)); });
   });
@@ -1401,29 +1408,40 @@ function cardHtml(p){
     +'<div class="card-name">'+esc(p.name)+'</div>'
     +priceHtml
     +(p.size_material?'<div class="card-size">'+esc(p.size_material)+'</div>':'')
+
     +hint
     +'</div>';
 }
 
+// ===== 商品詳細モーダル =====
 function openDetail(id){
   var p=products.find(function(x){ return x.id===id; });
   if(!p) return;
   var isTeal=p.cat==='konyudo';
   var sizes=productSizes[p.id]||[];
+
   document.getElementById('detail-name').textContent=p.name;
+
+  // 写真
   var mediaEl=document.getElementById('detail-media');
   if(p.photo){
     mediaEl.innerHTML='<div class="detail-photo-wrap"><img class="detail-photo" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'"></div>';
   } else {
     mediaEl.innerHTML='<div class="detail-photo-wrap"><div class="detail-icon">'+(p.icon||(isTeal?'🟢':'🔖'))+'</div></div>';
   }
+
+  // 素材
   var matEl=document.getElementById('detail-material');
   if(p.size_material){ matEl.textContent='【素材・仕様】'+p.size_material; matEl.style.display='block'; }
   else { matEl.style.display='none'; }
+
+  // 説明
   document.getElementById('detail-desc').innerHTML=esc(p.description||'').replace(/\n/g,'<br>').replace(
     /https?:\/\/[\w\-._~:/?#[\]@!$&'()*+,;=%]+/g,
     function(url){ return '<a href="'+url+'" target="_blank" rel="noopener noreferrer" style="color:var(--gold-dark);word-break:break-all;">'+url+'</a>'; }
   );
+
+  // サイズ別価格
   var titleEl=document.getElementById('detail-sizes-title');
   titleEl.className='detail-sizes-title'+(isTeal?' teal':'');
   var contentEl=document.getElementById('detail-sizes-content');
@@ -1443,10 +1461,12 @@ function openDetail(id){
     titleEl.style.display='none';
     contentEl.innerHTML='';
   }
+
   document.getElementById('detail-overlay').classList.add('show');
 }
 function closeDetail(){ document.getElementById('detail-overlay').classList.remove('show'); }
 
+// ===== 管理リスト =====
 function renderMgmt(){
   ['hanko','konyudo','meishi','yakiin','nafuda','sonota','coupon'].forEach(function(cat){
     var list=products.filter(function(p){ return p.cat===cat; });
@@ -1471,6 +1491,7 @@ function renderMgmt(){
         +'<button class="mgmt-btn sq trash" data-id="'+p.id+'">🗑</button>'
         +'</div></div>';
     }).join('');
+
     el.querySelectorAll('.mgmt-btn.photo').forEach(function(btn){
       btn.addEventListener('click',function(){ openPmModal(this.dataset.id,this.dataset.name); });
     });
@@ -1486,10 +1507,10 @@ function renderMgmt(){
         var swapIdx=idx2+dir;
         if(swapIdx<0||swapIdx>=arr.length) return;
         var newArr=arr.slice(); var tmp=newArr[idx2]; newArr[idx2]=newArr[swapIdx]; newArr[swapIdx]=tmp;
-        this.disabled=true;
+        var btn=this; btn.disabled=true;
         Promise.all(newArr.map(function(p,i){ return sbFetch('PATCH','products?id=eq.'+p.id,{sort_order:i}); }))
           .then(function(){ showToast('✅ 順番を変更しました'); return loadProducts().then(function(){ renderMgmt(); }); })
-          .catch(function(e){ showToast('⚠ 並び替えに失敗しました'); loadProducts().then(function(){ renderMgmt(); }); });
+          .catch(function(e){ console.error('sort error',e); showToast('⚠ 並び替えに失敗しました'); loadProducts().then(function(){ renderMgmt(); }); });
       });
     });
     el.querySelectorAll('.mgmt-btn.trash').forEach(function(btn){
@@ -1504,8 +1525,11 @@ function renderMgmt(){
   });
 }
 
-// ===== サイト情報管理 =====
-var DEFAULT_ABOUT = '太古堂（たいこどう）は1939年（昭和14年）の創業以来、三代にわたって商いさせていただいております。...';
+// ===== サイト情報管理（Supabase版） =====
+
+// デフォルトの紹介文（Supabaseにデータがない場合のフォールバック）
+var DEFAULT_ABOUT = '太古堂（たいこどう）は1939年（昭和14年）の創業以来、三代にわたって商いさせていただいております。\n創業者の意志である「親切、丁寧、誠実に」の気持ちを忘れることなく、皆様に愛される店を目指して日々勉強中でございます。\n\n様々な印材のはんこはもちろん、名刺印刷やゴム印・スタンプ作製、表札やプレート作製、焼印、さらに四日市市マスコットキャラクターこにゅうどうくんのグッズも、キーホルダーやステッカー、ボールペンやスタンプなどなど可愛らしいグッズを多数取り扱っております。\n\n既製認印（三文判）は、姓の種類で約２万5千種類、本数にして約４万本在庫しております。\n珍しい姓や、髙・邊・國・澤など、様々な旧字体の認印もございます。\n\n初めて印鑑やスタンプ、名刺などを作られる方には、分かりやすく丁寧にご提案をさせていただきます。\n是非お気軽にお立ち寄りくださいませ。';
+
 var DEFAULT_HISTORY = [
   {year:'1939年／昭和14年1月', content:'小林宗市が沖の島町にて創業'},
   {year:'1950年／昭和25年',    content:'戦後の道路整備により現在地へ移転'},
@@ -1513,38 +1537,55 @@ var DEFAULT_HISTORY = [
   {year:'1990年／平成2年8月',  content:'有限会社に組織変更・小林幹太郎 代表取締役に就任'},
   {year:'2000年／平成12年4月', content:'小林克司 入社'},
   {year:'2011年／平成23年1月', content:'ホームページ開設'},
-  {year:'2013年／平成25年9月', content:'こにゅうどうくんグッズ販売開始'},
+  {year:'2013年／平成25年9月', content:'四日市市キャラクターこにゅうどうくんグッズ販売開始'},
   {year:'2016年／平成28年1月', content:'小林克司 代表取締役に就任'},
   {year:'2016年／平成28年3月', content:'こにゅうどうくんグッズネットショップオープン'}
 ];
 
 function loadSiteInfo(){
+  // 紹介文をロード
   sbFetch('GET','site_info?select=*&key=eq.about_text')
     .then(function(data){
       var text = (data && data[0] && data[0].value) ? data[0].value : DEFAULT_ABOUT;
       renderAboutText(text);
       var ta = document.getElementById('site-about-text');
       if(ta) ta.value = text;
-    }).catch(function(){ renderAboutText(DEFAULT_ABOUT); });
+    })
+    .catch(function(){
+      renderAboutText(DEFAULT_ABOUT);
+    });
+
+  // 沿革をロード
   sbFetch('GET','site_history?select=*&order=sort_order.asc')
     .then(function(data){
       var items = (data && data.length) ? data : DEFAULT_HISTORY;
       renderHistory(items);
       renderHistoryMgmt(items);
-    }).catch(function(){ renderHistory(DEFAULT_HISTORY); renderHistoryMgmt(DEFAULT_HISTORY); });
+    })
+    .catch(function(){
+      renderHistory(DEFAULT_HISTORY);
+      renderHistoryMgmt(DEFAULT_HISTORY);
+    });
 }
 
 function renderAboutText(text){
   var el = document.getElementById('about-text-area');
   if(!el) return;
+  // 改行を<p>タグに変換
   var paras = text.split('\n\n').filter(function(p){ return p.trim(); });
   if(!paras.length) paras = [text];
-  el.innerHTML = paras.map(function(p){ return '<p class="about-lead">'+esc(p).replace(/\n/g,'<br>')+'</p>'; }).join('');
+  el.innerHTML = paras.map(function(p){
+    return '<p class="about-lead">'+esc(p).replace(/\n/g,'<br>')+'</p>';
+  }).join('');
 }
 
 function renderHistory(items){
   var el = document.getElementById('history-list-area');
   if(!el) return;
+  if(!items || !items.length){
+    el.innerHTML = '<div style="color:#888;font-size:13px;padding:8px 0;">沿革データがありません</div>';
+    return;
+  }
   el.innerHTML = items.map(function(h){
     var y = h.year || h.year_label || '';
     var c = h.content || h.content_text || '';
@@ -1555,46 +1596,87 @@ function renderHistory(items){
 function renderHistoryMgmt(items){
   var el = document.getElementById('site-history-list');
   if(!el) return;
+  if(!items || !items.length){
+    el.innerHTML = '<div class="mgmt-empty">沿革データがありません</div>';
+    return;
+  }
   el.innerHTML = items.map(function(h){
     var y = h.year || h.year_label || '';
     var c = h.content || h.content_text || '';
+    var id = h.id || '';
     return '<div class="mgmt-item">'
       +'<div class="mgmt-info"><div class="mgmt-name">'+esc(y)+'</div><div class="mgmt-price">'+esc(c)+'</div></div>'
-      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" onclick="deleteHistoryItem('+h.id+')">🗑</button></div>'
+      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-id="'+id+'" onclick="deleteHistoryItem('+id+')">🗑</button></div>'
       +'</div>';
   }).join('');
 }
 
 function saveSiteAbout(){
   var text = document.getElementById('site-about-text').value.trim();
-  if(!text) return;
+  if(!text){ showToast('⚠ テキストを入力してください'); return; }
   var btn = event.target;
   btn.disabled = true;
+  btn.textContent = '保存中...';
+  // upsert（存在すれば更新、なければ挿入）
   sbFetch('POST','site_info?on_conflict=key',{key:'about_text',value:text})
-    .then(function(){ renderAboutText(text); showToast('✅ 保存しました'); })
-    .catch(function(){ showToast('⚠ 失敗'); })
-    .finally(function(){ btn.disabled=false; });
+    .then(function(){
+      renderAboutText(text);
+      showToast('✅ 紹介文を保存しました');
+    })
+    .catch(function(e){
+      // POSTが失敗したらPATCHで試みる
+      sbFetch('PATCH','site_info?key=eq.about_text',{value:text})
+        .then(function(){
+          renderAboutText(text);
+          showToast('✅ 紹介文を保存しました');
+        })
+        .catch(function(){
+          showToast('⚠ 保存に失敗しました');
+        });
+    })
+    .finally(function(){ btn.disabled=false; btn.textContent='💾 保存する'; });
 }
 
 function addHistoryItem(){
   var year = document.getElementById('site-hist-year').value.trim();
   var ct   = document.getElementById('site-hist-content').value.trim();
-  if(!year || !ct) return;
-  sbFetch('POST','site_history',{year_label:year, content_text:ct, sort_order:999})
-    .then(function(){ loadSiteInfo(); showToast('✅ 追加'); });
+  if(!year || !ct){ showToast('⚠ 年・内容を入力してください'); return; }
+  sbFetch('POST','site_history',{year_label:year, content_text:ct, sort_order:9999})
+    .then(function(){
+      document.getElementById('site-hist-year').value = '';
+      document.getElementById('site-hist-content').value = '';
+      showToast('✅ 沿革を追加しました');
+      loadSiteInfo();
+    })
+    .catch(function(){ showToast('⚠ 追加に失敗しました'); });
 }
 
 function deleteHistoryItem(id){
-  sbFetch('DELETE','site_history?id=eq.'+id).then(function(){ loadSiteInfo(); });
+  if(!id){ showToast('⚠ IDが不明です'); return; }
+  sbFetch('DELETE','site_history?id=eq.'+id)
+    .then(function(){
+      showToast('🗑 削除しました');
+      loadSiteInfo();
+    })
+    .catch(function(){ showToast('⚠ 削除に失敗しました'); });
 }
 
-// ===== 臨時休業管理 =====
+// ===== 臨時休業管理（Supabase版） =====
 var holidays = [];
+
 function loadHolidays(){
-  sbFetch('GET','holidays?select=*&order=date.asc').then(function(data){
-    holidays = Array.isArray(data) ? data : [];
-    updateHoursBar(); renderHolList();
-  });
+  sbFetch('GET','holidays?select=*&order=date.asc')
+    .then(function(data){
+      if(!Array.isArray(data)){ holidays=[]; }
+      else { holidays = data; }
+      updateHoursBar();
+      renderHolList();
+    })
+    .catch(function(){
+      holidays=[];
+      updateHoursBar();
+      renderHolList();
+    });
 }
 
 function addHoliday(){
@@ -1602,135 +1684,312 @@ function addHoliday(){
   var start = document.getElementById('hol-start').value;
   var end   = document.getElementById('hol-end').value;
   var msg   = document.getElementById('hol-msg').value.trim();
-  if(!date) return;
-  sbFetch('POST','holidays',{date:date, start_time:start||null, end_time:end||null, msg:msg||'臨時休業'})
-    .then(function(){ loadHolidays(); showToast('✅ 登録'); });
+  var err   = document.getElementById('hol-err');
+  var btn   = document.getElementById('hol-add-btn');
+  if(!date){ err.textContent='⚠ 日付を選択してください'; err.style.display='block'; return; }
+  if(start && end && start >= end){ err.textContent='⚠ 終了時間は開始時間より後にしてください'; err.style.display='block'; return; }
+  if(holidays.find(function(h){ return h.date===date; })){ err.textContent='⚠ すでに登録されています'; err.style.display='block'; return; }
+  err.style.display='none';
+  btn.disabled=true;
+  var entry = {date:date, msg:msg||(start?'営業時間変更':'臨時休業')};
+  if(start) entry.start_time = start;
+  if(end)   entry.end_time   = end;
+  sbFetch('POST','holidays',entry)
+    .then(function(){
+      document.getElementById('hol-date').value='';
+      document.getElementById('hol-start').value='';
+      document.getElementById('hol-end').value='';
+      document.getElementById('hol-msg').value='';
+      showToast('✅ 臨時休業日を登録しました');
+      loadHolidays();
+    })
+    .catch(function(e){
+      showToast('⚠ 登録に失敗しました');
+      console.error(e);
+    })
+    .finally(function(){ btn.disabled=false; });
 }
 
 function deleteHoliday(id){
-  sbFetch('DELETE','holidays?id=eq.'+id).then(function(){ loadHolidays(); });
+  sbFetch('DELETE','holidays?id=eq.'+id)
+    .then(function(){
+      showToast('🗑 削除しました');
+      loadHolidays();
+    })
+    .catch(function(){ showToast('⚠ 削除に失敗しました'); });
 }
 
 function renderHolList(){
   var el = document.getElementById('hol-list');
+  if(!holidays.length){ el.innerHTML='<div class="mgmt-empty">登録された臨時休業日はありません</div>'; return; }
   el.innerHTML = holidays.map(function(h){
+    var d = new Date(h.date+'T00:00:00');
+    var DAY = ['日','月','火','水','木','金','土'];
+    var label = h.date + '（'+DAY[d.getDay()]+'）';
+    var st = h.start_time || '';
+    var et = h.end_time   || '';
+    var timeLabel = (st && et) ? st+'〜'+et : (st ? st+'〜' : (et ? '〜'+et : '終日'));
+    var detail = timeLabel + '　' + (h.msg||'');
     return '<div class="mgmt-item">'
-      +'<div class="mgmt-info"><div class="mgmt-name">'+h.date+'</div><div class="mgmt-price">'+(h.msg||'')+'</div></div>'
-      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" onclick="deleteHoliday('+h.id+')">🗑</button></div>'
+      +'<div class="mgmt-info"><div class="mgmt-name">'+label+'</div><div class="mgmt-price">'+detail+'</div></div>'
+      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-id="'+h.id+'">🗑</button></div>'
       +'</div>';
   }).join('');
+  el.querySelectorAll('.mgmt-btn.trash').forEach(function(btn){
+    btn.addEventListener('click',function(){ deleteHoliday(this.dataset.id); });
+  });
+}
+
+function getTodayStr(){
+  var d = new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
 
 function updateHoursBar(){
-  var today = new Date().toISOString().split('T')[0];
+  var today = getTodayStr();
   var hol = holidays.find(function(h){ return h.date===today; });
   var extra = document.getElementById('hours-extra-note');
   if(hol){
-    document.getElementById('hours-dot').className = 'hours-dot closed';
-    document.getElementById('hours-time').textContent = hol.start_time ? '営業時間変更' : '本日臨時休業';
-    extra.textContent = '※ ' + (hol.msg || '臨時休業');
-    extra.style.display = 'block';
+    var st = hol.start_time || hol.start || '';
+    var et = hol.end_time   || hol.end   || '';
+    if(st || et){
+      // 時間指定あり → 営業時間変更として表示
+      var timeRange = (st && et) ? st+'〜'+et : (st ? st+'〜' : '〜'+et);
+      extra.textContent = '※ '+(hol.msg||'営業時間変更')+'（'+timeRange+'）';
+      extra.style.display='block';
+    } else {
+      // 終日休業
+      document.getElementById('hours-dot').className = 'hours-dot closed';
+      document.getElementById('hours-time').className = 'hours-time closed';
+      document.getElementById('hours-time').textContent = '本日は臨時休業です';
+      document.getElementById('hours-note').textContent = '';
+      extra.textContent = '※ '+(hol.msg||'臨時休業');
+      extra.style.display='block';
+    }
+  } else {
+    extra.style.display='none';
   }
 }
 
-// ===== モーダル等共通処理 =====
+// ===== 商品編集モーダル =====
 var editProductId = null;
 function openEditModal(id){
   var p = products.find(function(x){ return String(x.id)===String(id); });
   if(!p) return;
   editProductId = id;
-  document.getElementById('edit-name').value = p.name;
-  document.getElementById('edit-price').value = p.price || '';
-  document.getElementById('edit-size').value = p.size_material || '';
-  document.getElementById('edit-desc').value = p.description || '';
-  document.getElementById('edit-icon').value = p.icon || '';
+  document.getElementById('edit-name').value  = p.name||'';
+  document.getElementById('edit-price').value = (p.price != null && p.price > 0) ? p.price : '';
+  document.getElementById('edit-size').value  = p.size_material||'';
+  document.getElementById('edit-desc').value  = p.description||'';
+  document.getElementById('edit-icon').value  = p.icon||'';
+  document.getElementById('edit-err').style.display='none';
+  document.getElementById('edit-save-btn').disabled=false;
+  document.getElementById('edit-save-btn').textContent='💾 変更を保存する';
   document.getElementById('edit-overlay').classList.add('show');
 }
-function closeEditModal(){ document.getElementById('edit-overlay').classList.remove('show'); }
+function closeEditModal(){
+  document.getElementById('edit-overlay').classList.remove('show');
+  editProductId=null;
+}
 function saveEdit(){
-  var body = {
-    name: document.getElementById('edit-name').value,
-    price: parseInt(document.getElementById('edit-price').value) || null,
-    size_material: document.getElementById('edit-size').value,
-    description: document.getElementById('edit-desc').value,
-    icon: document.getElementById('edit-icon').value
-  };
-  sbFetch('PATCH','products?id=eq.'+editProductId, body).then(function(){
-    loadProducts(); closeEditModal(); showToast('✅ 更新');
-  });
+  var name  = document.getElementById('edit-name').value.trim();
+  var priceRaw = document.getElementById('edit-price').value.trim();
+  var price = (priceRaw==='') ? null : parseInt(priceRaw,10);
+  var size  = document.getElementById('edit-size').value.trim();
+  var desc  = document.getElementById('edit-desc').value.trim();
+  var icon  = document.getElementById('edit-icon').value.trim();
+  var errEl = document.getElementById('edit-err');
+  var btn   = document.getElementById('edit-save-btn');
+  if(!name){ errEl.textContent='⚠ 商品名を入力してください'; errEl.style.display='block'; return; }
+  if(!desc){ errEl.textContent='⚠ 商品の説明を入力してください'; errEl.style.display='block'; return; }
+  errEl.style.display='none';
+  btn.disabled=true; btn.textContent='保存中...';
+  sbFetch('PATCH','products?id=eq.'+editProductId,{name:name,price:price,size_material:size,description:desc,icon:icon})
+    .then(function(){
+      showToast('✅ 商品情報を更新しました');
+      closeEditModal();
+      loadProducts();
+      setTimeout(function(){ switchAdminTab('mgmt'); },600);
+    }).catch(function(){
+      showToast('⚠ 更新に失敗しました');
+      btn.disabled=false; btn.textContent='💾 変更を保存する';
+    });
 }
 
+// ===== サイズ管理モーダル =====
 function openSzModal(id, name){
   szProductId = id;
   document.getElementById('sz-pname').textContent = name;
+  document.getElementById('sz-size-name').value = '';
+  document.getElementById('sz-price').value = '';
   renderSzList();
   document.getElementById('sz-overlay').classList.add('show');
 }
-function closeSzModal(){ document.getElementById('sz-overlay').classList.remove('show'); }
+function closeSzModal(){ document.getElementById('sz-overlay').classList.remove('show'); szProductId=null; }
+
 function renderSzList(){
   var sizes = productSizes[szProductId] || [];
   var el = document.getElementById('sz-list');
+  if(!sizes.length){ el.innerHTML='<div style="font-size:13px;color:var(--muted);text-align:center;padding:12px;">まだサイズが登録されていません</div>'; return; }
   el.innerHTML = sizes.map(function(s){
-    return '<div class="sz-item"><span>'+esc(s.size_name)+'</span><span>¥'+s.price.toLocaleString()+'</span>'
-      +'<button onclick="deleteSize('+s.id+')">🗑</button></div>';
+    var label = (s.item_name?'<span style="color:var(--muted);font-size:12px;margin-right:6px;">'+esc(s.item_name)+'</span>':'');
+    return '<div class="sz-item">'
+      +'<span class="sz-item-name">'+label+esc(s.size_name)+'</span>'
+      +'<span class="sz-item-price">¥'+Number(s.price).toLocaleString()+'</span>'
+      +'<button class="sz-item-del" data-id="'+s.id+'">🗑</button>'
+      +'</div>';
   }).join('');
-}
-function addSize(){
-  var body = {
-    product_id: szProductId,
-    item_name: document.getElementById('sz-item-name').value,
-    size_name: document.getElementById('sz-size-name').value,
-    price: parseInt(document.getElementById('sz-price').value),
-    sort_order: 99
-  };
-  sbFetch('POST','product_sizes', body).then(function(){ loadProducts().then(renderSzList); });
-}
-function deleteSize(id){
-  sbFetch('DELETE','product_sizes?id=eq.'+id).then(function(){ loadProducts().then(renderSzList); });
+  el.querySelectorAll('.sz-item-del').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var sid=this.dataset.id;
+      sbFetch('DELETE','product_sizes?id=eq.'+sid).then(function(){
+        // ローカルからも削除
+        if(productSizes[szProductId]){
+          productSizes[szProductId]=productSizes[szProductId].filter(function(s){ return String(s.id)!==String(sid); });
+        }
+        renderSzList();
+        renderAll();
+        renderMgmt();
+        showToast('🗑 削除しました');
+      });
+    });
+  });
 }
 
-function openPmModal(id, name){
-  pmId = id;
-  document.getElementById('pm-pname').textContent = name;
-  var p = products.find(function(x){ return String(x.id)===String(id); });
-  if(p && p.photo){
-    document.getElementById('pm-preview').src = p.photo;
-    document.getElementById('pm-preview').style.display = 'block';
+function addSize(){
+  var itemName = document.getElementById('sz-item-name').value.trim();
+  var sizeName = document.getElementById('sz-size-name').value.trim();
+  var price    = parseInt(document.getElementById('sz-price').value, 10);
+  if(!sizeName){ showToast('⚠ サイズ名を入力してください'); return; }
+  if(!price||price<0){ showToast('⚠ 価格を入力してください'); return; }
+  var currentSizes = productSizes[szProductId] || [];
+  var sortOrder = currentSizes.length;
+  var postData = {product_id:parseInt(szProductId),size_name:sizeName,price:price,sort_order:sortOrder};
+  if(itemName) postData.item_name = itemName;
+  sbFetch('POST','product_sizes',postData)
+    .then(function(data){
+      if(Array.isArray(data)&&data[0]){
+        if(!productSizes[szProductId]) productSizes[szProductId]=[];
+        productSizes[szProductId].push(data[0]);
+        document.getElementById('sz-item-name').value='';
+        document.getElementById('sz-size-name').value='';
+        document.getElementById('sz-price').value='';
+        renderSzList();
+        renderAll();
+        renderMgmt();
+        showToast('✅ サイズを追加しました');
+      } else { showToast('⚠ 追加に失敗しました'); }
+    }).catch(function(){ showToast('⚠ 通信エラー'); });
+}
+
+// ===== 写真編集モーダル =====
+function openPmModal(id,name){
+  pmId=id; pmPhoto=null;
+  document.getElementById('pm-pname').textContent=name;
+  document.getElementById('pm-preview').src='';
+  document.getElementById('pm-preview').style.display='none';
+  document.getElementById('pm-drop-hint').style.display='block';
+  document.getElementById('pm-del-btn').style.display='none';
+  document.getElementById('pm-save-btn').disabled=true;
+  document.getElementById('pm-cam-input').value='';
+  document.getElementById('pm-lib-input').value='';
+  var p=products.find(function(x){ return String(x.id)===String(id); });
+  if(p&&p.photo){
+    pmPhoto=p.photo;
+    document.getElementById('pm-preview').src=p.photo;
+    document.getElementById('pm-preview').style.display='block';
+    document.getElementById('pm-drop-hint').style.display='none';
+    document.getElementById('pm-del-btn').style.display='inline-flex';
+    document.getElementById('pm-save-btn').disabled=false;
   }
   document.getElementById('pm-overlay').classList.add('show');
 }
-function closePmModal(){ document.getElementById('pm-overlay').classList.remove('show'); }
-function pmSetPhoto(b64){ pmPhoto = b64; document.getElementById('pm-preview').src = b64; document.getElementById('pm-preview').style.display = 'block'; document.getElementById('pm-save-btn').disabled = false; }
+function closePmModal(){ document.getElementById('pm-overlay').classList.remove('show'); pmId=null; pmPhoto=null; }
+function pmSetPhoto(dataUrl){ pmPhoto=dataUrl; document.getElementById('pm-preview').src=dataUrl; document.getElementById('pm-preview').style.display='block'; document.getElementById('pm-drop-hint').style.display='none'; document.getElementById('pm-del-btn').style.display='inline-flex'; document.getElementById('pm-save-btn').disabled=false; }
+function pmDelPhoto(){ pmPhoto=''; document.getElementById('pm-preview').src=''; document.getElementById('pm-preview').style.display='none'; document.getElementById('pm-drop-hint').style.display='block'; document.getElementById('pm-del-btn').style.display='none'; document.getElementById('pm-save-btn').disabled=false; }
 function pmSave(){
-  sbFetch('PATCH','products?id=eq.'+pmId, {photo: pmPhoto}).then(function(){ loadProducts(); closePmModal(); });
+  if(!pmId) return;
+  var btn=document.getElementById('pm-save-btn');
+  btn.disabled=true; btn.textContent='保存中...';
+  sbFetch('PATCH','products?id=eq.'+pmId,{photo:pmPhoto||null}).then(function(){
+    showToast('✅ 写真を保存しました'); closePmModal(); loadProducts(); setTimeout(function(){ switchAdminTab('mgmt'); },600);
+  }).catch(function(){ showToast('⚠ 保存に失敗しました'); btn.disabled=false; btn.textContent='💾 保存する'; });
 }
 
+// ===== 商品登録 =====
 function addProduct(){
-  var body = {
-    cat: document.querySelector('input[name="cat"]:checked').value,
-    name: document.getElementById('f-name').value,
-    price: parseInt(document.getElementById('f-price').value) || 0,
-    size_material: document.getElementById('f-size').value,
-    description: document.getElementById('f-desc').value,
-    icon: document.getElementById('f-icon').value,
-    photo: photoData,
-    sort_order: 99
-  };
-  sbFetch('POST','products', body).then(function(){ loadProducts(); showToast('✅ 登録'); });
+  var cat=document.querySelector('input[name="cat"]:checked').value;
+  var name=document.getElementById('f-name').value.trim();
+  var price=parseInt(document.getElementById('f-price').value,10)||0;
+  var size=document.getElementById('f-size').value.trim();
+  var desc=document.getElementById('f-desc').value.trim();
+  var icon=document.getElementById('f-icon').value.trim()||(cat==='konyudo'?'🟢':'🔖');
+
+  var errEl=document.getElementById('form-err');
+  var btn=document.getElementById('reg-btn');
+  if(!name){ errEl.textContent='⚠ 商品名を入力してください'; errEl.style.display='block'; return; }
+  if(!desc){ errEl.textContent='⚠ 商品の説明を入力してください'; errEl.style.display='block'; return; }
+  errEl.style.display='none';
+  btn.disabled=true; btn.textContent='登録中...';
+  var catP=products.filter(function(p){ return p.cat===cat; });
+  var maxO=catP.length>0?Math.max.apply(null,catP.map(function(p){ return p.sort_order||0; }))+1:0;
+  sbFetch('POST','products',{cat:cat,name:name,price:price,size_material:size,description:desc,icon:icon,photo:photoData,sort_order:maxO})
+    .then(function(data){
+      btn.disabled=false; btn.textContent='＋ この商品を登録する';
+      var ok=Array.isArray(data)?data[0]:(!data.message&&data.id);
+      if(ok){
+        document.getElementById('f-name').value='';
+        document.getElementById('f-price').value='';
+        document.getElementById('f-size').value='';
+        document.getElementById('f-desc').value='';
+        document.getElementById('f-icon').value='';
+        document.querySelector('input[name="cat"][value="hanko"]').checked=true;
+        removePhoto(); showToast('✅ 商品を登録しました！'); loadProducts(); switchTab(cat);
+      } else { errEl.textContent='⚠ 登録失敗'; errEl.style.display='block'; }
+    }).catch(function(){ btn.disabled=false; btn.textContent='＋ この商品を登録する'; errEl.textContent='⚠ 通信エラー'; errEl.style.display='block'; });
 }
 
+// ===== タブ =====
+function tabScroll(dir){
+  var nav = document.getElementById('tab-nav-scroll');
+  nav.scrollLeft += dir * 200;
+  setTimeout(updateTabArrows, 300);
+}
+function updateTabArrows(){
+  var nav = document.getElementById('tab-nav-scroll');
+  if(!nav) return;
+  var l = document.getElementById('tab-arrow-left');
+  var r = document.getElementById('tab-arrow-right');
+  if(l) l.classList.toggle('hidden', nav.scrollLeft <= 0);
+  if(r) r.classList.toggle('hidden', nav.scrollLeft + nav.clientWidth >= nav.scrollWidth - 2);
+}
 function switchTab(name){
   document.querySelectorAll('.tab-pane').forEach(function(el){ el.classList.remove('active'); });
   document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
   document.getElementById('pane-'+name).classList.add('active');
   document.getElementById('tab-btn-'+name).classList.add('active');
-  if(name==='blog') loadBlogPosts();
+  if(name==='blog' && !blogPosts.length) loadBlogPosts();
 }
-
-var ownerQuill = null;
 function initOwnerQuill(){
-  if(ownerQuill) return;
-  ownerQuill = new Quill('#owner-quill-editor', { theme: 'snow' });
+  if(ownerQuill) return; // すでに初期化済みならスキップ
+  var el = document.getElementById('owner-quill-editor');
+  if(!el) return;
+  ownerQuill = new Quill('#owner-quill-editor', {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline'],
+        [{ 'color': [] }],
+        [{ 'align': [] }],
+        ['clean']
+      ]
+    },
+    placeholder: '店主の紹介文を入力してください...'
+  });
+  // 読み込み済みデータがあればセット
+  var introHtml = ownerData['intro_text'] || '';
+  if(introHtml) ownerQuill.root.innerHTML = introHtml;
 }
 
 function switchAdminTab(name){
@@ -1739,87 +1998,437 @@ function switchAdminTab(name){
   document.getElementById('apane-'+name).classList.add('active');
   document.getElementById('atab-'+name).classList.add('active');
   if(name==='mgmt') renderMgmt();
-  if(name==='site') setTimeout(initOwnerQuill, 100);
+  if(name==='blog') renderBlogMgmt();
+  if(name==='site') setTimeout(initOwnerQuill, 50);
 }
 
-function setPhoto(b64){ photoData = b64; document.getElementById('photo-prev').src = b64; document.getElementById('photo-prev').style.display = 'block'; }
-function removePhoto(){ photoData = null; document.getElementById('photo-prev').style.display = 'none'; }
+// ===== 登録フォーム写真 =====
+function setPhoto(dataUrl){ photoData=dataUrl; document.getElementById('photo-prev').src=dataUrl; document.getElementById('photo-prev').style.display='block'; document.getElementById('photo-hint').style.display='none'; document.getElementById('btn-rmpho').style.display='inline-flex'; }
+function removePhoto(){ photoData=null; document.getElementById('photo-prev').src=''; document.getElementById('photo-prev').style.display='none'; document.getElementById('photo-hint').style.display='block'; document.getElementById('btn-rmpho').style.display='none'; document.getElementById('f-photo-cam').value=''; document.getElementById('f-photo-lib').value=''; }
 
+// ===== アコーディオン（沿革） =====
 function toggleAccordion(){
+  var btn  = document.getElementById('history-btn');
   var body = document.getElementById('history-body');
-  body.hidden = !body.hidden;
-  body.classList.toggle('open');
-}
-function toggleOwnerAccordion(){
-  var body = document.getElementById('owner-body');
-  body.hidden = !body.hidden;
+  var txt  = document.getElementById('history-btn-text');
+  var arrow = document.getElementById('history-btn-arrow');
+  if(!btn || !body) return;
+  var isOpen = btn.classList.contains('open');
+  if(isOpen){
+    btn.classList.remove('open');
+    body.classList.remove('open');
+    body.hidden = true;
+    body.setAttribute('aria-hidden','true');
+    if(txt) txt.textContent = '沿 革 を 見 る';
+    if(arrow) arrow.textContent = '▼';
+  } else {
+    btn.classList.add('open');
+    body.classList.remove('open');
+    body.hidden = false;
+    body.setAttribute('aria-hidden','false');
+    body.classList.add('open');
+    if(txt) txt.textContent = '沿 革 を 閉 じ る';
+    if(arrow) arrow.textContent = '▲';
+  }
 }
 
+
+// ===== アコーディオン（店主紹介） =====
+function toggleOwnerAccordion(){
+  var btn  = document.getElementById('owner-btn');
+  var body = document.getElementById('owner-body');
+  var txt  = document.getElementById('owner-btn-text');
+  var arrow = document.getElementById('owner-btn-arrow');
+  if(!btn || !body) return;
+  var isOpen = btn.classList.contains('open');
+  if(isOpen){
+    btn.classList.remove('open');
+    body.hidden = true;
+    body.setAttribute('aria-hidden','true');
+    if(txt) txt.textContent = '■ 店主紹介';
+    if(arrow) arrow.textContent = '▼';
+  } else {
+    btn.classList.add('open');
+    body.hidden = false;
+    body.setAttribute('aria-hidden','false');
+    if(txt) txt.textContent = '■ 店主紹介';
+    if(arrow) arrow.textContent = '▲';
+  }
+}
+
+// ===== 店主紹介データ =====
 var ownerData = {};
+var ownerQuill = null;
+
 function loadOwnerProfile(){
-  sbFetch('GET','owner_profile?select=*').then(function(data){
-    if(Array.isArray(data)) data.forEach(function(r){ ownerData[r.key] = r.value; });
-    renderOwnerSection();
-  });
+  sbFetch('GET','owner_profile?select=*')
+    .then(function(data){
+      if(!Array.isArray(data)) return;
+      ownerData = {};
+      data.forEach(function(row){ ownerData[row.key] = row.value || ''; });
+      renderOwnerSection();
+      // 管理画面フォームに値をセット
+      var igEl = document.getElementById('owner-instagram');
+      var twEl = document.getElementById('owner-twitter');
+      var fbEl = document.getElementById('owner-facebook');
+      if(igEl) igEl.value = ownerData['instagram_url'] || '';
+      if(twEl) twEl.value = ownerData['twitter_url'] || '';
+      if(fbEl) fbEl.value = ownerData['facebook_url'] || '';
+      // 写真プレビュー復元
+      ['1','2'].forEach(function(n){
+        var url = ownerData['photo'+n+'_url'] || '';
+        var cap = ownerData['photo'+n+'_caption'] || '';
+        var capEl = document.getElementById('owner-photo'+n+'-caption');
+        if(capEl) capEl.value = cap;
+        if(url){
+          var prev = document.getElementById('owner-photo'+n+'-preview');
+          if(prev){
+            prev.innerHTML = '<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;">';
+            prev.dataset.b64 = url;
+          }
+        }
+      });
+      // Quillエディタに内容をセット
+      if(ownerQuill){
+        var introHtml = ownerData['intro_text'] || '';
+        ownerQuill.root.innerHTML = introHtml;
+      }
+      renderOwnerMediaMgmt();
+    })
+    .catch(function(){ console.log('owner_profile not found'); });
 }
 
 function renderOwnerSection(){
   var el = document.getElementById('owner-section-area');
   if(!el) return;
-  el.innerHTML = ownerData['intro_text'] || '準備中';
-}
-
-function onAdminToggle(){
-  if(authed){
-    document.getElementById('admin-panel').classList.toggle('open');
-  } else {
-    document.getElementById('pw-overlay').classList.add('show');
+  var html = '';
+  // 写真2枚（紹介文の上）
+  var photo1 = ownerData['photo1_url'] || '';
+  var photo2 = ownerData['photo2_url'] || '';
+  var cap1   = ownerData['photo1_caption'] || '';
+  var cap2   = ownerData['photo2_caption'] || '';
+  if(photo1 || photo2){
+    html += '<div class="owner-photos">';
+    if(photo1){
+      html += '<div class="owner-photo-item"><img src="'+esc(photo1)+'" alt="店主写真1">';
+      if(cap1) html += '<div class="owner-photo-caption">'+esc(cap1)+'</div>';
+      html += '</div>';
+    }
+    if(photo2){
+      html += '<div class="owner-photo-item"><img src="'+esc(photo2)+'" alt="店主写真2">';
+      if(cap2) html += '<div class="owner-photo-caption">'+esc(cap2)+'</div>';
+      html += '</div>';
+    }
+    html += '</div>';
   }
+  // 紹介文
+  var introText = ownerData['intro_text'] || '';
+  if(introText){
+    html += '<div class="owner-intro ql-editor" style="padding:0;">'+introText+'</div>';
+  }
+  // 経歴
+  var careerJson = ownerData['career'] || '';
+  var careerItems = [];
+  try { careerItems = careerJson ? JSON.parse(careerJson) : []; } catch(e){}
+  if(careerItems.length){
+    html += '<div class="owner-block"><div class="owner-block-title">経 歴</div>';
+    html += '<div class="owner-career-list">';
+    careerItems.forEach(function(item){
+      html += '<div class="owner-career-item">'
+        + '<span class="owner-career-year">'+esc(item.year||'')+'</span>'
+        + '<span>'+esc(item.content||'')+'</span>'
+        + '</div>';
+    });
+    html += '</div></div>';
+  }
+  // メディア掲載
+  var mediaJson = ownerData['media'] || '';
+  var mediaItems = [];
+  try { mediaItems = mediaJson ? JSON.parse(mediaJson) : []; } catch(e){}
+  if(mediaItems.length){
+    html += '<div class="owner-block"><div class="owner-block-title">メディア掲載</div>';
+    html += '<div class="owner-media-list">';
+    mediaItems.forEach(function(item){
+      var label = (typeof item === 'object') ? (item.label || '') : item;
+      var url   = (typeof item === 'object') ? (item.url   || '') : '';
+      if(url){
+        html += '<div class="owner-media-item"><a href="'+esc(url)+'" target="_blank" rel="noopener" style="color:var(--gold-dark);text-decoration:underline;">'+esc(label)+'</a></div>';
+      } else {
+        html += '<div class="owner-media-item">'+esc(label)+'</div>';
+      }
+    });
+    html += '</div></div>';
+  }
+  // SNS
+  var ig = ownerData['instagram_url'] || '';
+  var tw = ownerData['twitter_url']   || '';
+  var fb = ownerData['facebook_url']  || '';
+  if(ig || tw || fb){
+    html += '<div class="owner-block"><div class="owner-block-title">SNS</div>';
+    html += '<div class="owner-sns">';
+    if(ig) html += '<a href="'+esc(ig)+'" target="_blank" rel="noopener" class="owner-sns-btn"><span class="sns-icon">📷</span>Instagram</a>';
+    if(tw) html += '<a href="'+esc(tw)+'" target="_blank" rel="noopener" class="owner-sns-btn"><span class="sns-icon">✖️</span>X（旧Twitter）</a>';
+    if(fb) html += '<a href="'+esc(fb)+'" target="_blank" rel="noopener" class="owner-sns-btn"><span class="sns-icon">👥</span>Facebook</a>';
+    html += '</div></div>';
+  }
+  el.innerHTML = html || '<div style="color:#888;font-size:13px;padding:8px;">まだ内容が登録されていません</div>';
 }
 
-function checkPw(){
-  if(document.getElementById('pw-input').value === ADMIN_PW){
-    authed = true; document.getElementById('pw-overlay').classList.remove('show');
-    document.getElementById('admin-panel').classList.add('open');
-  } else { alert('NG'); }
+function renderOwnerCareerMgmt(){
+  var el = document.getElementById('owner-career-list');
+  if(!el) return;
+  var json = ownerData['career'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  if(!items.length){ el.innerHTML='<div class="mgmt-empty">経歴がありません</div>'; return; }
+  el.innerHTML = items.map(function(item, i){
+    return '<div class="mgmt-item">'
+      +'<div class="mgmt-info"><div class="mgmt-name">'+esc(item.year||'')+'</div>'
+      +'<div class="mgmt-price">'+esc(item.content||'')+'</div></div>'
+      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-idx="'+i+'" data-type="career">🗑</button></div>'
+      +'</div>';
+  }).join('');
+  el.querySelectorAll('[data-type="career"]').forEach(function(btn){
+    btn.addEventListener('click', function(){ deleteOwnerCareer(parseInt(this.dataset.idx)); });
+  });
 }
+
+function renderOwnerMediaMgmt(){
+  var el = document.getElementById('owner-media-list');
+  if(!el) return;
+  var json = ownerData['media'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  if(!items.length){ el.innerHTML='<div class="mgmt-empty">メディア掲載がありません</div>'; return; }
+  el.innerHTML = items.map(function(item, i){
+    var label = (typeof item === 'object') ? (item.label || '') : item;
+    var url   = (typeof item === 'object') ? (item.url   || '') : '';
+    return '<div class="mgmt-item">'
+      +'<div class="mgmt-info"><div class="mgmt-name">'+esc(label)+'</div>'
+      +(url ? '<div class="mgmt-price" style="font-size:11px;word-break:break-all;">'+esc(url)+'</div>' : '')
+      +'</div>'
+      +'<div class="mgmt-actions"><button class="mgmt-btn sq trash" data-idx="'+i+'" data-type="media">🗑</button></div>'
+      +'</div>';
+  }).join('');
+  el.querySelectorAll('[data-type="media"]').forEach(function(btn){
+    btn.addEventListener('click', function(){ deleteOwnerMedia(parseInt(this.dataset.idx)); });
+  });
+}
+
+function saveOwnerField(key, value, successMsg){
+  return sbFetch('POST','owner_profile?on_conflict=key',{key:key, value:value})
+    .catch(function(){
+      return sbFetch('PATCH','owner_profile?key=eq.'+key,{value:value});
+    })
+    .then(function(){
+      ownerData[key] = value;
+      renderOwnerSection();
+      showToast(successMsg || '✅ 保存しました');
+    })
+    .catch(function(){ showToast('⚠ 保存に失敗しました'); });
+}
+
+function previewOwnerPhoto(n, input){
+  var file = input.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var preview = document.getElementById('owner-photo'+n+'-preview');
+    preview.innerHTML = '<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover;">';
+    preview.dataset.b64 = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveOwnerPhotos(){
+  var p1 = document.getElementById('owner-photo1-preview');
+  var p2 = document.getElementById('owner-photo2-preview');
+  var c1 = document.getElementById('owner-photo1-caption').value;
+  var c2 = document.getElementById('owner-photo2-caption').value;
+  var promises = [];
+  if(p1.dataset.b64) promises.push(saveOwnerField('photo1_url', p1.dataset.b64, null));
+  if(p2.dataset.b64) promises.push(saveOwnerField('photo2_url', p2.dataset.b64, null));
+  promises.push(saveOwnerField('photo1_caption', c1, null));
+  promises.push(saveOwnerField('photo2_caption', c2, null));
+  Promise.all(promises).then(function(){ showToast('✅ 写真を保存しました'); renderOwnerSection(); });
+}
+
+function saveOwnerIntro(){
+  var html = ownerQuill ? ownerQuill.root.innerHTML : '';
+  // 空の場合（<p><br></p>のみ）は空文字に
+  if(html === '<p><br></p>' || html === '') html = '';
+  saveOwnerField('intro_text', html, '✅ 紹介文を保存しました');
+}
+
+function saveOwnerSns(){
+  var ig = (document.getElementById('owner-instagram').value || '').trim();
+  var tw = (document.getElementById('owner-twitter').value || '').trim();
+  var fb = (document.getElementById('owner-facebook').value || '').trim();
+  Promise.all([
+    saveOwnerField('instagram_url', ig, null),
+    saveOwnerField('twitter_url', tw, null),
+    saveOwnerField('facebook_url', fb, null)
+  ]).then(function(){ showToast('✅ SNSリンクを保存しました'); });
+}
+
+function addOwnerCareer(){
+  var year = document.getElementById('owner-career-year').value.trim();
+  var ct   = document.getElementById('owner-career-content').value.trim();
+  if(!year || !ct){ showToast('⚠ 年・内容を入力してください'); return; }
+  var json = ownerData['career'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  items.push({year:year, content:ct});
+  saveOwnerField('career', JSON.stringify(items), '✅ 経歴を追加しました')
+    .then(function(){
+      document.getElementById('owner-career-year').value = '';
+      document.getElementById('owner-career-content').value = '';
+      renderOwnerCareerMgmt();
+    });
+}
+
+function deleteOwnerCareer(idx){
+  var json = ownerData['career'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  items.splice(idx, 1);
+  saveOwnerField('career', JSON.stringify(items), '🗑 削除しました')
+    .then(function(){ renderOwnerCareerMgmt(); });
+}
+
+function addOwnerMedia(){
+  var val = document.getElementById('owner-media-input').value.trim();
+  var url = document.getElementById('owner-media-url').value.trim();
+  if(!val){ showToast('⚠ 内容を入力してください'); return; }
+  var json = ownerData['media'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  items.push({label: val, url: url || ''});
+  saveOwnerField('media', JSON.stringify(items), '✅ メディアを追加しました')
+    .then(function(){
+      document.getElementById('owner-media-input').value = '';
+      document.getElementById('owner-media-url').value = '';
+      renderOwnerMediaMgmt();
+    });
+}
+
+function deleteOwnerMedia(idx){
+  var json = ownerData['media'] || '';
+  var items = [];
+  try { items = json ? JSON.parse(json) : []; } catch(e){}
+  items.splice(idx, 1);
+  saveOwnerField('media', JSON.stringify(items), '🗑 削除しました')
+    .then(function(){ renderOwnerMediaMgmt(); });
+}
+
+// ===== 管理トグル・PW =====
+function onAdminToggle(){
+  if(authed){ document.getElementById('admin-toggle-btn').classList.toggle('open'); document.getElementById('admin-panel').classList.toggle('open'); var activeSub=document.querySelector('.admin-subpane.active'); if(activeSub && activeSub.id==='apane-site') setTimeout(initOwnerQuill,50); }
+  else{ document.getElementById('pw-overlay').classList.add('show'); setTimeout(function(){ document.getElementById('pw-input').focus(); },100); }
+}
+function checkPw(){
+  var inp=document.getElementById('pw-input'), msg=document.getElementById('pw-errmsg');
+  if(inp.value===ADMIN_PW){ authed=true; document.getElementById('pw-overlay').classList.remove('show'); inp.value=''; msg.classList.remove('show'); document.getElementById('admin-toggle-btn').classList.add('open'); document.getElementById('admin-panel').classList.add('open'); }
+  else{ inp.classList.add('err'); msg.classList.add('show'); setTimeout(function(){ inp.classList.remove('err'); },400); inp.value=''; inp.focus(); }
+}
+function closePw(){ document.getElementById('pw-overlay').classList.remove('show'); document.getElementById('pw-input').value=''; document.getElementById('pw-errmsg').classList.remove('show'); }
 
 document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('admin-toggle-btn').addEventListener('click',onAdminToggle);
   document.getElementById('reg-btn').addEventListener('click',addProduct);
+  // 登録フォーム写真
   document.getElementById('photo-drop').addEventListener('click',function(){ document.getElementById('f-photo-lib').click(); });
-  document.getElementById('f-photo-lib').addEventListener('change',function(){
-    var reader = new FileReader();
-    reader.onload = function(e){ setPhoto(e.target.result); };
-    reader.readAsDataURL(this.files[0]);
-  });
+  document.getElementById('btn-camera').addEventListener('click',function(e){ e.stopPropagation(); document.getElementById('f-photo-cam').click(); });
+  document.getElementById('btn-library').addEventListener('click',function(e){ e.stopPropagation(); document.getElementById('f-photo-lib').click(); });
+  document.getElementById('btn-rmpho').addEventListener('click',function(e){ e.stopPropagation(); removePhoto(); });
+  document.getElementById('f-photo-cam').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){setPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  document.getElementById('f-photo-lib').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){setPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  // 詳細モーダル
   document.getElementById('detail-close').addEventListener('click',closeDetail);
+  document.getElementById('detail-overlay').addEventListener('click',function(e){ if(e.target===this) closeDetail(); });
+  // 臨時休業
+  document.getElementById('hol-add-btn').addEventListener('click',addHoliday);
+  loadSiteInfo();
+  loadOwnerProfile();
+  loadHolidays();
+  updateTabArrows();
+  document.getElementById('tab-nav-scroll').addEventListener('scroll', updateTabArrows);
+  // 商品編集モーダル
   document.getElementById('edit-save-btn').addEventListener('click',saveEdit);
   document.getElementById('edit-cancel-btn').addEventListener('click',closeEditModal);
+  document.getElementById('edit-overlay').addEventListener('click',function(e){ if(e.target===this) closeEditModal(); });
+  // サイズ管理モーダル
   document.getElementById('sz-add-btn').addEventListener('click',addSize);
   document.getElementById('sz-close-btn').addEventListener('click',closeSzModal);
+  document.getElementById('sz-overlay').addEventListener('click',function(e){ if(e.target===this) closeSzModal(); });
+  // 写真編集モーダル
+  document.getElementById('pm-drop').addEventListener('click',function(){ document.getElementById('pm-lib-input').click(); });
+  document.getElementById('pm-cam-btn').addEventListener('click',function(e){ e.stopPropagation(); document.getElementById('pm-cam-input').click(); });
+  document.getElementById('pm-lib-btn').addEventListener('click',function(e){ e.stopPropagation(); document.getElementById('pm-lib-input').click(); });
+  document.getElementById('pm-del-btn').addEventListener('click',function(e){ e.stopPropagation(); pmDelPhoto(); });
+  document.getElementById('pm-cam-input').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){pmSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  document.getElementById('pm-lib-input').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){pmSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
   document.getElementById('pm-save-btn').addEventListener('click',pmSave);
   document.getElementById('pm-cancel-btn').addEventListener('click',closePmModal);
+  document.getElementById('pm-overlay').addEventListener('click',function(e){ if(e.target===this) closePmModal(); });
+  // パスワード
   document.getElementById('pw-submit-btn').addEventListener('click',checkPw);
+  document.getElementById('pw-input').addEventListener('keydown',function(e){ if(e.key==='Enter') checkPw(); });
+  document.getElementById('pw-cancel-btn').addEventListener('click',closePw);
+  document.getElementById('pw-overlay').addEventListener('click',function(e){ if(e.target===this) closePw(); });
+  // ブログ詳細
+  document.getElementById('blog-box-close').addEventListener('click',closeBlogDetail);
+  document.getElementById('blog-overlay').addEventListener('click',function(e){ if(e.target===this) closeBlogDetail(); });
+  // ブログフォーム
+  document.getElementById('bf-submit-btn').addEventListener('click',submitBlog);
+  document.getElementById('bf-cancel-edit-btn').addEventListener('click',resetBlogForm);
+  document.getElementById('bf-photo-drop').addEventListener('click',function(){ document.getElementById('bf-photo-lib').click(); });
+  document.getElementById('bf-btn-camera').addEventListener('click',function(e){ e.stopPropagation(); document.getElementById('bf-photo-cam').click(); });
+  document.getElementById('bf-btn-library').addEventListener('click',function(e){ e.stopPropagation(); document.getElementById('bf-photo-lib').click(); });
+  document.getElementById('bf-btn-rmpho').addEventListener('click',function(e){ e.stopPropagation(); bfRemovePhoto(); });
+  document.getElementById('bf-photo-cam').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){bfSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
+  document.getElementById('bf-photo-lib').addEventListener('change',function(){ if(this.files[0]){var r=new FileReader();r.onload=function(ev){bfSetPhoto(ev.target.result);};r.readAsDataURL(this.files[0]);} });
 
-  loadProducts(); loadSiteInfo(); loadHolidays(); loadOwnerProfile();
+  loadProducts();
 
-  // スライダー初期化
+  // ===== スライダー =====
   (function(){
     var slides = document.querySelectorAll('.slider-slide');
-    var dots = document.querySelectorAll('.slider-dot');
+    var dots   = document.querySelectorAll('.slider-dot');
+    var total  = slides.length;
     var current = 0;
+    var timer;
+
     function show(n){
-      slides.forEach(function(s, i){ s.style.display = (i===n) ? 'block' : 'none'; });
-      dots.forEach(function(d, i){ d.classList.toggle('active', i===n); });
-      current = n;
+      current = (n + total) % total;
+      slides.forEach(function(s){ s.style.display = 'none'; });
+      dots.forEach(function(d){ d.classList.remove('active'); });
+      slides[current].style.display = 'block';
+      dots[current].classList.add('active');
     }
-    document.getElementById('slider-next').onclick = function(){ show((current+1)%slides.length); };
-    document.getElementById('slider-prev').onclick = function(){ show((current-1+slides.length)%slides.length); };
-    dots.forEach(function(d, i){ d.onclick = function(){ show(i); }; });
-    show(0); setInterval(function(){ document.getElementById('slider-next').click(); }, 5000);
+
+    function next(){ show(current + 1); }
+    function prev(){ show(current - 1); }
+
+    function startAuto(){ timer = setInterval(next, 5000); }
+    function resetAuto(){ clearInterval(timer); startAuto(); }
+
+    // 初期化
+    show(0);
+    startAuto();
+
+    document.getElementById('slider-next').addEventListener('click', function(){ next(); resetAuto(); });
+    document.getElementById('slider-prev').addEventListener('click', function(){ prev(); resetAuto(); });
+    dots.forEach(function(d){
+      d.addEventListener('click', function(){
+        show(parseInt(d.dataset.idx));
+        resetAuto();
+      });
+    });
   })();
+
 });
 </script>
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 </body>
 </html>
