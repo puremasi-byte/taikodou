@@ -1318,7 +1318,10 @@ function openDetail(id){
   else { matEl.style.display='none'; }
 
   // 説明
-  document.getElementById('detail-desc').innerHTML=esc(p.description||'').replace(/\n/g,'<br>');
+  document.getElementById('detail-desc').innerHTML=esc(p.description||'').replace(/\n/g,'<br>').replace(
+    /https?:\/\/[\w\-._~:/?#[\]@!$&'()*+,;=%]+/g,
+    function(url){ return '<a href="'+url+'" target="_blank" rel="noopener noreferrer" style="color:var(--gold-dark);word-break:break-all;">'+url+'</a>'; }
+  );
 
   // サイズ別価格
   var titleEl=document.getElementById('detail-sizes-title');
