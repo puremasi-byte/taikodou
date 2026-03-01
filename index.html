@@ -1,14 +1,4 @@
-function setPhoto(data){
-  photoSlots[currentSlot]=data;
-  photoData=data;
-  document.getElementById('photo-prev').src=data;
-  document.getElementById('photo-prev').style.display='block';
-  document.getElementById('photo-hint').style.display='none';
-  document.getElementById('btn-rmpho').style.display='';
-  // タブボタンに登録済みマーク
-  var tab=document.getElementById('ptab-'+currentSlot);
-  if(tab) tab.textContent='写真'+currentSlot+' ✓';
-}<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="ja">
 <head>
@@ -91,7 +81,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 /* ===== ヘッダー ===== */
 .banner-wrap{width:100%;background:var(--black);line-height:0;position:relative;overflow:hidden;}
 .banner-wrap::after{content:””;position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.banner-wrap img{width:100%;height:auto;display:block;object-fit:cover;max-height:240px;object-position:top;opacity:.95;}
+.banner-wrap img{width:100%;height:auto;display:block;object-fit:cover;max-height:240px;object-position:center;opacity:.95;}
 
 .info-bar{background:var(--black2);display:flex;align-items:center;justify-content:space-between;padding:12px 40px;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--border);}
 .info-bar .tagline{font-size:11px;color:var(--gold);letter-spacing:.35em;text-transform:uppercase;}
@@ -100,10 +90,10 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 
 /* ===== スライダー ===== */
 .slider-wrap{width:100%;background:var(--black);position:relative;overflow:hidden;line-height:0;}
-.slider-track{position:relative;}
-.slider-slide{width:100%;position:relative;display:none;}
+.slider-track{display:flex;transition:transform .8s cubic-bezier(.77,0,.175,1);will-change:transform;}
+.slider-slide{min-width:100%;position:relative;}
 .slider-slide img{width:100%;display:block;opacity:.95;}.slider-slide picture{display:block;}@media(max-width:767px){.slider-slide img{height:auto;max-height:100vw;object-fit:cover;object-position:center;}}@media(min-width:768px){.slider-slide img{height:auto;max-height:none;object-fit:fill;}}
-.slider-slide-dummy{width:100%;height:560px;display:flex;align-items:center;justify-content:center;font-family:“Noto Serif JP”,serif;font-size:18px;font-weight:700;letter-spacing:.3em;color:var(--gold);}
+.slider-slide-dummy{width:100%;height:240px;display:flex;align-items:center;justify-content:center;font-family:“Noto Serif JP”,serif;font-size:18px;font-weight:700;letter-spacing:.3em;color:var(--gold);}
 .slider-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;}
 .slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s;border:none;padding:0;}
 .slider-dot.active{background:var(--gold);transform:scale(1.3);}
@@ -138,15 +128,20 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 
 /* ===== タブ ===== */
 .tabs-wrap{max-width:1100px;margin:0 auto;padding:0 24px 60px;background:var(--off-white);}
-.tab-nav{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;}
-.tab-btn{padding:14px 8px;border:none;cursor:pointer;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;background:#2a2418;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .3s;letter-spacing:.05em;white-space:nowrap;position:relative;}
+.tab-nav{display:flex;gap:2px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.tab-nav::-webkit-scrollbar{display:none;}
+.tab-btn{flex:0 0 auto;min-width:110px;padding:14px 16px;border:none;cursor:pointer;font-family:“Noto Serif JP”,serif;font-size:14px;font-weight:700;background:#2a2418;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .3s;letter-spacing:.05em;white-space:nowrap;position:relative;}
 .tab-btn::after{content:””;position:absolute;bottom:0;left:0;right:0;height:2px;background:transparent;transition:background .3s;}
 .tab-btn:first-child{border-radius:2px 0 0 0;}
 .tab-btn:last-child{border-radius:0 2px 0 0;}
 .tab-btn.active{background:#3a3020;color:var(--gold2);}
 .tab-btn.active::after{background:var(--gold-dark);}
-.tab-scroll-wrap{margin-top:40px;}
-.tab-nav{display:grid !important;grid-template-columns:repeat(5,1fr);gap:2px;overflow:visible !important;}
+.tab-scroll-wrap{position:relative;margin-top:40px;}
+.tab-scroll-btn{position:absolute;top:0;bottom:0;width:40px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;z-index:10;transition:opacity .2s;padding:0;}
+.tab-scroll-btn.left{left:0;background:linear-gradient(to right,#2a2418 60%,transparent);}
+.tab-scroll-btn.right{right:0;background:linear-gradient(to left,#2a2418 60%,transparent);}
+.tab-scroll-btn span{color:#fff;font-size:22px;font-weight:bold;line-height:1;}
+.tab-scroll-btn.hidden{opacity:0;pointer-events:none;}
 .tab-btn:hover:not(.active){background:#3a3020;color:var(--gold);}
 
 .tab-content{background:#ffffff;border:1px solid #e0d8c8;border-top:none;border-radius:0 0 4px 4px;padding:36px;min-height:400px;}
@@ -192,15 +187,7 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .detail-header h3{font-family:“Noto Serif JP”,serif;font-size:22px;font-weight:700;color:var(--black);margin-bottom:0;padding-right:40px;letter-spacing:.15em;}
 .detail-close{position:absolute;top:24px;right:24px;width:32px;height:32px;border:1px solid var(--border);background:transparent;border-radius:2px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s;}
 .detail-close:hover{border-color:var(--gold);color:var(--gold);}
-.detail-photo-wrap{width:100%;aspect-ratio:4/3;background:#f0ece4;overflow:hidden;position:relative;}
-.detail-carousel{display:flex;width:100%;height:100%;transition:transform .3s ease;}
-.detail-carousel-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0ece4;}
-.detail-carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;}
-.detail-carousel-btn.prev{left:8px;}
-.detail-carousel-btn.next{right:8px;}
-.detail-carousel-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:6px;}
-.detail-carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;border:none;}
-.detail-carousel-dot.active{background:#fff;}
+.detail-photo-wrap{width:100%;aspect-ratio:4/3;background:#f0ece4;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .detail-photo{width:100%;height:100%;object-fit:contain;}
 .detail-icon{font-size:72px;padding:30px;}
 .detail-body{padding:28px 32px 36px;}
@@ -240,10 +227,9 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .fg textarea{resize:vertical;min-height:76px;}
 .radio-row{display:flex;gap:10px;}
 .rlabel{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:700;padding:10px 18px;border:1px solid var(--border-light);border-radius:2px;background:white;flex:1;justify-content:center;transition:all .2s;}
-.rlabel.red.active{border-color:var(--red);background:rgba(139,0,0,.04);color:var(--red);}
-.rlabel.teal.active{border-color:var(--teal);background:rgba(26,90,90,.04);color:var(--teal);}
-.rlabel.active{border-color:var(--gold-dark);background:rgba(180,140,60,.08);color:var(--gold-dark);font-weight:900;}
-
+.rlabel.red:has(input:checked){border-color:var(--red);background:rgba(139,0,0,.04);color:var(--red);}
+.rlabel.teal:has(input:checked){border-color:var(--teal);background:rgba(26,90,90,.04);color:var(--teal);}
+.rlabel input{display:none;}
 .photo-drop{width:100%;aspect-ratio:4/3;border:1px dashed var(--border-light);border-radius:2px;background:#fafaf8;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;transition:border-color .2s;position:relative;}
 .photo-drop:hover{border-color:var(--gold-dark);}
 .photo-hint{text-align:center;pointer-events:none;padding:20px;}
@@ -425,7 +411,6 @@ footer a{color:var(--gold2);}
 
 /* ===== レスポンシブ ===== */
 @media(max-width:600px){
-.tab-nav{grid-template-columns:repeat(3,1fr) !important;}
 .info-bar{padding:10px 16px;}
 .form-grid{grid-template-columns:1fr;}
 .tab-btn{font-size:12px;padding:12px 8px;}
@@ -468,36 +453,8 @@ footer a{color:var(--gold2);}
   .about-heading{font-size:16px;}
   .history-year{min-width:110px;}
 }
-
-/* ===== 店主紹介 ===== */
-.owner-photos{display:flex;gap:12px;margin-bottom:16px;}
-.owner-photo-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
-.owner-photo-item img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:2px solid #d4c4a0;}
-.owner-photo-caption{font-size:12px;color:#888;text-align:center;}
-.owner-section{padding:20px 0 4px;}
-.owner-intro{margin-bottom:18px;line-height:1.9;color:#333;}
-.owner-block{margin-bottom:20px;}
-.owner-block-title{font-family:"Noto Serif JP",serif;font-size:12px;font-weight:700;color:var(--gold-dark);letter-spacing:.25em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #e0d8c8;}
-.owner-career-list{display:flex;flex-direction:column;gap:8px;}
-.owner-career-item{display:flex;gap:12px;font-size:13px;line-height:1.7;color:#444;}
-.owner-career-year{color:var(--gold-dark);font-weight:700;min-width:60px;flex-shrink:0;font-family:"Noto Serif JP",serif;}
-.owner-media-list{display:flex;flex-direction:column;gap:6px;}
-.owner-media-item{font-size:13px;color:#444;line-height:1.7;padding-left:14px;position:relative;}
-.owner-media-item::before{content:"▶";position:absolute;left:0;font-size:9px;color:var(--gold-dark);top:4px;}
-.owner-sns{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;}
-.owner-sns-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid #e0d8c8;border-radius:2px;font-size:13px;color:#444;text-decoration:none;transition:all .2s;background:#faf7f2;font-weight:700;}
-.owner-sns-btn:hover{border-color:var(--gold-dark);color:var(--gold-dark);background:#fff;}
-.owner-sns-btn .sns-icon{font-size:16px;}
 </style>
 
-<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
-<style>
-/* Quillエディタのカスタマイズ */
-.ql-toolbar.ql-snow{border:1px solid #d4c4a0;border-radius:4px 4px 0 0;background:#faf7f2;}
-.ql-container.ql-snow{border:1px solid #d4c4a0;border-top:none;border-radius:0 0 4px 4px;min-height:160px;font-family:"Noto Sans JP",sans-serif;font-size:14px;}
-.ql-editor{min-height:160px;line-height:1.9;}
-.ql-snow .ql-picker.ql-size .ql-picker-label::before,.ql-snow .ql-picker.ql-size .ql-picker-item::before{content:attr(data-value) !important;}
-</style>
 </head>
 <body>
 <header>
@@ -559,26 +516,17 @@ footer a{color:var(--gold2);}
         <div class="history-list" id="history-list-area"></div>
       </div>
     </div>
-
-    <!-- 店主紹介アコーディオン -->
-    <div class="accordion" style="margin-top:8px;">
-      <button class="accordion-btn" id="owner-btn" onclick="toggleOwnerAccordion()">
-        <span id="owner-btn-text">■ 店主紹介</span>
-        <span class="accordion-arrow" id="owner-btn-arrow">▼</span>
-      </button>
-      <div class="accordion-body" id="owner-body" hidden aria-hidden="true">
-        <div class="owner-section" id="owner-section-area"></div>
-      </div>
-    </div>
   </div>
 </section>
 <div class="tabs-wrap">
   <div class="tab-scroll-wrap">
+    <button class="tab-scroll-btn left hidden" id="tab-arrow-left" onclick="tabScroll(-1)"><span>&#8249;</span></button>
+    <button class="tab-scroll-btn right" id="tab-arrow-right" onclick="tabScroll(1)"><span>&#8250;</span></button>
   <div class="tab-nav" id="tab-nav-scroll">
     <button class="tab-btn active" id="tab-btn-hanko"   onclick="switchTab('hanko')">印鑑・はんこ</button>
     <button class="tab-btn"        id="tab-btn-konyudo" onclick="switchTab('konyudo')">こにゅうどうくんグッズ</button>
     <button class="tab-btn"        id="tab-btn-meishi"  onclick="switchTab('meishi')">名刺</button>
-    <button class="tab-btn"        id="tab-btn-yakiin"  onclick="switchTab('yakiin')">焼印</button>
+    <button class="tab-btn"        id="tab-btn-yakiin"  onclick="switchTab('yakiin')">焼き印</button>
     <button class="tab-btn"        id="tab-btn-nafuda"  onclick="switchTab('nafuda')">名札</button>
     <button class="tab-btn"        id="tab-btn-sonota"  onclick="switchTab('sonota')">その他グッズ</button>
     <button class="tab-btn"        id="tab-btn-coupon"  onclick="switchTab('coupon')">クーポン</button>
@@ -710,29 +658,21 @@ footer a{color:var(--gold2);}
           <div class="fg full">
             <label>カテゴリ<span class="req">*</span></label>
             <div class="radio-row">
-              <button type="button" class="rlabel red active" data-cat="hanko">印鑑・はんこ</button>
-              <button type="button" class="rlabel teal" data-cat="konyudo">こにゅうどうくんグッズ</button>
-              <button type="button" class="rlabel" data-cat="meishi">名刺</button>
-              <button type="button" class="rlabel" data-cat="yakiin">焼印</button>
-              <button type="button" class="rlabel" data-cat="nafuda">名札</button>
-              <button type="button" class="rlabel" data-cat="sonota">その他グッズ</button>
-              <button type="button" class="rlabel" data-cat="coupon">クーポン</button>
+              <label class="rlabel red"><input type="radio" name="cat" value="hanko" checked> 印鑑・はんこ</label>
+              <label class="rlabel teal"><input type="radio" name="cat" value="konyudo"> こにゅうどうくんグッズ</label>
+              <label class="rlabel"><input type="radio" name="cat" value="meishi"> 名刺</label>
+              <label class="rlabel"><input type="radio" name="cat" value="yakiin"> 焼き印</label>
+              <label class="rlabel"><input type="radio" name="cat" value="nafuda"> 名札</label>
+              <label class="rlabel"><input type="radio" name="cat" value="sonota"> その他グッズ</label>
+              <label class="rlabel"><input type="radio" name="cat" value="coupon"> クーポン</label>
             </div>
-            <input type="hidden" id="selected-cat" value="hanko">
           </div>
           <div class="fg full"><label>商品名<span class="req">*</span></label><input type="text" id="f-name" placeholder="例：本象牙 印鑑"></div>
-          <div class="fg" id="fg-price"><label>価格（税込）※サイズ別価格がある場合は空白でOK</label><input type="number" id="f-price" placeholder="例：3800" min="0"></div>
-          <div class="fg" id="fg-size"><label>素材・仕様</label><input type="text" id="f-size" placeholder="例：本象牙 / 最高級素材"></div>
+          <div class="fg"><label>価格（税込）※サイズ別価格がある場合は空白でOK</label><input type="number" id="f-price" placeholder="例：3800" min="0"></div>
+          <div class="fg"><label>素材・仕様</label><input type="text" id="f-size" placeholder="例：本象牙 / 最高級素材"></div>
           <div class="fg full"><label>商品の説明<span class="req">*</span></label><textarea id="f-desc" placeholder="例：古来より最高級の印材として珍重されてきた本象牙。"></textarea></div>
           <div class="fg full">
-            <label>商品写真（最大5枚・スワイプで切替表示）</label>
-            <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;" id="photo-tab-btns">
-              <button type="button" class="pbtn cam active-tab" data-slot="1" id="ptab-1">写真1</button>
-              <button type="button" class="pbtn lib" data-slot="2" id="ptab-2">写真2</button>
-              <button type="button" class="pbtn lib" data-slot="3" id="ptab-3">写真3</button>
-              <button type="button" class="pbtn lib" data-slot="4" id="ptab-4">写真4</button>
-              <button type="button" class="pbtn lib" data-slot="5" id="ptab-5">写真5</button>
-            </div>
+            <label>商品写真</label>
             <div class="photo-drop" id="photo-drop">
               <div class="photo-hint" id="photo-hint">
                 <div class="ph-icons">📷 🖼️</div>
@@ -762,7 +702,7 @@ footer a{color:var(--gold2);}
         <div class="mgmt-list" id="mgmt-konyudo"></div>
         <div style="margin:18px 0 12px;"><strong style="font-size:13px;">名刺</strong></div>
         <div class="mgmt-list" id="mgmt-meishi"></div>
-        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">焼印</strong></div>
+        <div style="margin:18px 0 12px;"><strong style="font-size:13px;">焼き印</strong></div>
         <div class="mgmt-list" id="mgmt-yakiin"></div>
         <div style="margin:18px 0 12px;"><strong style="font-size:13px;">名札</strong></div>
         <div class="mgmt-list" id="mgmt-nafuda"></div>
@@ -839,83 +779,6 @@ footer a{color:var(--gold2);}
           <textarea id="site-about-text" style="width:100%;min-height:180px;padding:12px;border:2px solid #d4c4a0;border-radius:8px;font-size:14px;line-height:2;font-family:'Noto Sans JP',sans-serif;resize:vertical;" placeholder="紹介文を入力..."></textarea>
           <button type="button" onclick="saveSiteAbout()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;">💾 保存する</button>
         </div>
-        <!-- 店主紹介 -->
-        <div style="font-family:'Noto Serif JP',serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e0d8c8;letter-spacing:.1em;">👤 店主紹介</div>
-
-        <!-- テキスト入力 -->
-        <div style="margin-bottom:20px;">
-          <div style="margin-bottom:8px;">
-            <label style="font-size:12px;font-weight:700;color:#666;">📝 紹介文</label>
-            <span style="font-size:11px;color:#888;margin-left:8px;">文字サイズ・太字・色などを自由に設定できます</span>
-          </div>
-          <div id="owner-quill-editor" style="margin-bottom:0;"></div>
-          <input type="hidden" id="owner-intro-text">
-          <button type="button" onclick="saveOwnerIntro()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 保存する</button>
-          <!-- 店主写真 -->
-          <div style="margin-top:20px;padding-top:16px;border-top:1px solid #e8dcc8;">
-            <label style="font-size:12px;font-weight:700;color:#666;">🖼 店主写真（2枚）</label>
-            <div style="display:flex;gap:12px;margin-top:10px;">
-              <div style="flex:1;">
-                <div style="font-size:11px;color:#888;margin-bottom:4px;">写真1</div>
-                <div id="owner-photo1-preview" style="width:100%;aspect-ratio:1/1;background:#f0ebe0;border:2px dashed #d4c4a0;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;cursor:pointer;" onclick="document.getElementById('owner-photo1-input').click()">
-                  <span style="font-size:24px;">📷</span>
-                </div>
-                <input type="file" id="owner-photo1-input" accept="image/*" style="display:none" onchange="previewOwnerPhoto(1,this)">
-                <input type="text" id="owner-photo1-caption" placeholder="キャプション（任意）" style="width:100%;padding:6px 8px;border:1px solid #d4c4a0;border-radius:4px;font-size:12px;box-sizing:border-box;">
-              </div>
-              <div style="flex:1;">
-                <div style="font-size:11px;color:#888;margin-bottom:4px;">写真2</div>
-                <div id="owner-photo2-preview" style="width:100%;aspect-ratio:1/1;background:#f0ebe0;border:2px dashed #d4c4a0;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:6px;overflow:hidden;cursor:pointer;" onclick="document.getElementById('owner-photo2-input').click()">
-                  <span style="font-size:24px;">📷</span>
-                </div>
-                <input type="file" id="owner-photo2-input" accept="image/*" style="display:none" onchange="previewOwnerPhoto(2,this)">
-                <input type="text" id="owner-photo2-caption" placeholder="キャプション（任意）" style="width:100%;padding:6px 8px;border:1px solid #d4c4a0;border-radius:4px;font-size:12px;box-sizing:border-box;">
-              </div>
-            </div>
-            <button type="button" onclick="saveOwnerPhotos()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 写真を保存する</button>
-          </div>
-        </div>
-
-                <!-- メディア掲載 -->
-        <div style="margin-bottom:20px;">
-          <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:8px;">📰 メディア掲載履歴</div>
-          <div id="owner-media-list" style="margin-bottom:12px;"></div>
-          <div style="background:#faf7f2;border:1px solid #e0d8c8;border-radius:4px;padding:14px;">
-            <div style="margin-bottom:8px;">
-              <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">掲載名・説明</label>
-              <input type="text" id="owner-media-input" placeholder="例：2023年 CTYテレビ 取材" style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
-            </div>
-            <div style="margin-bottom:10px;">
-              <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">リンクURL（任意）</label>
-              <input type="url" id="owner-media-url" placeholder="https://..." style="width:100%;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
-            </div>
-            <button type="button" onclick="addOwnerMedia()" style="padding:8px 20px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:13px;cursor:pointer;">＋ 追加</button>
-          </div>
-        </div>
-
-        <!-- SNS -->
-        <div style="margin-bottom:20px;">
-          <div style="font-size:12px;font-weight:700;color:#666;margin-bottom:10px;">🔗 SNSリンク</div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span style="font-size:18px;">📷</span>
-              <span style="font-size:12px;font-weight:700;color:#888;min-width:90px;">Instagram</span>
-              <input type="url" id="owner-instagram" placeholder="https://www.instagram.com/..." style="flex:1;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span style="font-size:18px;">✖️</span>
-              <span style="font-size:12px;font-weight:700;color:#888;min-width:90px;">X（旧Twitter）</span>
-              <input type="url" id="owner-twitter" placeholder="https://x.com/..." style="flex:1;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;">
-              <span style="font-size:18px;">👥</span>
-              <span style="font-size:12px;font-weight:700;color:#888;min-width:90px;">Facebook</span>
-              <input type="url" id="owner-facebook" placeholder="https://www.facebook.com/..." style="flex:1;padding:8px;border:1px solid #d4c4a0;border-radius:4px;font-size:13px;">
-            </div>
-          </div>
-          <button type="button" onclick="saveOwnerSns()" style="margin-top:10px;padding:10px 24px;background:var(--gold-dark);color:#fff;border:none;border-radius:4px;font-size:14px;cursor:pointer;">💾 SNSを保存する</button>
-        </div>
-
         <!-- 沿革 -->
         <div style="font-family:'Noto Serif JP',serif;font-size:14px;font-weight:700;color:var(--black);margin-bottom:12px;letter-spacing:.1em;">📅 沿革</div>
         <div id="site-history-list" style="margin-bottom:16px;"></div>
@@ -1058,9 +921,7 @@ footer a{color:var(--gold2);}
   </div>
 </div>
 
-<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script>
-
 var SUPABASE_URL = 'https://pqylvacqbbpogvvtivcd.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxeWx2YWNxYmJwb2d2dnRpdmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4MTY4NjksImV4cCI6MjA4NzM5Mjg2OX0.N1ioSbtt_lk4KbVU-oqFlH8Teyh8q5FX0SbzeptX_h0';
 var ADMIN_PW = 'taikodo2024';
