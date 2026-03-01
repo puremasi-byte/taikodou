@@ -714,7 +714,7 @@ footer a{color:var(--gold2);}
           <div class="fg" id="fg-size"><label>素材・仕様</label><input type="text" id="f-size" placeholder="例：本象牙 / 最高級素材"></div>
           <div class="fg full"><label>商品の説明<span class="req">*</span></label><textarea id="f-desc" placeholder="例：古来より最高級の印材として珍重されてきた本象牙。"></textarea></div>
           <div class="fg full">
-            <label>商品写真（最大5枚・スワイプ切替）</label>
+            <label>商品写真（最大5枚）</label>
             <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;" id="photo-tab-btns">
               <button type="button" class="pbtn cam active-tab" data-slot="1" id="ptab-1">写真1</button>
               <button type="button" class="pbtn lib" data-slot="2" id="ptab-2">写真2</button>
@@ -1051,30 +1051,15 @@ footer a{color:var(--gold2);}
 <script>
 
 function toggleAccordion(){
-  var btn  = document.getElementById('history-btn');
-  var body = document.getElementById('history-body');
-  var txt  = document.getElementById('history-btn-text');
-  var arrow = document.getElementById('history-btn-arrow');
-  if(!btn || !body) return;
-  var isOpen = btn.classList.contains('open');
-  if(isOpen){
-    btn.classList.remove('open');
-    body.classList.remove('open');
-    body.hidden = true;
-    body.setAttribute('aria-hidden','true');
-    if(txt) txt.textContent = '沿 革 を 見 る';
-    if(arrow) arrow.textContent = '▼';
-  } else {
-    btn.classList.add('open');
-    body.classList.remove('open');
-    body.hidden = false;
-    body.setAttribute('aria-hidden','false');
-    body.classList.add('open');
-    if(txt) txt.textContent = '沿 革 を 閉 じ る';
-    if(arrow) arrow.textContent = '▲';
-  }
+  var btn=document.getElementById('history-btn');
+  var body=document.getElementById('history-body');
+  var txt=document.getElementById('history-btn-text');
+  var arrow=document.getElementById('history-btn-arrow');
+  if(!btn||!body) return;
+  var isOpen=btn.classList.contains('open');
+  if(isOpen){ btn.classList.remove('open'); body.classList.remove('open'); body.hidden=true; body.setAttribute('aria-hidden','true'); if(txt)txt.textContent='沿 革 を 見 る'; if(arrow)arrow.textContent='▼'; }
+  else { btn.classList.add('open'); body.hidden=false; body.setAttribute('aria-hidden','false'); body.classList.add('open'); if(txt)txt.textContent='沿 革 を 閉 じ る'; if(arrow)arrow.textContent='▲'; }
 }
-
 var SUPABASE_URL = 'https://pqylvacqbbpogvvtivcd.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxeWx2YWNxYmJwb2d2dnRpdmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4MTY4NjksImV4cCI6MjA4NzM5Mjg2OX0.N1ioSbtt_lk4KbVU-oqFlH8Teyh8q5FX0SbzeptX_h0';
 var ADMIN_PW = 'taikodo2024';
@@ -2397,15 +2382,24 @@ document.addEventListener('DOMContentLoaded',function(){
     updateFormByCat('hanko');
   }
   initRlabels();
-  // 写真スロットタブ
+
+  // 写真スロット切り替え
+  function switchPhotoSlot(slot){
+    currentSlot=slot;
+    document.querySelectorAll('#photo-tab-btns button').forEach(function(b){
+      b.classList.toggle('active-tab', parseInt(b.dataset.slot)===slot);
+    });
+    var prev=document.getElementById('photo-prev');
+    var hint=document.getElementById('photo-hint');
+    var del=document.getElementById('btn-rmpho');
+    var d=photoSlots[slot];
+    if(d){ prev.src=d; prev.style.display='block'; hint.style.display='none'; del.style.display=''; }
+    else { prev.src=''; prev.style.display='none'; hint.style.display=''; del.style.display='none'; }
+  }
   document.querySelectorAll('#photo-tab-btns button').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      currentSlot=parseInt(btn.dataset.slot);
-      document.querySelectorAll('#photo-tab-btns button').forEach(function(b){ b.classList.remove('active-tab'); });
-      btn.classList.add('active-tab');
-      var d=photoSlots[currentSlot];
-      if(d){ document.getElementById('photo-prev').src=d; document.getElementById('photo-prev').style.display='block'; document.getElementById('photo-hint').style.display='none'; document.getElementById('btn-rmpho').style.display=''; }
-      else { document.getElementById('photo-prev').src=''; document.getElementById('photo-prev').style.display='none'; document.getElementById('photo-hint').style.display=''; document.getElementById('btn-rmpho').style.display='none'; }
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      switchPhotoSlot(parseInt(btn.dataset.slot));
     });
   });
   // 登録フォーム写真
