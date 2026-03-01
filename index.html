@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+function setPhoto(data){
+  photoSlots[currentSlot]=data;
+  photoData=data;
+  document.getElementById('photo-prev').src=data;
+  document.getElementById('photo-prev').style.display='block';
+  document.getElementById('photo-hint').style.display='none';
+  document.getElementById('btn-rmpho').style.display='';
+  // タブボタンに登録済みマーク
+  var tab=document.getElementById('ptab-'+currentSlot);
+  if(tab) tab.textContent='写真'+currentSlot+' ✓';
+}<!DOCTYPE html>
 
 <html lang="ja">
 <head>
@@ -182,7 +192,15 @@ body{font-family:"Noto Sans JP",sans-serif;background:var(--black);color:var(--b
 .detail-header h3{font-family:“Noto Serif JP”,serif;font-size:22px;font-weight:700;color:var(--black);margin-bottom:0;padding-right:40px;letter-spacing:.15em;}
 .detail-close{position:absolute;top:24px;right:24px;width:32px;height:32px;border:1px solid var(--border);background:transparent;border-radius:2px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s;}
 .detail-close:hover{border-color:var(--gold);color:var(--gold);}
-.detail-photo-wrap{width:100%;aspect-ratio:4/3;background:#f0ece4;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.detail-photo-wrap{width:100%;aspect-ratio:4/3;background:#f0ece4;overflow:hidden;position:relative;}
+.detail-carousel{display:flex;width:100%;height:100%;transition:transform .3s ease;}
+.detail-carousel-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0ece4;}
+.detail-carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.4);color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;}
+.detail-carousel-btn.prev{left:8px;}
+.detail-carousel-btn.next{right:8px;}
+.detail-carousel-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:6px;}
+.detail-carousel-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;border:none;}
+.detail-carousel-dot.active{background:#fff;}
 .detail-photo{width:100%;height:100%;object-fit:contain;}
 .detail-icon{font-size:72px;padding:30px;}
 .detail-body{padding:28px 32px 36px;}
@@ -707,7 +725,14 @@ footer a{color:var(--gold2);}
           <div class="fg" id="fg-size"><label>素材・仕様</label><input type="text" id="f-size" placeholder="例：本象牙 / 最高級素材"></div>
           <div class="fg full"><label>商品の説明<span class="req">*</span></label><textarea id="f-desc" placeholder="例：古来より最高級の印材として珍重されてきた本象牙。"></textarea></div>
           <div class="fg full">
-            <label>商品写真</label>
+            <label>商品写真（最大5枚・スワイプで切替表示）</label>
+            <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;" id="photo-tab-btns">
+              <button type="button" class="pbtn cam active-tab" data-slot="1" id="ptab-1">写真1</button>
+              <button type="button" class="pbtn lib" data-slot="2" id="ptab-2">写真2</button>
+              <button type="button" class="pbtn lib" data-slot="3" id="ptab-3">写真3</button>
+              <button type="button" class="pbtn lib" data-slot="4" id="ptab-4">写真4</button>
+              <button type="button" class="pbtn lib" data-slot="5" id="ptab-5">写真5</button>
+            </div>
             <div class="photo-drop" id="photo-drop">
               <div class="photo-hint" id="photo-hint">
                 <div class="ph-icons">📷 🖼️</div>
@@ -1418,12 +1443,47 @@ function openDetail(id){
 
   document.getElementById('detail-name').textContent=p.name;
 
-  // 写真
+  // 写真（カルーセル）
   var mediaEl=document.getElementById('detail-media');
-  if(p.photo){
-    mediaEl.innerHTML='<div class="detail-photo-wrap"><img class="detail-photo" src="'+esc(p.photo)+'" alt="'+esc(p.name)+'"></div>';
-  } else {
+  var photos=[p.photo,p.photo2,p.photo3,p.photo4,p.photo5].filter(function(x){ return x && x.length>10; });
+  if(photos.length===0){
     mediaEl.innerHTML='<div class="detail-photo-wrap"><div class="detail-icon">'+(p.icon||(isTeal?'🟢':'🔖'))+'</div></div>';
+  } else if(photos.length===1){
+    mediaEl.innerHTML='<div class="detail-photo-wrap"><div class="detail-carousel"><div class="detail-carousel-slide"><img class="detail-photo" src="'+esc(photos[0])+'" alt="'+esc(p.name)+'"></div></div></div>';
+  } else {
+    var slides=photos.map(function(src){
+      return '<div class="detail-carousel-slide"><img class="detail-photo" src="'+esc(src)+'" alt="'+esc(p.name)+'"></div>';
+    }).join('');
+    var dots=photos.map(function(_,i){
+      return '<button class="detail-carousel-dot'+(i===0?' active':'')+'" data-i="'+i+'"></button>';
+    }).join('');
+    mediaEl.innerHTML='<div class="detail-photo-wrap">'
+      +'<div class="detail-carousel" id="dc-track">'+slides+'</div>'
+      +'<button class="detail-carousel-btn prev" id="dc-prev">‹</button>'
+      +'<button class="detail-carousel-btn next" id="dc-next">›</button>'
+      +'<div class="detail-carousel-dots" id="dc-dots">'+dots+'</div>'
+      +'</div>';
+    // カルーセル初期化
+    (function(){
+      var cur=0;
+      var track=document.getElementById('dc-track');
+      var dotEls=document.querySelectorAll('#dc-dots .detail-carousel-dot');
+      function go(n){
+        cur=(n+photos.length)%photos.length;
+        track.style.transform='translateX(-'+cur*100+'%)';
+        dotEls.forEach(function(d,i){ d.classList.toggle('active',i===cur); });
+      }
+      document.getElementById('dc-prev').onclick=function(){ go(cur-1); };
+      document.getElementById('dc-next').onclick=function(){ go(cur+1); };
+      dotEls.forEach(function(d){ d.onclick=function(){ go(parseInt(d.dataset.i)); }; });
+      // タッチスワイプ
+      var startX=0;
+      track.addEventListener('touchstart',function(e){ startX=e.touches[0].clientX; },{passive:true});
+      track.addEventListener('touchend',function(e){
+        var diff=startX-e.changedTouches[0].clientX;
+        if(Math.abs(diff)>40){ go(diff>0?cur+1:cur-1); }
+      },{passive:true});
+    })();
   }
 
   // 素材
@@ -1919,6 +1979,11 @@ function addProduct(){
   var price=parseInt(document.getElementById('f-price').value,10)||0;
   var size=document.getElementById('f-size').value.trim();
   var desc=document.getElementById('f-desc').value.trim();
+  var photo=photoSlots[1]||null;
+  var photo2=photoSlots[2]||null;
+  var photo3=photoSlots[3]||null;
+  var photo4=photoSlots[4]||null;
+  var photo5=photoSlots[5]||null;
   var icon=document.getElementById('f-icon').value.trim()||(cat==='konyudo'?'🟢':'🔖');
 
   var errEl=document.getElementById('form-err');
@@ -1929,7 +1994,7 @@ function addProduct(){
   btn.disabled=true; btn.textContent='登録中...';
   var catP=products.filter(function(p){ return p.cat===cat; });
   var maxO=catP.length>0?Math.max.apply(null,catP.map(function(p){ return p.sort_order||0; }))+1:0;
-  sbFetch('POST','products',{cat:cat,name:name,price:price,size_material:size,description:desc,icon:icon,photo:photoData,sort_order:maxO})
+  sbFetch('POST','products',{cat:cat,name:name,price:price,size_material:size,description:desc,icon:icon,photo:photo,photo2:photo2,photo3:photo3,photo4:photo4,photo5:photo5,sort_order:maxO})
     .then(function(data){
       btn.disabled=false; btn.textContent='＋ この商品を登録する';
       var ok=Array.isArray(data)?data[0]:(!data.message&&data.id);
@@ -1940,7 +2005,7 @@ function addProduct(){
         document.getElementById('f-desc').value='';
         document.getElementById('f-icon').value='';
         document.querySelector('input[name="cat"][value="hanko"]').checked=true;
-        removePhoto(); showToast('✅ 商品を登録しました！'); loadProducts(); switchTab(cat);
+        photoSlots={1:null,2:null,3:null,4:null,5:null}; currentSlot=1; document.querySelectorAll('#photo-tab-btns button').forEach(function(b,i){ b.textContent='写真'+(i+1); }); removePhoto(); showToast('✅ 商品を登録しました！'); loadProducts(); switchTab(cat);
       } else { errEl.textContent='⚠ 登録失敗'; errEl.style.display='block'; }
     }).catch(function(){ btn.disabled=false; btn.textContent='＋ この商品を登録する'; errEl.textContent='⚠ 通信エラー'; errEl.style.display='block'; });
 }
@@ -2000,32 +2065,15 @@ function switchAdminTab(name){
 
 // ===== 登録フォーム写真 =====
 function setPhoto(dataUrl){ photoData=dataUrl; document.getElementById('photo-prev').src=dataUrl; document.getElementById('photo-prev').style.display='block'; document.getElementById('photo-hint').style.display='none'; document.getElementById('btn-rmpho').style.display='inline-flex'; }
-function removePhoto(){ photoData=null; document.getElementById('photo-prev').src=''; document.getElementById('photo-prev').style.display='none'; document.getElementById('photo-hint').style.display='block'; document.getElementById('btn-rmpho').style.display='none'; document.getElementById('f-photo-cam').value=''; document.getElementById('f-photo-lib').value=''; }
-
-// ===== アコーディオン（沿革） =====
-function toggleAccordion(){
-  var btn  = document.getElementById('history-btn');
-  var body = document.getElementById('history-body');
-  var txt  = document.getElementById('history-btn-text');
-  var arrow = document.getElementById('history-btn-arrow');
-  if(!btn || !body) return;
-  var isOpen = btn.classList.contains('open');
-  if(isOpen){
-    btn.classList.remove('open');
-    body.classList.remove('open');
-    body.hidden = true;
-    body.setAttribute('aria-hidden','true');
-    if(txt) txt.textContent = '沿 革 を 見 る';
-    if(arrow) arrow.textContent = '▼';
-  } else {
-    btn.classList.add('open');
-    body.classList.remove('open');
-    body.hidden = false;
-    body.setAttribute('aria-hidden','false');
-    body.classList.add('open');
-    if(txt) txt.textContent = '沿 革 を 閉 じ る';
-    if(arrow) arrow.textContent = '▲';
-  }
+function removePhoto(){
+  photoSlots[currentSlot]=null;
+  if(currentSlot===1) photoData=null;
+  document.getElementById('photo-prev').src='';
+  document.getElementById('photo-prev').style.display='none';
+  document.getElementById('photo-hint').style.display='';
+  document.getElementById('btn-rmpho').style.display='none';
+  var tab=document.getElementById('ptab-'+currentSlot);
+  if(tab) tab.textContent='写真'+currentSlot;
 }
 
 
@@ -2386,6 +2434,28 @@ document.addEventListener('DOMContentLoaded',function(){
     updateFormByCat(initCat);
   }
   initRlabels();
+  // 写真スロットタブ切り替え
+  document.querySelectorAll('#photo-tab-btns button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var slot=parseInt(btn.dataset.slot);
+      currentSlot=slot;
+      document.querySelectorAll('#photo-tab-btns button').forEach(function(b){ b.classList.remove('active-tab'); });
+      btn.classList.add('active-tab');
+      // スロットの写真を表示
+      var d=photoSlots[slot];
+      if(d){
+        document.getElementById('photo-prev').src=d;
+        document.getElementById('photo-prev').style.display='block';
+        document.getElementById('photo-hint').style.display='none';
+        document.getElementById('btn-rmpho').style.display='';
+      } else {
+        document.getElementById('photo-prev').src='';
+        document.getElementById('photo-prev').style.display='none';
+        document.getElementById('photo-hint').style.display='';
+        document.getElementById('btn-rmpho').style.display='none';
+      }
+    });
+  });
   // カテゴリ選択ボタンのアクティブ状態管理
   document.querySelectorAll('.rlabel').forEach(function(label){
     label.addEventListener('click', function(){
